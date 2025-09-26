@@ -1,0 +1,3856 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYAHJAYA INDO GRUP - E-Commerce Lengkap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-YOUR_CLIENT_KEY"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+
+        /* Text Readability */
+        .text-readable {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .text-on-gradient {
+            background: linear-gradient(45deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .text-dark-bg {
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .text-light-bg {
+            color: #1a1a1a;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            background: linear-gradient(-45deg, #2d3748, #4a5568, #2b6cb0, #3182ce);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Button Styles */
+        .btn-gradient {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-gradient:hover::before {
+            left: 100%;
+        }
+
+        .btn-seller {
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            color: #ffffff;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        /* Input Styles */
+        .input-readable {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid #e2e8f0;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .input-readable:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Product Card */
+        .product-card {
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Seller Card */
+        .seller-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .seller-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Filter Tags */
+        .filter-tag {
+            background: #f3f4f6;
+            color: #4b5563;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tag:hover {
+            background: #e5e7eb;
+        }
+
+        .filter-tag.active {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Star Rating */
+        .star-rating {
+            display: inline-flex;
+            gap: 0.25rem;
+        }
+
+        .star {
+            color: #d1d5db;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star.filled {
+            color: #fbbf24;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            left: -100%;
+            top: 0;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.open {
+            left: 0;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* Category Dropdown */
+        .category-dropdown {
+            position: relative;
+        }
+
+        .category-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 0.5rem;
+            z-index: 100;
+            display: none;
+        }
+
+        .category-menu.show {
+            display: block;
+        }
+
+        .category-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #4b5563;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .category-menu a:hover {
+            background: #f3f4f6;
+            color: #667eea;
+        }
+
+        /* Back to Top Button */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 997;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTop:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Product Tabs */
+        .product-tabs {
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .product-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .product-tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .product-tab-content {
+            display: none;
+            padding: 1.5rem 0;
+        }
+
+        .product-tab-content.active {
+            display: block;
+        }
+
+        /* Compare Bar */
+        .compare-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 996;
+        }
+
+        .compare-bar.show {
+            transform: translateY(0);
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .countdown-item {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            min-width: 60px;
+        }
+
+        .countdown-item span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .countdown-item small {
+            font-size: 0.75rem;
+        }
+
+        /* Testimonial */
+        .testimonial-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Seller Badge */
+        .seller-badge {
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Seller Stats */
+        .seller-stat {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .seller-stat:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        /* Product Management */
+        .product-management {
+            background: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-management-header {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay for Mobile Menu & Cart -->
+    <div class="overlay" onclick="closeAllSidebars()"></div>
+
+    <!-- Login/Register Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal('authModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form">
+                <h2 class="text-2xl font-bold mb-6 text-center">Masuk ke Akun Anda</h2>
+                <form onsubmit="handleLogin(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Email</label>
+                        <input type="email" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="email@example.com">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Password</label>
+                        <input type="password" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="••••••••">
+                    </div>
+                    <div class="mb-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <span class="text-gray-600">Ingat saya</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-gradient w-full py-3 rounded-lg font-semibold mb-4">
+                        Masuk
+                    </button>
+                    <div class="text-center">
+                        <p class="text-gray-600">Belum punya akun? 
+                            <a href="#" onclick="showRegisterForm()" class="text-purple-600 hover:text-purple-700 font-medium">Daftar</a>
+                        </p>
+                        <p class="text-gray-600 mt-2">
+                            <a href="#" onclick="showSellerRegisterForm()" class="text-pink-600 hover:text-pink-700 font-medium">
+                                <i class="fas fa-store mr-1"></i> Daftar sebagai Penjual
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerForm" class="auth-form hidden">
+                <h2 class="text-2xl font-bold mb-6 text-center">Buat Akun Baru</h2>
+                <form onsubmit="handleRegister(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Nama Lengkap</label>
+                        <input type="text" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="John Doe">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Email</label>
+                        <input type="email" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="email@example.com">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Password</label>
+                        <input type="password" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="••••••••">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Konfirmasi Password</label>
+                        <input type="password" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="••••••••">
+                    </div>
+                    <div class="mb-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" required class="mr-2">
+                            <span class="text-gray-600">Saya setuju dengan <a href="#" class="text-purple-600">syarat & ketentuan</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-gradient w-full py-3 rounded-lg font-semibold mb-4">
+                        Daftar
+                    </button>
+                    <div class="text-center">
+                        <p class="text-gray-600">Sudah punya akun? 
+                            <a href="#" onclick="showLoginForm()" class="text-purple-600 hover:text-purple-700 font-medium">Masuk</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Seller Register Form -->
+            <div id="sellerRegisterForm" class="auth-form hidden">
+                <h2 class="text-2xl font-bold mb-6 text-center">Daftar sebagai Penjual</h2>
+                <form onsubmit="handleSellerRegister(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Nama Toko</label>
+                        <input type="text" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="Nama Toko Anda">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Nama Lengkap</label>
+                        <input type="text" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="John Doe">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Email</label>
+                        <input type="email" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="email@example.com">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">No. Telepon</label>
+                        <input type="tel" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="08123456789">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Password</label>
+                        <input type="password" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="••••••••">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Konfirmasi Password</label>
+                        <input type="password" required class="input-readable w-full px-4 py-3 rounded-lg" placeholder="••••••••">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Deskripsi Toko</label>
+                        <textarea required class="input-readable w-full px-4 py-3 rounded-lg" rows="3" placeholder="Ceritakan tentang toko Anda..."></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Alamat Toko</label>
+                        <textarea required class="input-readable w-full px-4 py-3 rounded-lg" rows="2" placeholder="Alamat lengkap toko Anda"></textarea>
+                    </div>
+                    <div class="mb-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" required class="mr-2">
+                            <span class="text-gray-600">Saya setuju dengan <a href="#" class="text-purple-600">syarat & ketentuan penjual</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-seller w-full py-3 rounded-lg font-semibold mb-4">
+                        <i class="fas fa-store mr-2"></i> Daftar sebagai Penjual
+                    </button>
+                    <div class="text-center">
+                        <p class="text-gray-600">Sudah punya akun? 
+                            <a href="#" onclick="showLoginForm()" class="text-purple-600 hover:text-purple-700 font-medium">Masuk</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content max-w-6xl">
+            <button onclick="closeModal('productModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div id="productDetailContent">
+                <!-- Product detail will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard Modal -->
+    <div id="dashboardModal" class="modal">
+        <div class="modal-content max-w-6xl">
+            <button onclick="closeModal('dashboardModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Sidebar -->
+                <div class="w-full md:w-1/4">
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-20 h-20 bg-purple-600 rounded-full mx-auto flex items-center justify-center text-white text-2xl">
+                                ${currentUser?.name?.charAt(0) || 'U'}
+                            </div>
+                            <h3 class="font-bold mt-2">${currentUser?.name || 'User'}</h3>
+                            ${currentUser?.isSeller ? '<span class="seller-badge inline-block mt-1">Penjual</span>' : ''}
+                        </div>
+                        <nav class="space-y-2">
+                            <button onclick="showDashboardSection('profile')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-200">
+                                <i class="fas fa-user mr-2"></i> Profil Saya
+                            </button>
+                            <button onclick="showDashboardSection('orders')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-200">
+                                <i class="fas fa-shopping-bag mr-2"></i> Pesanan Saya
+                            </button>
+                            <button onclick="showDashboardSection('address')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-200">
+                                <i class="fas fa-map-marker-alt mr-2"></i> Alamat
+                            </button>
+                            <button onclick="showDashboardSection('wishlist')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-200">
+                                <i class="fas fa-heart mr-2"></i> Wishlist
+                            </button>
+                            ${currentUser?.isSeller ? `
+                                <button onclick="showDashboardSection('seller')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-200">
+                                    <i class="fas fa-store mr-2"></i> Dashboard Penjual
+                                </button>
+                            ` : ''}
+                            <button onclick="showDashboardSection('settings')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-200">
+                                <i class="fas fa-cog mr-2"></i> Pengaturan
+                            </button>
+                            <button onclick="logout()" class="w-full text-left px-4 py-2 rounded text-red-600">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Keluar
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+                
+                <!-- Content -->
+                <div class="w-full md:w-3/4">
+                    <div id="dashboardContent">
+                        <!-- Profile Section -->
+                        <div id="profileSection" class="dashboard-section">
+                            <h2 class="text-2xl font-bold mb-6">Profil Saya</h2>
+                            <form onsubmit="updateProfile(event)" class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Nama Lengkap</label>
+                                        <input type="text" id="profileName" value="${currentUser?.name || ''}" class="input-readable w-full px-4 py-2 rounded">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Email</label>
+                                        <input type="email" id="profileEmail" value="${currentUser?.email || ''}" class="input-readable w-full px-4 py-2 rounded" readonly>
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">No. Telepon</label>
+                                        <input type="tel" id="profilePhone" class="input-readable w-full px-4 py-2 rounded" placeholder="08123456789">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Tanggal Lahir</label>
+                                        <input type="date" id="profileBirthday" class="input-readable w-full px-4 py-2 rounded">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2">Bio</label>
+                                    <textarea id="profileBio" rows="3" class="input-readable w-full px-4 py-2 rounded" placeholder="Ceritakan tentang Anda..."></textarea>
+                                </div>
+                                <button type="submit" class="btn-gradient px-6 py-2 rounded">Simpan Perubahan</button>
+                            </form>
+                        </div>
+                        
+                        <!-- Orders Section -->
+                        <div id="ordersSection" class="dashboard-section hidden">
+                            <h2 class="text-2xl font-bold mb-6">Pesanan Saya</h2>
+                            <div id="ordersList">
+                                <!-- Orders will be loaded here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Address Section -->
+                        <div id="addressSection" class="dashboard-section hidden">
+                            <div class="flex justify-between items-center mb-6">
+                                <h2 class="text-2xl font-bold">Alamat Pengiriman</h2>
+                                <button onclick="showAddressForm()" class="btn-gradient px-4 py-2 rounded">
+                                    <i class="fas fa-plus mr-2"></i> Tambah Alamat
+                                </button>
+                            </div>
+                            <div id="addressList">
+                                <!-- Addresses will be loaded here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Wishlist Section -->
+                        <div id="wishlistSection" class="dashboard-section hidden">
+                            <h2 class="text-2xl font-bold mb-6">Wishlist Saya</h2>
+                            <div id="wishlistItems" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Wishlist items will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Seller Dashboard Section -->
+                        <div id="sellerSection" class="dashboard-section hidden">
+                            <h2 class="text-2xl font-bold mb-6">Dashboard Penjual</h2>
+                            
+                            <!-- Seller Stats -->
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                                <div class="seller-stat">
+                                    <i class="fas fa-box text-3xl text-purple-600 mb-2"></i>
+                                    <div class="text-2xl font-bold">${getSellerStats().totalProducts}</div>
+                                    <div class="text-sm text-gray-600">Total Produk</div>
+                                </div>
+                                <div class="seller-stat">
+                                    <i class="fas fa-shopping-cart text-3xl text-green-600 mb-2"></i>
+                                    <div class="text-2xl font-bold">${getSellerStats().totalOrders}</div>
+                                    <div class="text-sm text-gray-600">Total Pesanan</div>
+                                </div>
+                                <div class="seller-stat">
+                                    <i class="fas fa-money-bill-wave text-3xl text-blue-600 mb-2"></i>
+                                    <div class="text-2xl font-bold">Rp ${getSellerStats().totalRevenue.toLocaleString('id-ID')}</div>
+                                    <div class="text-sm text-gray-600">Total Pendapatan</div>
+                                </div>
+                                <div class="seller-stat">
+                                    <i class="fas fa-star text-3xl text-yellow-600 mb-2"></i>
+                                    <div class="text-2xl font-bold">${getSellerStats().avgRating}</div>
+                                    <div class="text-sm text-gray-600">Rating Rata-rata</div>
+                                </div>
+                            </div>
+
+                            <!-- Seller Actions -->
+                            <div class="flex gap-4 mb-6">
+                                <button onclick="showAddProductForm()" class="btn-seller px-6 py-3 rounded-lg font-semibold">
+                                    <i class="fas fa-plus mr-2"></i> Tambah Produk
+                                </button>
+                                <button onclick="showSellerOrders()" class="btn-gradient px-6 py-3 rounded-lg font-semibold">
+                                    <i class="fas fa-list mr-2"></i> Kelola Pesanan
+                                </button>
+                            </div>
+
+                            <!-- Seller Products -->
+                            <div class="product-management">
+                                <div class="product-management-header">
+                                    <h3 class="text-lg font-semibold">Produk Saya</h3>
+                                </div>
+                                <div id="sellerProducts" class="p-4">
+                                    <!-- Seller products will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Settings Section -->
+                        <div id="settingsSection" class="dashboard-section hidden">
+                            <h2 class="text-2xl font-bold mb-6">Pengaturan</h2>
+                            <div class="space-y-6">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h3 class="font-semibold mb-3">Notifikasi</h3>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2">
+                                            <span>Email notifikasi</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2">
+                                            <span>SMS notifikasi</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="mr-2">
+                                            <span>Push notifikasi</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h3 class="font-semibold mb-3">Privasi</h3>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2">
+                                            <span>Tampilkan profil publik</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="mr-2">
+                                            <span>Tampilkan aktivitas belanja</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                ${currentUser?.isSeller ? `
+                                <div class="bg-pink-50 p-4 rounded-lg">
+                                    <h3 class="font-semibold mb-3 text-pink-600">Penjual</h3>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" checked class="mr-2">
+                                            <span>Tampilkan info toko di profil</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="mr-2">
+                                            <span>Terima pesanan otomatis</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                ` : ''}
+                                
+                                <div class="bg-red-50 p-4 rounded-lg">
+                                    <h3 class="font-semibold mb-3 text-red-600">Bahaya</h3>
+                                    <button onclick="deleteAccount()" class="text-red-600 hover:text-red-700">
+                                        <i class="fas fa-trash mr-2"></i> Hapus Akun
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="cart-sidebar">
+        <div class="p-6 border-b">
+            <div class="flex justify-between items-center">
+                <h3 class="text-xl font-bold">Keranjang Belanja</h3>
+                <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div class="p-6">
+            <div id="cartItems" class="space-y-4 mb-6">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div class="border-t pt-4">
+                <div class="flex justify-between mb-4">
+                    <span class="font-semibold">Subtotal:</span>
+                    <span class="font-bold text-purple-600" id="cartSubtotal">Rp 0</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="font-semibold">Ongkir:</span>
+                    <span class="font-bold" id="cartShipping">Rp 0</span>
+                </div>
+                <div class="flex justify-between mb-6">
+                    <span class="text-lg font-bold">Total:</span>
+                    <span class="text-xl font-bold text-purple-600" id="cartTotal">Rp 0</span>
+                </div>
+                <button onclick="proceedToCheckout()" class="btn-gradient w-full py-3 rounded-lg font-semibold">
+                    Proses Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-xl font-bold">Menu</h3>
+                <button onclick="toggleMobileMenu()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <nav class="space-y-4">
+                <a href="#" class="block py-2 text-gray-700 hover:text-purple-600 font-medium">Beranda</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-purple-600 font-medium">Kategori</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-purple-600 font-medium">Penjual</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-purple-600 font-medium">Promo</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-purple-600 font-medium">Best Seller</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-purple-600 font-medium">Tentang Kami</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-purple-600 font-medium">Kontak</a>
+                <hr class="my-4">
+                <a href="#" onclick="showModal('authModal')" class="block py-2 text-gray-700 hover:text-purple-600 font-medium">
+                    <i class="fas fa-user mr-2"></i> Masuk / Daftar
+                </a>
+                <a href="#" onclick="showModal('authModal'); showSellerRegisterForm();" class="block py-2 text-pink-600 hover:text-pink-700 font-medium">
+                    <i class="fas fa-store mr-2"></i> Jual Produk
+                </a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-purple-600 font-medium">
+                    <i class="fas fa-heart mr-2"></i> Wishlist
+                </a>
+                <a href="#" onclick="toggleCart()" class="block py-2 text-gray-700 hover:text-purple-600 font-medium">
+                    <i class="fas fa-shopping-cart mr-2"></i> Keranjang
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Compare Bar -->
+    <div id="compareBar" class="compare-bar">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-balance-scale mr-2"></i>
+                    <span class="font-medium">Bandingkan Produk (<span id="compareCount">0</span>)</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="compareItems" class="flex gap-2">
+                        <!-- Compare items will be shown here -->
+                    </div>
+                    <button onclick="showCompareModal()" class="btn-gradient px-4 py-2 rounded">Bandingkan</button>
+                    <button onclick="clearCompare()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 bg-white shadow-md z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="animated-bg p-3 rounded-xl">
+                        <i class="fas fa-store text-white text-2xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-light-bg">SYAHJAYA INDO GRUP</h1>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-xl mx-8">
+                    <div class="relative w-full">
+                        <input type="text" id="searchInput" placeholder="Cari produk atau toko..." 
+                               class="input-readable w-full px-6 py-3 pr-12 rounded-full"
+                               onkeyup="handleSearch(event)">
+                        <button onclick="performSearch()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-2 rounded-full">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- User Actions -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="showDashboard()" class="relative text-gray-700 hover:text-purple-600 transition-colors">
+                        <i class="fas fa-user-circle text-xl"></i>
+                        ${currentUser ? '<span class="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></span>' : ''}
+                    </button>
+                    <button onclick="showWishlist()" class="relative text-gray-700 hover:text-purple-600 transition-colors">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center" id="wishlistBadge">0</span>
+                    </button>
+                    <button onclick="toggleCart()" class="relative text-gray-700 hover:text-purple-600 transition-colors">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-purple-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center" id="cartBadge">0</span>
+                    </button>
+                    <button onclick="showModal('authModal'); showSellerRegisterForm();" class="btn-seller px-4 py-2 rounded-lg text-white font-medium hidden md:flex">
+                        <i class="fas fa-store mr-2"></i> Jual
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden md:block border-t">
+                <ul class="flex space-x-8 py-3">
+                    <li><a href="#" class="text-purple-600 font-medium">Beranda</a></li>
+                    <li class="category-dropdown">
+                        <a href="#" class="text-gray-700 hover:text-purple-600 font-medium flex items-center" onclick="toggleCategoryMenu(event)">
+                            Kategori <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="category-menu" id="categoryMenu">
+                            <a href="#" onclick="filterProducts('children-toys')">Mainan Anak</a>
+                            <a href="#" onclick="filterProducts('electronic')">Elektronik</a>
+                            <a href="#" onclick="filterProducts('handphone')">Handphone</a>
+                            <a href="#" onclick="filterProducts('household-appliances')">Peralatan Rumah Tangga</a>
+                            <a href="#" onclick="filterProducts('computer-accessories')">Komputer & Aksesoris</a>
+                            <a href="#" onclick="filterProducts('fashion-boys')">Fashion Anak Laki-laki</a>
+                            <a href="#" onclick="filterProducts('fashion-girl')">Fashion Anak Perempuan</a>
+                            <a href="#" onclick="filterProducts('book')">Buku</a>
+                            <a href="#" onclick="filterProducts('automotive')">Otomotif</a>
+                            <a href="#" onclick="filterProducts('sport')">Olahraga</a>
+                            <a href="#" onclick="filterProducts('baby')">Bayi</a>
+                            <a href="#" onclick="filterProducts('software')">Software</a>
+                            <a href="#" onclick="filterProducts('cosmetics')">Kosmetik</a>
+                            <a href="#" onclick="filterProducts('kitchen-appliances')">Peralatan Dapur</a>
+                        </div>
+                    </li>
+                    <li><a href="#" onclick="showSellers()" class="text-gray-700 hover:text-purple-600 font-medium">Penjual</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-purple-600 font-medium">
+                        <span class="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs mr-1">HOT</span>Promo
+                    </a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-purple-600 font-medium">Best Seller</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-purple-600 font-medium">Tentang Kami</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-purple-600 font-medium">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden" 
+                 style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://picsum.photos/seed/hero/1920/1080');">
+            <div class="container mx-auto px-4 text-center text-white">
+                <h2 class="text-5xl md:text-7xl font-bold mb-6 text-readable">
+                    SELAMAT DATANG DI<br>
+                    <span class="text-on-gradient">SYAHJAYA INDO GRUP</span>
+                </h2>
+                <p class="text-xl md:text-2xl mb-8 text-dark-bg font-medium">
+                    Platform E-Commerce Terpercaya untuk Pembeli dan Penjual
+                </p>
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <button class="btn-gradient px-8 py-4 rounded-full text-lg font-semibold">
+                        <i class="fas fa-shopping-bag mr-2"></i> Belanja Sekarang
+                    </button>
+                    <button onclick="showModal('authModal'); showSellerRegisterForm();" class="btn-seller px-8 py-4 rounded-full text-lg font-semibold">
+                        <i class="fas fa-store mr-2"></i> Mulai Berjualan
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seller CTA Section -->
+        <section class="py-16 bg-gradient-to-r from-pink-500 to-purple-600 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold mb-4">Jual Produk Anda dengan Mudah</h2>
+                <p class="text-xl mb-8">Bergabung dengan ribuan penjual lainnya dan raih kesuksesan</p>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="text-center">
+                        <i class="fas fa-rocket text-4xl mb-3"></i>
+                        <h3 class="font-semibold mb-2">Mudah Dimulai</h3>
+                        <p>Daftar dalam hitungan menit</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-chart-line text-4xl mb-3"></i>
+                        <h3 class="font-semibold mb-2">Pantau Penjualan</h3>
+                        <p>Dashboard lengkap untuk analisis</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-shield-alt text-4xl mb-3"></i>
+                        <h3 class="font-semibold mb-2">Aman Terpercaya</h3>
+                        <p>Sistem pembayaran yang aman</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-headset text-4xl mb-3"></i>
+                        <h3 class="font-semibold mb-2">Dukungan 24/7</h3>
+                        <p>Bantuan kapan saja Anda butuhkan</p>
+                    </div>
+                </div>
+                <button onclick="showModal('authModal'); showSellerRegisterForm();" class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100">
+                    <i class="fas fa-store mr-2"></i> Daftar Sekarang Gratis
+                </button>
+            </div>
+        </section>
+
+        <!-- Top Sellers Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold">Penjual Terpopuler</h2>
+                    <a href="#" onclick="showSellers()" class="text-purple-600 hover:text-purple-700 font-medium">
+                        Lihat Semua <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                <div id="topSellers" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <!-- Top sellers will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Promo Section -->
+        <section class="py-16 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-4">Flash Sale Hari Ini!</h2>
+                    <p class="text-xl">Diskon hingga 70% untuk produk terpilih</p>
+                </div>
+                <div class="countdown mb-8">
+                    <div class="countdown-item">
+                        <span id="hours">00</span>
+                        <small>Jam</small>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes">00</span>
+                        <small>Menit</small>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="seconds">00</span>
+                        <small>Detik</small>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100">
+                        Lihat Semua Promo
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Kategori Populer</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <div class="text-center cursor-pointer group" onclick="filterProducts('electronic')">
+                        <div class="bg-white p-6 rounded-lg shadow-md group-hover:shadow-lg transition-shadow">
+                            <i class="fas fa-laptop text-4xl text-purple-600 mb-3"></i>
+                            <h3 class="font-medium">Elektronik</h3>
+                        </div>
+                    </div>
+                    <div class="text-center cursor-pointer group" onclick="filterProducts('fashion-boys')">
+                        <div class="bg-white p-6 rounded-lg shadow-md group-hover:shadow-lg transition-shadow">
+                            <i class="fas fa-tshirt text-4xl text-purple-600 mb-3"></i>
+                            <h3 class="font-medium">Fashion</h3>
+                        </div>
+                    </div>
+                    <div class="text-center cursor-pointer group" onclick="filterProducts('sport')">
+                        <div class="bg-white p-6 rounded-lg shadow-md group-hover:shadow-lg transition-shadow">
+                            <i class="fas fa-dumbbell text-4xl text-purple-600 mb-3"></i>
+                            <h3 class="font-medium">Olahraga</h3>
+                        </div>
+                    </div>
+                    <div class="text-center cursor-pointer group" onclick="filterProducts('kitchen-appliances')">
+                        <div class="bg-white p-6 rounded-lg shadow-md group-hover:shadow-lg transition-shadow">
+                            <i class="fas fa-utensils text-4xl text-purple-600 mb-3"></i>
+                            <h3 class="font-medium">Dapur</h3>
+                        </div>
+                    </div>
+                    <div class="text-center cursor-pointer group" onclick="filterProducts('baby')">
+                        <div class="bg-white p-6 rounded-lg shadow-md group-hover:shadow-lg transition-shadow">
+                            <i class="fas fa-baby text-4xl text-purple-600 mb-3"></i>
+                            <h3 class="font-medium">Bayi</h3>
+                        </div>
+                    </div>
+                    <div class="text-center cursor-pointer group" onclick="filterProducts('book')">
+                        <div class="bg-white p-6 rounded-lg shadow-md group-hover:shadow-lg transition-shadow">
+                            <i class="fas fa-book text-4xl text-purple-600 mb-3"></i>
+                            <h3 class="font-medium">Buku</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="py-8 bg-white border-b">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap gap-4 items-center">
+                    <span class="font-medium text-gray-700">Filter:</span>
+                    <button class="filter-tag active" onclick="filterProducts('all')">Semua</button>
+                    <button class="filter-tag" onclick="filterProducts('children-toys')">Mainan Anak</button>
+                    <button class="filter-tag" onclick="filterProducts('electronic')">Elektronik</button>
+                    <button class="filter-tag" onclick="filterProducts('handphone')">Handphone</button>
+                    <button class="filter-tag" onclick="filterProducts('household-appliances')">Peralatan Rumah Tangga</button>
+                    <button class="filter-tag" onclick="filterProducts('computer-accessories')">Komputer & Aksesoris</button>
+                    <button class="filter-tag" onclick="filterProducts('fashion-boys')">Fashion Anak Laki-laki</button>
+                    <button class="filter-tag" onclick="filterProducts('fashion-girl')">Fashion Anak Perempuan</button>
+                    <button class="filter-tag" onclick="filterProducts('book')">Buku</button>
+                    <button class="filter-tag" onclick="filterProducts('automotive')">Otomotif</button>
+                    <button class="filter-tag" onclick="filterProducts('sport')">Olahraga</button>
+                    <button class="filter-tag" onclick="filterProducts('baby')">Bayi</button>
+                    <button class="filter-tag" onclick="filterProducts('software')">Software</button>
+                    <button class="filter-tag" onclick="filterProducts('cosmetics')">Kosmetik</button>
+                    <button class="filter-tag" onclick="filterProducts('kitchen-appliances')">Peralatan Dapur</button>
+                    
+                    <div class="ml-auto flex items-center gap-4">
+                        <span class="font-medium text-gray-700">Urutkan:</span>
+                        <select onchange="sortProducts(this.value)" class="input-readable px-4 py-2 rounded-lg">
+                            <option value="default">Default</option>
+                            <option value="price-low">Harga Terendah</option>
+                            <option value="price-high">Harga Tertinggi</option>
+                            <option value="name">Nama A-Z</option>
+                            <option value="rating">Rating Tertinggi</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold">Produk Terbaru</h2>
+                    <div class="flex gap-2">
+                        <button onclick="setViewMode('grid')" class="p-2 rounded hover:bg-gray-100">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button onclick="setViewMode('list')" class="p-2 rounded hover:bg-gray-100">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Products will be loaded here -->
+                </div>
+                
+                <!-- Load More Button -->
+                <div class="text-center mt-12">
+                    <button onclick="loadMoreProducts()" class="btn-gradient px-8 py-3 rounded-full font-semibold">
+                        Muat Lebih Banyak
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Apa Kata Penjual Kami</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="testimonial-card" data-aos="fade-up">
+                        <div class="flex items-center mb-4">
+                            <img src="https://picsum.photos/seed/seller1/50/50" class="w-12 h-12 rounded-full mr-3">
+                            <div>
+                                <div class="font-semibold">Toko Maju Jaya</div>
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"Platform yang sangat membantu untuk mengembangkan bisnis online. Penjualan meningkat 300% sejak bergabung!"</p>
+                    </div>
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-center mb-4">
+                            <img src="https://picsum.photos/seed/seller2/50/50" class="w-12 h-12 rounded-full mr-3">
+                            <div>
+                                <div class="font-semibold">Butik Cantik</div>
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"Fitur dashboard yang lengkap memudahkan saya memantau penjualan dan stok produk."</p>
+                    </div>
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center mb-4">
+                            <img src="https://picsum.photos/seed/seller3/50/50" class="w-12 h-12 rounded-full mr-3">
+                            <div>
+                                <div class="font-semibold">Gadget Store</div>
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"Sistem pembayaran yang aman dan proses pencairan yang cepat. Sangat direkomendasikan!"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-4">Dapatkan Penawaran Eksklusif</h2>
+                    <p class="text-gray-600 mb-8">Daftar newsletter kami dan dapatkan diskon 15%</p>
+                    <form onsubmit="handleNewsletter(event)" class="flex gap-4">
+                        <input type="email" placeholder="Email Anda" required 
+                               class="input-readable flex-1 px-6 py-3 rounded-lg">
+                        <button type="submit" class="btn-gradient px-8 py-3 rounded-lg font-semibold">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recently Viewed Section -->
+        <section class="py-12" id="recentlyViewedSection" style="display: none;">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl font-bold mb-8">Baru Dilihat</h2>
+                <div id="recentlyViewedGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <!-- Recently viewed products will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended Products Section -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl font-bold mb-8">Rekomendasi Untuk Anda</h2>
+                <div id="recommendedGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <!-- Recommended products will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">SYAHJAYA INDO GRUP</h3>
+                    <p class="text-gray-400">Platform e-commerce terpercaya untuk pembeli dan penjual.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Layanan</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Pusat Bantuan</a></li>
+                        <li><a href="#" class="hover:text-white">Cara Pembelian</a></li>
+                        <li><a href="#" class="hover:text-white">Pengiriman</a></li>
+                        <li><a href="#" class="hover:text-white">Pengembalian</a></li>
+                        <li><a href="#" onclick="showModal('authModal'); showSellerRegisterForm();" class="hover:text-white">Jual Produk</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Perusahaan</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Tentang Kami</a></li>
+                        <li><a href="#" class="hover:text-white">Karir</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Press</a></li>
+                        <li><a href="#" class="hover:text-white">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Kontak</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i> 021-1234-5678</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@syahjaya.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> Jakarta, Indonesia</li>
+                        <li><i class="fas fa-clock mr-2"></i> Senin - Jumat: 09:00 - 18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 SYAHJAYA INDO GRUP. All rights reserved. | 
+                    <a href="#" class="hover:text-white">Privacy Policy</a> | 
+                    <a href="#" class="hover:text-white">Terms of Service</a> |
+                    <a href="#" class="hover:text-white">Seller Agreement</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Global State
+        let currentUser = null;
+        let currentSeller = null;
+        let cart = [];
+        let wishlist = [];
+        let compareList = [];
+        let recentlyViewed = [];
+        let products = [];
+        let sellers = [];
+        let filteredProducts = [];
+        let currentFilter = 'all';
+        let selectedColor = null;
+        let selectedSize = null;
+        let viewMode = 'grid';
+
+        // Product Data
+        const productData = [
+            {
+                id: 1,
+                name: 'Laptop Gaming ASUS ROG Strix',
+                category: 'computer-accessories',
+                price: 15000000,
+                originalPrice: 18750000,
+                discount: 20,
+                rating: 4.5,
+                reviews: 128,
+                image: 'https://picsum.photos/seed/laptop1/300/300',
+                description: 'Laptop gaming dengan performa tinggi untuk pengalaman gaming maksimal.',
+                specs: ['Intel Core i7', '16GB RAM', 'RTX 3060', '512GB SSD'],
+                stock: 10,
+                features: ['High Performance', 'RGB Keyboard', 'Advanced Cooling', 'Immersive Audio'],
+                sellerId: 1
+            },
+            {
+                id: 2,
+                name: 'Smartphone Samsung Galaxy S23',
+                category: 'handphone',
+                price: 12000000,
+                rating: 5,
+                reviews: 256,
+                image: 'https://picsum.photos/seed/phone1/300/300',
+                description: 'Smartphone flagship dengan kamera terbaik di kelasnya.',
+                specs: ['Snapdragon 8 Gen 2', '8GB RAM', '256GB Storage', '50MP Camera'],
+                stock: 25,
+                features: ['Pro-Grade Camera', 'All-Day Battery', 'Sleek Design', '5G Connectivity'],
+                sellerId: 2
+            },
+            {
+                id: 3,
+                name: 'Headphone Sony WH-1000XM4',
+                category: 'electronic',
+                price: 4500000,
+                rating: 4,
+                reviews: 89,
+                image: 'https://picsum.photos/seed/headphone1/300/300',
+                description: 'Headphone wireless dengan noise cancelling terbaik.',
+                specs: ['30hr Battery', 'Noise Cancelling', 'Hi-Res Audio', 'Touch Control'],
+                stock: 15,
+                features: ['Industry-Leading Noise Cancellation', 'All-Day Power', 'Touch Sensor Controls', 'Speak-to-Chat Technology'],
+                sellerId: 1
+            },
+            {
+                id: 4,
+                name: 'Kaos Polos Premium',
+                category: 'fashion-boys',
+                price: 150000,
+                rating: 4.5,
+                reviews: 67,
+                image: 'https://picsum.photos/seed/tshirt1/300/300',
+                description: 'Kaos polos dengan bahan katun premium yang nyaman.',
+                variants: [
+                    { color: 'Hitam', size: 'S', stock: 10 },
+                    { color: 'Hitam', size: 'M', stock: 15 },
+                    { color: 'Hitam', size: 'L', stock: 12 },
+                    { color: 'Putih', size: 'S', stock: 8 },
+                    { color: 'Putih', size: 'M', stock: 10 },
+                    { color: 'Putih', size: 'L', stock: 5 }
+                ],
+                stock: 50,
+                features: ['100% Cotton', 'Premium Quality', 'Comfortable Fit', 'Durable'],
+                sellerId: 3
+            },
+            {
+                id: 5,
+                name: 'Sofa Minimalis 3 Seater',
+                category: 'household-appliances',
+                price: 3500000,
+                rating: 4.8,
+                reviews: 45,
+                image: 'https://picsum.photos/seed/sofa1/300/300',
+                description: 'Sofa minimalis dengan desain modern dan nyaman.',
+                specs: ['3 Seater', 'Fabric Material', 'Modern Design', 'Easy Assembly'],
+                stock: 5,
+                features: ['Modern Design', 'Comfortable Seating', 'Easy to Clean', 'Sturdy Construction'],
+                sellerId: 4
+            },
+            {
+                id: 6,
+                name: 'Sepatu Running Nike',
+                category: 'sport',
+                price: 1200000,
+                originalPrice: 1500000,
+                discount: 20,
+                rating: 4.7,
+                reviews: 234,
+                image: 'https://picsum.photos/seed/shoes1/300/300',
+                description: 'Sepatu running dengan teknologi terbaru untuk performa maksimal.',
+                specs: ['Air Zoom', 'Lightweight', 'Breathable', 'Durable'],
+                stock: 50,
+                features: ['Responsive Cushioning', 'Breathable Upper', 'Durable Outsole', 'Secure Fit'],
+                sellerId: 2
+            },
+            {
+                id: 7,
+                name: 'Mainan Edukatif Anak',
+                category: 'children-toys',
+                price: 250000,
+                rating: 4.3,
+                reviews: 78,
+                image: 'https://picsum.photos/seed/toy1/300/300',
+                description: 'Mainan edukatif untuk mengembangkan kreativitas anak.',
+                specs: ['Bahan Aman', 'Edukatif', 'Usia 3+ Tahun'],
+                stock: 30,
+                features: ['Educational Value', 'Safe Materials', 'Colorful Design', 'Interactive Elements'],
+                sellerId: 5
+            },
+            {
+                id: 8,
+                name: 'Kamera DSLR Canon',
+                category: 'electronic',
+                price: 8500000,
+                rating: 4.6,
+                reviews: 112,
+                image: 'https://picsum.photos/seed/camera1/300/300',
+                description: 'Kamera DSLR dengan hasil foto profesional.',
+                specs: ['24MP', 'Dual Pixel CMOS', 'Full HD'],
+                stock: 12,
+                features: ['Professional Quality', 'Easy to Use', 'Versatile Lens Options', 'Advanced Features'],
+                sellerId: 1
+            },
+            {
+                id: 9,
+                name: 'Setrika Uap Philips',
+                category: 'household-appliances',
+                price: 750000,
+                rating: 4.2,
+                reviews: 95,
+                image: 'https://picsum.photos/seed/iron1/300/300',
+                description: 'Setrika uap dengan teknologi canggih untuk hasil maksimal.',
+                specs: ['2200W', 'Steam Boost', 'Non-Stick Soleplate'],
+                stock: 20,
+                features: ['Powerful Steam', 'Non-Stick Soleplate', 'Easy Glide', 'Quick Heat-Up'],
+                sellerId: 4
+            },
+            {
+                id: 10,
+                name: 'Mouse Gaming Logitech',
+                category: 'computer-accessories',
+                price: 450000,
+                rating: 4.7,
+                reviews: 203,
+                image: 'https://picsum.photos/seed/mouse1/300/300',
+                description: 'Mouse gaming dengan sensor presisi tinggi.',
+                specs: ['16,000 DPI', 'RGB Lighting', '11 Programmable Buttons'],
+                stock: 35,
+                features: ['High Precision', 'Customizable Buttons', 'RGB Lighting', 'Ergonomic Design'],
+                sellerId: 1
+            },
+            {
+                id: 11,
+                name: 'Gaun Anak Perempuan',
+                category: 'fashion-girl',
+                price: 350000,
+                rating: 4.4,
+                reviews: 67,
+                image: 'https://picsum.photos/seed/dress1/300/300',
+                description: 'Gaun cantik untuk anak perempuan dengan bahan nyaman.',
+                specs: ['Katun Premium', 'Available in 4 Colors', 'Size 2-10 Tahun'],
+                stock: 25,
+                features: ['Beautiful Design', 'Comfortable Fabric', 'Easy to Wear', 'Durable Material'],
+                sellerId: 3
+            },
+            {
+                id: 12,
+                name: 'Buku Novel Best Seller',
+                category: 'book',
+                price: 120000,
+                rating: 4.8,
+                reviews: 156,
+                image: 'https://picsum.photos/seed/book1/300/300',
+                description: 'Novel best seller dengan cerita yang menarik.',
+                specs: ['400 Halaman', 'Soft Cover', 'Best Seller 2023'],
+                stock: 50,
+                features: ['Engaging Story', 'Well-Written', 'Best Seller', 'Great Reviews'],
+                sellerId: 6
+            },
+            {
+                id: 13,
+                name: 'Oli Mobil Shell',
+                category: 'automotive',
+                price: 180000,
+                rating: 4.5,
+                reviews: 89,
+                image: 'https://picsum.photos/seed/oil1/300/300',
+                description: 'Oli mobil dengan formula sintetis untuk performa mesin optimal.',
+                specs: ['Synthetic 5W-30', 'API SN', '1 Liter'],
+                stock: 100,
+                features: ['Engine Protection', 'Improved Performance', 'Fuel Efficiency', 'Cleaner Engine'],
+                sellerId: 7
+            },
+            {
+                id: 14,
+                name: 'Tennis Racket Pro',
+                category: 'sport',
+                price: 1500000,
+                rating: 4.6,
+                reviews: 78,
+                image: 'https://picsum.photos/seed/tennis1/300/300',
+                description: 'Racket tennis profesional untuk pemain tingkat lanjut.',
+                specs: ['Graphite Composite', '100 sq inch', '300g Weight'],
+                stock: 15,
+                features: ['Professional Grade', 'Lightweight', 'Powerful Shots', 'Comfortable Grip'],
+                sellerId: 2
+            },
+            {
+                id: 15,
+                name: 'Popok Bayi Premium',
+                category: 'baby',
+                price: 150000,
+                rating: 4.7,
+                reviews: 234,
+                image: 'https://picsum.photos/seed/diaper1/300/300',
+                description: 'Popok bayi dengan daya serap tinggi dan lembut di kulit.',
+                specs: ['Size M', '40 Pcs', 'Extra Soft'],
+                stock: 75,
+                features: ['High Absorption', 'Soft on Skin', 'Leak Protection', 'Comfortable Fit'],
+                sellerId: 5
+            },
+            {
+                id: 16,
+                name: 'Software Office 365',
+                category: 'software',
+                price: 1200000,
+                rating: 4.3,
+                reviews: 145,
+                image: 'https://picsum.photos/seed/software1/300/300',
+                description: 'Paket software produktivitas untuk bisnis dan personal.',
+                specs: ['Word, Excel, PowerPoint', '1 Year License', '5 Devices'],
+                stock: 100,
+                features: ['Complete Suite', 'Cloud Integration', 'Regular Updates', 'Multi-Device'],
+                sellerId: 8
+            },
+            {
+                id: 17,
+                name: 'Lipstik Matte Premium',
+                category: 'cosmetics',
+                price: 250000,
+                rating: 4.5,
+                reviews: 189,
+                image: 'https://picsum.photos/seed/lipstick1/300/300',
+                description: 'Lipstik matte dengan hasil tahan lama dan nyaman.',
+                specs: ['Matte Finish', 'Long Lasting', 'Available in 12 Colors'],
+                stock: 60,
+                features: ['Long-Lasting', 'Matte Finish', 'Comfortable Wear', 'Vibrant Colors'],
+                sellerId: 9
+            },
+            {
+                id: 18,
+                name: 'Blender Philips',
+                category: 'kitchen-appliances',
+                price: 850000,
+                rating: 4.4,
+                reviews: 123,
+                image: 'https://picsum.photos/seed/blender1/300/300',
+                description: 'Blender dengan teknologi ProBlend 6 untuk hasil halus.',
+                specs: ['600W', '2L Jar', '5 Speed Settings'],
+                stock: 30,
+                features: ['Powerful Motor', 'Multiple Speeds', 'Large Capacity', 'Easy to Clean'],
+                sellerId: 4
+            }
+        ];
+
+        // Sellers Data
+        const sellersData = [
+            {
+                id: 1,
+                name: 'Toko Maju Jaya',
+                email: 'toko@majujaya.com',
+                phone: '08123456789',
+                address: 'Jakarta Selatan',
+                description: 'Toko elektronik terlengkap dengan harga terbaik',
+                rating: 4.8,
+                totalProducts: 156,
+                totalOrders: 2341,
+                joinedDate: '2023-01-15',
+                status: 'approved',
+                image: 'https://picsum.photos/seed/seller1/100/100'
+            },
+            {
+                id: 2,
+                name: 'Gadget Store',
+                email: 'info@gadgetstore.com',
+                phone: '08198765432',
+                address: 'Jakarta Pusat',
+                description: 'Spesialis gadget dan aksesoris original',
+                rating: 4.9,
+                totalProducts: 89,
+                totalOrders: 1876,
+                joinedDate: '2023-02-20',
+                status: 'approved',
+                image: 'https://picsum.photos/seed/seller2/100/100'
+            },
+            {
+                id: 3,
+                name: 'Butik Cantik',
+                email: 'hello@butikcantik.com',
+                phone: '08111223344',
+                address: 'Bandung',
+                description: 'Fashion terkini untuk wanita modern',
+                rating: 4.7,
+                totalProducts: 234,
+                totalOrders: 3456,
+                joinedDate: '2023-01-10',
+                status: 'approved',
+                image: 'https://picsum.photos/seed/seller3/100/100'
+            },
+            {
+                id: 4,
+                name: 'Rumahku Indah',
+                email: 'sales@rumahku.com',
+                phone: '08155667788',
+                address: 'Surabaya',
+                description: 'Peralatan rumah tangga berkualitas',
+                rating: 4.6,
+                totalProducts: 178,
+                totalOrders: 2890,
+                joinedDate: '2023-03-05',
+                status: 'approved',
+                image: 'https://picsum.photos/seed/seller4/100/100'
+            },
+            {
+                id: 5,
+                name: 'Kids World',
+                email: 'info@kidsworld.com',
+                phone: '08199887766',
+                address: 'Jakarta Barat',
+                description: 'Segala kebutuhan anak terlengkap',
+                rating: 4.8,
+                totalProducts: 312,
+                totalOrders: 4123,
+                joinedDate: '2023-01-25',
+                status: 'approved',
+                image: 'https://picsum.photos/seed/seller5/100/100'
+            },
+            {
+                id: 6,
+                name: 'Gramedia Digital',
+                email: 'online@gramedia.com',
+                phone: '02112345678',
+                address: 'Jakarta Selatan',
+                description: 'Toko buku terpercaya sejak lama',
+                rating: 4.9,
+                totalProducts: 567,
+                totalOrders: 6789,
+                joinedDate: '2022-12-01',
+                status: 'approved',
+                image: 'https://picsum.photos/seed/seller6/100/100'
+            },
+            {
+                id: 7,
+                name: 'AutoParts Pro',
+                email: 'sales@autoparts.com',
+                phone: '08122334455',
+                address: 'Bekasi',
+                description: 'Sparepart mobil dan aksesoris',
+                rating: 4.5,
+                totalProducts: 234,
+                totalOrders: 1567,
+                joinedDate: '2023-02-15',
+                status: 'approved',
+                image: 'https://picsum.photos/seed/seller7/100/100'
+            },
+            {
+                id: 8,
+                name: 'Software House',
+                email: 'support@softwarehouse.com',
+                phone: '02187654321',
+                address: 'Jakarta Pusat',
+                description: 'Software original dan lisensi resmi',
+                rating: 4.7,
+                totalProducts: 89,
+                totalOrders: 987,
+                joinedDate: '2023-03-10',
+                status: 'approved',
+                image: 'https://picsum.photos/seed/seller8/100/100'
+            },
+            {
+                id: 9,
+                name: 'Beauty Care',
+                email: 'info@beautycare.com',
+                phone: '08133445566',
+                address: 'Jakarta Utara',
+                description: 'Produk kecantikan original dan berkualitas',
+                rating: 4.8,
+                totalProducts: 456,
+                totalOrders: 5432,
+                joinedDate: '2023-01-30',
+                status: 'approved',
+                image: 'https://picsum.photos/seed/seller9/100/100'
+            }
+        ];
+
+        // Initialize Products and Sellers
+        function initializeData() {
+            products = [...productData];
+            sellers = [...sellersData];
+            filteredProducts = [...products];
+            renderProducts();
+            loadTopSellers();
+            loadRecommendedProducts();
+            startCountdown();
+        }
+
+        // Render Products
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            
+            if (viewMode === 'grid') {
+                grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6';
+                filteredProducts.forEach(product => {
+                    const productCard = createProductCard(product);
+                    grid.innerHTML += productCard;
+                });
+            } else {
+                grid.className = 'space-y-4';
+                filteredProducts.forEach(product => {
+                    const productCard = createProductListCard(product);
+                    grid.innerHTML += productCard;
+                });
+            }
+        }
+
+        // Create Product Card
+        function createProductCard(product) {
+            const seller = sellers.find(s => s.id === product.sellerId);
+            const discountHtml = product.discount ? `
+                <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                    -${product.discount}%
+                </span>
+            ` : '';
+            
+            const originalPriceHtml = product.originalPrice ? `
+                <span class="text-gray-400 text-sm line-through">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>
+            ` : '';
+            
+            const stockBadge = product.stock < 10 ? `
+                <span class="absolute top-2 right-2 bg-orange-500 text-white px-2 py-1 rounded text-xs font-bold">
+                    Stok Habis!
+                </span>
+            ` : '';
+
+            return `
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-lg" data-aos="fade-up">
+                    <div class="relative">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover cursor-pointer" onclick="showProductDetail(${product.id})">
+                        ${discountHtml}
+                        ${stockBadge}
+                        <button onclick="toggleWishlist(${product.id})" class="absolute bottom-2 right-2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100">
+                            <i class="far fa-heart text-gray-600"></i>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center mb-2">
+                            <img src="${seller?.image || 'https://picsum.photos/seed/default/30/30'}" class="w-6 h-6 rounded-full mr-2">
+                            <span class="text-xs text-gray-500">${seller?.name || 'Unknown Seller'}</span>
+                        </div>
+                        <h3 class="font-semibold mb-2 cursor-pointer hover:text-purple-600" onclick="showProductDetail(${product.id})">${product.name}</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400 text-sm">
+                                ${generateStars(product.rating)}
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(${product.reviews})</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-purple-600 font-bold">Rp ${product.price.toLocaleString('id-ID')}</span>
+                                ${originalPriceHtml}
+                            </div>
+                            <div class="flex gap-1">
+                                <button onclick="toggleCompare(${product.id})" class="text-gray-500 hover:text-blue-600 p-1">
+                                    <i class="fas fa-balance-scale"></i>
+                                </button>
+                                <button onclick="addToCart(${product.id})" class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create Product List Card
+        function createProductListCard(product) {
+            const seller = sellers.find(s => s.id === product.sellerId);
+            const discountHtml = product.discount ? `
+                <span class="bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                    -${product.discount}%
+                </span>
+            ` : '';
+            
+            const originalPriceHtml = product.originalPrice ? `
+                <span class="text-gray-400 text-sm line-through">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>
+            ` : '';
+
+            return `
+                <div class="bg-white rounded-lg shadow-md p-4 flex gap-4" data-aos="fade-up">
+                    <img src="${product.image}" alt="${product.name}" class="w-32 h-32 object-cover rounded cursor-pointer" onclick="showProductDetail(${product.id})">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-2">
+                            <img src="${seller?.image || 'https://picsum.photos/seed/default/30/30'}" class="w-6 h-6 rounded-full mr-2">
+                            <span class="text-sm text-gray-500">${seller?.name || 'Unknown Seller'}</span>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold mb-2 cursor-pointer hover:text-purple-600" onclick="showProductDetail(${product.id})">${product.name}</h3>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        ${generateStars(product.rating)}
+                                    </div>
+                                    <span class="text-gray-500 text-sm ml-2">(${product.reviews})</span>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div>
+                                        <span class="text-purple-600 font-bold">Rp ${product.price.toLocaleString('id-ID')}</span>
+                                        ${originalPriceHtml}
+                                    </div>
+                                    ${discountHtml}
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="toggleWishlist(${product.id})" class="text-gray-500 hover:text-red-600 p-2">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button onclick="toggleCompare(${product.id})" class="text-gray-500 hover:text-blue-600 p-2">
+                                    <i class="fas fa-balance-scale"></i>
+                                </button>
+                                <button onclick="addToCart(${product.id})" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+                                    <i class="fas fa-shopping-cart mr-2"></i> Tambah
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load Top Sellers
+        function loadTopSellers() {
+            const topSellers = sellers.slice(0, 4);
+            const grid = document.getElementById('topSellers');
+            
+            grid.innerHTML = topSellers.map(seller => `
+                <div class="seller-card bg-white rounded-lg shadow-md p-6 text-center" data-aos="fade-up">
+                    <img src="${seller.image}" alt="${seller.name}" class="w-20 h-20 rounded-full mx-auto mb-4">
+                    <h3 class="font-semibold mb-2">${seller.name}</h3>
+                    <div class="flex items-center justify-center mb-2">
+                        <div class="flex text-yellow-400 text-sm">
+                            ${generateStars(seller.rating)}
+                        </div>
+                        <span class="text-gray-500 text-sm ml-2">(${seller.totalOrders})</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">${seller.description}</p>
+                    <div class="flex justify-center gap-2 mb-4">
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">${seller.totalProducts} Produk</span>
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Aktif</span>
+                    </div>
+                    <button onclick="showSellerDetail(${seller.id})" class="btn-seller w-full py-2 rounded text-sm">
+                        Kunjungi Toko
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Generate Stars
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i - 0.5 <= rating) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+
+        // Show Seller Detail
+        function showSellerDetail(sellerId) {
+            const seller = sellers.find(s => s.id === sellerId);
+            const sellerProducts = products.filter(p => p.sellerId === sellerId);
+            
+            const modal = document.getElementById('productModal');
+            const content = document.getElementById('productDetailContent');
+            
+            content.innerHTML = `
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-1">
+                        <img src="${seller.image}" alt="${seller.name}" class="w-full rounded-lg mb-4">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-semibold mb-3">Informasi Toko</h3>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Status:</span>
+                                    <span class="text-green-600 font-medium">Aktif</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Bergabung:</span>
+                                    <span>${new Date(seller.joinedDate).toLocaleDateString('id-ID')}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Total Produk:</span>
+                                    <span>${seller.totalProducts}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Total Pesanan:</span>
+                                    <span>${seller.totalOrders}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="contactSeller(${seller.id})" class="btn-seller w-full py-3 rounded-lg font-semibold mt-4">
+                            <i class="fas fa-envelope mr-2"></i> Hubungi Penjual
+                        </button>
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <h2 class="text-2xl font-bold mb-4">${seller.name}</h2>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                ${generateStars(seller.rating)}
+                            </div>
+                            <span class="text-gray-500 ml-2">${seller.rating} (${seller.totalOrders} pesanan)</span>
+                        </div>
+                        <p class="text-gray-600 mb-6">${seller.description}</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Alamat</h4>
+                                <p class="text-gray-600 text-sm">${seller.address}</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Kontak</h4>
+                                <p class="text-gray-600 text-sm">${seller.phone}</p>
+                                <p class="text-gray-600 text-sm">${seller.email}</p>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold mb-4">Produk dari ${seller.name}</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            ${sellerProducts.slice(0, 4).map(product => `
+                                <div class="border rounded-lg p-3 cursor-pointer hover:shadow-md transition-shadow" onclick="showProductDetail(${product.id})">
+                                    <img src="${product.image}" alt="${product.name}" class="w-full h-32 object-cover rounded mb-2">
+                                    <h4 class="font-medium text-sm mb-1">${product.name}</h4>
+                                    <p class="text-purple-600 font-bold">Rp ${product.price.toLocaleString('id-ID')}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        ${sellerProducts.length > 4 ? `
+                            <div class="text-center mt-4">
+                                <button onclick="filterBySeller(${seller.id})" class="btn-seller px-6 py-2 rounded">
+                                    Lihat Semua Produk (${sellerProducts.length})
+                                </button>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('show');
+        }
+
+        // Contact Seller
+        function contactSeller(sellerId) {
+            const seller = sellers.find(s => s.id === sellerId);
+            
+            const contactForm = `
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-semibold mb-3">Hubungi ${seller.name}</h3>
+                    <form onsubmit="sendSellerMessage(event, ${sellerId})" class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Nama</label>
+                            <input type="text" required class="input-readable w-full px-3 py-2 rounded" placeholder="Nama Anda">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Email</label>
+                            <input type="email" required class="input-readable w-full px-3 py-2 rounded" placeholder="email@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Pesan</label>
+                            <textarea required class="input-readable w-full px-3 py-2 rounded" rows="3" placeholder="Tulis pesan Anda..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-seller w-full py-2 rounded">Kirim Pesan</button>
+                    </form>
+                </div>
+            `;
+            
+            // Add contact form to modal
+            const modal = document.getElementById('productModal');
+            const content = document.getElementById('productDetailContent');
+            content.insertAdjacentHTML('beforeend', contactForm);
+        }
+
+        // Send Seller Message
+        function sendSellerMessage(event, sellerId) {
+            event.preventDefault();
+            
+            const seller = sellers.find(s => s.id === sellerId);
+            const formData = new FormData(event.target);
+            
+            // Simulate sending message
+            showToast(`Pesan berhasil dikirim ke ${seller.name}!`);
+            
+            // Remove contact form
+            event.target.closest('.bg-gray-50').remove();
+        }
+
+        // Filter by Seller
+        function filterBySeller(sellerId) {
+            const seller = sellers.find(s => s.id === sellerId);
+            filteredProducts = products.filter(p => p.sellerId === sellerId);
+            currentFilter = 'seller-' + sellerId;
+            
+            // Update filter tags
+            document.querySelectorAll('.filter-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            
+            renderProducts();
+            closeModal('productModal');
+            
+            // Scroll to products section
+            document.querySelector('#productGrid').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show Sellers Page
+        function showSellers() {
+            // This would typically navigate to a separate sellers page
+            // For now, we'll filter to show all sellers' products
+            showToast('Menampilkan semua penjual...');
+            filterProducts('all');
+        }
+
+        // Show Product Detail
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            const seller = sellers.find(s => s.id === product.sellerId);
+            const modal = document.getElementById('productModal');
+            const content = document.getElementById('productDetailContent');
+            
+            // Add to recently viewed
+            addToRecentlyViewed(product);
+            
+            const variantsHtml = product.variants ? `
+                <div class="mb-6">
+                    <h4 class="font-semibold mb-3">Pilih Variasi:</h4>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Warna:</label>
+                        <div class="flex gap-2">
+                            ${[...new Set(product.variants.map(v => v.color))].map(color => `
+                                <button class="px-4 py-2 border rounded color-option" 
+                                        onclick="selectVariant('${color}', null)">${color}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Ukuran:</label>
+                        <div class="flex gap-2">
+                            ${[...new Set(product.variants.map(v => v.size))].map(size => `
+                                <button class="px-4 py-2 border rounded size-option" 
+                                        onclick="selectVariant(null, '${size}')">${size}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div id="selectedVariant" class="mb-4 text-sm text-gray-600">
+                        Silakan pilih variasi
+                    </div>
+                </div>
+            ` : '';
+            
+            content.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <img src="${product.image}" alt="${product.name}" class="w-full rounded-lg mb-4">
+                        <div class="grid grid-cols-4 gap-2">
+                            ${[1,2,3,4].map(i => `
+                                <img src="https://picsum.photos/seed/${product.id}${i}/100/100" class="w-full rounded cursor-pointer hover:opacity-75">
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <img src="${seller?.image || 'https://picsum.photos/seed/default/40/40'}" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <div class="font-semibold">${seller?.name || 'Unknown Seller'}</div>
+                                <div class="flex text-yellow-400 text-sm">
+                                    ${generateStars(seller?.rating || 0)}
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="text-2xl font-bold mb-4">${product.name}</h2>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                ${generateStars(product.rating)}
+                            </div>
+                            <span class="text-gray-500 ml-2">(${product.reviews} ulasan)</span>
+                        </div>
+                        <div class="mb-4">
+                            <span class="text-3xl font-bold text-purple-600">Rp ${product.price.toLocaleString('id-ID')}</span>
+                            ${product.originalPrice ? `<span class="text-gray-400 line-through ml-2">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>` : ''}
+                        </div>
+                        
+                        ${variantsHtml}
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold mb-3">Fitur Utama:</h4>
+                            <ul class="space-y-1">
+                                ${product.features?.map(feature => `<li class="text-gray-600">• ${feature}</li>`).join('') || 
+                                    product.specs?.map(spec => `<li class="text-gray-600">• ${spec}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <button onclick="addToCart(${product.id})" class="btn-gradient flex-1 py-3 rounded-lg font-semibold">
+                                <i class="fas fa-shopping-cart mr-2"></i> Tambah ke Keranjang
+                            </button>
+                            <button onclick="toggleWishlist(${product.id})" class="border border-gray-300 px-4 py-3 rounded-lg hover:bg-gray-50">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button onclick="toggleCompare(${product.id})" class="border border-gray-300 px-4 py-3 rounded-lg hover:bg-gray-50">
+                                <i class="fas fa-balance-scale"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Tabs -->
+                <div class="mt-8">
+                    <div class="product-tabs">
+                        <div class="product-tab active" onclick="showProductTab('description')">Deskripsi</div>
+                        <div class="product-tab" onclick="showProductTab('specs')">Spesifikasi</div>
+                        <div class="product-tab" onclick="showProductTab('reviews')">Ulasan</div>
+                        <div class="product-tab" onclick="showProductTab('seller')">Info Penjual</div>
+                    </div>
+                    
+                    <div id="descriptionTab" class="product-tab-content active">
+                        <h3 class="font-semibold mb-3">Deskripsi Produk</h3>
+                        <p class="text-gray-600">${product.description}</p>
+                    </div>
+                    
+                    <div id="specsTab" class="product-tab-content">
+                        <h3 class="font-semibold mb-3">Spesifikasi</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            ${product.specs?.map(spec => `
+                                <div class="bg-gray-50 p-3 rounded">
+                                    <span class="text-gray-600">${spec}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div id="reviewsTab" class="product-tab-content">
+                        <h3 class="font-semibold mb-3">Ulasan Pembeli</h3>
+                        <div class="space-y-4">
+                            <div class="border rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <img src="https://picsum.photos/seed/user1/40/40" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <div class="font-semibold">John Doe</div>
+                                        <div class="flex text-yellow-400 text-sm">
+                                            ${generateStars(5)}
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600">Produk sangat bagus, kualitas sesuai dengan harga!</p>
+                            </div>
+                            <div class="border rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <img src="https://picsum.photos/seed/user2/40/40" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <div class="font-semibold">Jane Smith</div>
+                                        <div class="flex text-yellow-400 text-sm">
+                                            ${generateStars(4)}
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600">Pengiriman cepat, packing rapi. Recommended!</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Add Review Form -->
+                        <div class="mt-6 p-4 border rounded-lg">
+                            <h4 class="font-semibold mb-3">Tambah Ulasan</h4>
+                            <div class="mb-3">
+                                <label class="block text-sm font-medium mb-1">Rating</label>
+                                <div class="star-rating" id="productRating">
+                                    <i class="fas fa-star star" data-rating="1"></i>
+                                    <i class="fas fa-star star" data-rating="2"></i>
+                                    <i class="fas fa-star star" data-rating="3"></i>
+                                    <i class="fas fa-star star" data-rating="4"></i>
+                                    <i class="fas fa-star star" data-rating="5"></i>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="block text-sm font-medium mb-1">Ulasan</label>
+                                <textarea class="input-readable w-full px-4 py-2 rounded-lg" rows="3" placeholder="Tulis ulasan Anda..."></textarea>
+                            </div>
+                            <button class="btn-gradient px-6 py-2 rounded-lg font-semibold">Kirim Ulasan</button>
+                        </div>
+                    </div>
+                    
+                    <div id="sellerTab" class="product-tab-content">
+                        <h3 class="font-semibold mb-3">Informasi Penjual</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <img src="${seller?.image || 'https://picsum.photos/seed/default/60/60'}" class="w-16 h-16 rounded-full mr-4">
+                                <div>
+                                    <h4 class="font-semibold text-lg">${seller?.name || 'Unknown Seller'}</h4>
+                                    <div class="flex items-center">
+                                        <div class="flex text-yellow-400 text-sm">
+                                            ${generateStars(seller?.rating || 0)}
+                                        </div>
+                                        <span class="text-gray-500 text-sm ml-2">(${seller?.totalOrders || 0} pesanan)</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600">${seller?.description || 'No description available'}</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-medium mb-2">Alamat</h5>
+                                    <p class="text-sm text-gray-600">${seller?.address || 'No address available'}</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium mb-2">Kontak</h5>
+                                    <p class="text-sm text-gray-600">${seller?.phone || 'No phone available'}</p>
+                                    <p class="text-sm text-gray-600">${seller?.email || 'No email available'}</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex gap-2">
+                                <button onclick="contactSeller(${seller?.id})" class="btn-seller px-4 py-2 rounded text-sm">
+                                    <i class="fas fa-envelope mr-2"></i> Hubungi
+                                </button>
+                                <button onclick="filterBySeller(${seller?.id})" class="btn-gradient px-4 py-2 rounded text-sm">
+                                    <i class="fas fa-store mr-2"></i> Lihat Produk
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('show');
+        }
+
+        // Show Product Tab
+        function showProductTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.product-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.product-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected tab
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        // Select Variant
+        function selectVariant(color, size) {
+            if (color) selectedColor = color;
+            if (size) selectedSize = size;
+            
+            // Update UI
+            document.querySelectorAll('.color-option').forEach(btn => {
+                if (btn.textContent === selectedColor) {
+                    btn.classList.add('bg-purple-600', 'text-white');
+                } else {
+                    btn.classList.remove('bg-purple-600', 'text-white');
+                }
+            });
+            
+            document.querySelectorAll('.size-option').forEach(btn => {
+                if (btn.textContent === selectedSize) {
+                    btn.classList.add('bg-purple-600', 'text-white');
+                } else {
+                    btn.classList.remove('bg-purple-600', 'text-white');
+                }
+            });
+            
+            // Update text
+            const selectedVariant = document.getElementById('selectedVariant');
+            if (selectedVariant) {
+                selectedVariant.textContent = selectedColor && selectedSize ? 
+                    `Dipilih: ${selectedColor}, ${selectedSize}` : 'Silakan pilih variasi';
+            }
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            
+            if (product.variants && (!selectedColor || !selectedSize)) {
+                showToast('Pilih warna dan ukuran terlebih dahulu');
+                return;
+            }
+            
+            const existingItem = cart.find(item => 
+                item.id === productId && 
+                item.color === selectedColor && 
+                item.size === selectedSize
+            );
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    ...product,
+                    color: selectedColor,
+                    size: selectedSize,
+                    quantity: 1
+                });
+            }
+            
+            updateCartUI();
+            showToast(`${product.name} ditambahkan ke keranjang!`);
+            
+            // Reset variant selection
+            selectedColor = null;
+            selectedSize = null;
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            const cartBadge = document.getElementById('cartBadge');
+            const cartItems = document.getElementById('cartItems');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartShipping = document.getElementById('cartShipping');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            // Update badge
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartBadge.textContent = totalItems;
+            
+            // Update cart items
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">Keranjang belanja kosong</p>';
+            } else {
+                cartItems.innerHTML = cart.map(item => {
+                    const seller = sellers.find(s => s.id === item.sellerId);
+                    return `
+                        <div class="flex items-center space-x-3 border-b pb-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded">
+                            <div class="flex-1">
+                                <div class="flex items-center mb-1">
+                                    <img src="${seller?.image || 'https://picsum.photos/seed/default/20/20'}" class="w-5 h-5 rounded-full mr-2">
+                                    <span class="text-xs text-gray-500">${seller?.name || 'Unknown Seller'}</span>
+                                </div>
+                                <h4 class="font-medium text-sm">${item.name}</h4>
+                                ${item.color ? `<p class="text-xs text-gray-500">${item.color}, ${item.size}</p>` : ''}
+                                <p class="text-purple-600 font-semibold">Rp ${item.price.toLocaleString('id-ID')}</p>
+                                <div class="flex items-center mt-1">
+                                    <button onclick="updateCartQuantity(${item.id}, -1)" class="text-gray-500 hover:text-purple-600">
+                                        <i class="fas fa-minus-circle"></i>
+                                    </button>
+                                    <span class="mx-3 font-medium">${item.quantity}</span>
+                                    <button onclick="updateCartQuantity(${item.id}, 1)" class="text-gray-500 hover:text-purple-600">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-600">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // Update totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 100000 ? 0 : 15000;
+            const total = subtotal + shipping;
+            
+            cartSubtotal.textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+            cartShipping.textContent = `Rp ${shipping.toLocaleString('id-ID')}`;
+            cartTotal.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        // Update Cart Quantity
+        function updateCartQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            
+            if (item) {
+                const newQuantity = item.quantity + change;
+                if (newQuantity > 0) {
+                    item.quantity = newQuantity;
+                    updateCartUI();
+                } else {
+                    removeFromCart(productId);
+                }
+            }
+        }
+
+        // Remove from Cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+            showToast('Produk dihapus dari keranjang');
+        }
+
+        // Toggle Wishlist
+        function toggleWishlist(productId) {
+            const product = products.find(p => p.id === productId);
+            const index = wishlist.findIndex(item => item.id === productId);
+            
+            if (index > -1) {
+                wishlist.splice(index, 1);
+                showToast(`${product.name} dihapus dari wishlist`);
+            } else {
+                wishlist.push(product);
+                showToast(`${product.name} ditambahkan ke wishlist`);
+            }
+            
+            updateWishlistUI();
+        }
+
+        // Update Wishlist UI
+        function updateWishlistUI() {
+            const wishlistBadge = document.getElementById('wishlistBadge');
+            wishlistBadge.textContent = wishlist.length;
+        }
+
+        // Show Wishlist
+        function showWishlist() {
+            if (!currentUser) {
+                showModal('authModal');
+                return;
+            }
+            showDashboardSection('wishlist');
+            showModal('dashboardModal');
+        }
+
+        // Toggle Compare
+        function toggleCompare(productId) {
+            const product = products.find(p => p.id === productId);
+            const index = compareList.findIndex(item => item.id === productId);
+            
+            if (index > -1) {
+                compareList.splice(index, 1);
+                showToast(`${product.name} dihapus dari perbandingan`);
+            } else {
+                if (compareList.length >= 4) {
+                    showToast('Maksimal 4 produk untuk dibandingkan');
+                    return;
+                }
+                compareList.push(product);
+                showToast(`${product.name} ditambahkan ke perbandingan`);
+            }
+            
+            updateCompareUI();
+        }
+
+        // Update Compare UI
+        function updateCompareUI() {
+            const compareBar = document.getElementById('compareBar');
+            const compareCount = document.getElementById('compareCount');
+            const compareItems = document.getElementById('compareItems');
+            
+            compareCount.textContent = compareList.length;
+            
+            if (compareList.length > 0) {
+                compareBar.classList.add('show');
+                compareItems.innerHTML = compareList.map(item => `
+                    <div class="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded">
+                        <img src="${item.image}" class="w-8 h-8 object-cover rounded">
+                        <span class="text-sm">${item.name}</span>
+                        <button onclick="toggleCompare(${item.id})" class="text-gray-500 hover:text-red-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `).join('');
+            } else {
+                compareBar.classList.remove('show');
+            }
+        }
+
+        // Clear Compare
+        function clearCompare() {
+            compareList = [];
+            updateCompareUI();
+        }
+
+        // Add to Recently Viewed
+        function addToRecentlyViewed(product) {
+            // Remove if already exists
+            recentlyViewed = recentlyViewed.filter(item => item.id !== product.id);
+            
+            // Add to beginning
+            recentlyViewed.unshift(product);
+            
+            // Keep only last 6 items
+            if (recentlyViewed.length > 6) {
+                recentlyViewed = recentlyViewed.slice(0, 6);
+            }
+            
+            updateRecentlyViewedUI();
+        }
+
+        // Update Recently Viewed UI
+        function updateRecentlyViewedUI() {
+            const section = document.getElementById('recentlyViewedSection');
+            const grid = document.getElementById('recentlyViewedGrid');
+            
+            if (recentlyViewed.length > 0) {
+                section.style.display = 'block';
+                grid.innerHTML = recentlyViewed.map(product => {
+                    const seller = sellers.find(s => s.id === product.sellerId);
+                    return `
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow" onclick="showProductDetail(${product.id})">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-32 object-cover">
+                            <div class="p-3">
+                                <div class="flex items-center mb-1">
+                                    <img src="${seller?.image || 'https://picsum.photos/seed/default/20/20'}" class="w-4 h-4 rounded-full mr-1">
+                                    <span class="text-xs text-gray-500">${seller?.name || 'Unknown'}</span>
+                                </div>
+                                <h4 class="font-medium text-sm mb-1 truncate">${product.name}</h4>
+                                <p class="text-purple-600 font-bold">Rp ${product.price.toLocaleString('id-ID')}</p>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                section.style.display = 'none';
+            }
+        }
+
+        // Load Recommended Products
+        function loadRecommendedProducts() {
+            const grid = document.getElementById('recommendedGrid');
+            const recommended = products.slice(0, 6); // Simple recommendation
+            
+            grid.innerHTML = recommended.map(product => {
+                const seller = sellers.find(s => s.id === product.sellerId);
+                return `
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow" onclick="showProductDetail(${product.id})">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-32 object-cover">
+                        <div class="p-3">
+                            <div class="flex items-center mb-1">
+                                <img src="${seller?.image || 'https://picsum.photos/seed/default/20/20'}" class="w-4 h-4 rounded-full mr-1">
+                                <span class="text-xs text-gray-500">${seller?.name || 'Unknown'}</span>
+                            </div>
+                            <h4 class="font-medium text-sm mb-1 truncate">${product.name}</h4>
+                            <p class="text-purple-600 font-bold">Rp ${product.price.toLocaleString('id-ID')}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Toggle Cart
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            const overlay = document.querySelector('.overlay');
+            
+            cartSidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.querySelector('.overlay');
+            
+            mobileMenu.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        // Toggle Category Menu
+        function toggleCategoryMenu(event) {
+            event.preventDefault();
+            const categoryMenu = document.getElementById('categoryMenu');
+            categoryMenu.classList.toggle('show');
+        }
+
+        // Close All Sidebars
+        function closeAllSidebars() {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('categoryMenu').classList.remove('show');
+            document.querySelector('.overlay').classList.remove('show');
+        }
+
+        // Show Modal
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+        }
+
+        // Close Modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        // Show Login Form
+        function showLoginForm() {
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('sellerRegisterForm').classList.add('hidden');
+            document.getElementById('loginForm').classList.remove('hidden');
+        }
+
+        // Show Register Form
+        function showRegisterForm() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('sellerRegisterForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+        }
+
+        // Show Seller Register Form
+        function showSellerRegisterForm() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('sellerRegisterForm').classList.remove('hidden');
+        }
+
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            // Check if user exists
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.email === email);
+            
+            if (user) {
+                currentUser = user;
+                closeModal('authModal');
+                showToast('Login berhasil!');
+                updateUserUI();
+            } else {
+                showToast('Email tidak ditemukan');
+            }
+        }
+
+        // Handle Register
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = event.target.querySelector('input[type="text"]').value;
+            const email = event.target.querySelector('input[type="email"]').value;
+            const password = event.target.querySelector('input[type="password"]').value;
+            
+            // Create new user
+            const newUser = {
+                id: Date.now(),
+                name,
+                email,
+                password,
+                isSeller: false,
+                registeredAt: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            currentUser = newUser;
+            closeModal('authModal');
+            showToast('Registrasi berhasil!');
+            updateUserUI();
+        }
+
+        // Handle Seller Register
+        function handleSellerRegister(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            // Create new seller
+            const newSeller = {
+                id: Date.now(),
+                storeName: formData.get('storeName'),
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                password: formData.get('password'),
+                description: formData.get('description'),
+                address: formData.get('address'),
+                rating: 0,
+                totalProducts: 0,
+                totalOrders: 0,
+                totalRevenue: 0,
+                status: 'pending',
+                joinedDate: new Date().toISOString().split('T')[0],
+                isSeller: true,
+                registeredAt: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            const sellers = JSON.parse(localStorage.getItem('sellers') || '[]');
+            sellers.push(newSeller);
+            localStorage.setItem('sellers', JSON.stringify(sellers));
+            
+            // Also save as user
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            users.push({
+                id: newSeller.id,
+                name: newSeller.name,
+                email: newSeller.email,
+                password: newSeller.password,
+                isSeller: true,
+                registeredAt: newSeller.registeredAt
+            });
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            currentSeller = newSeller;
+            currentUser = {
+                id: newSeller.id,
+                name: newSeller.name,
+                email: newSeller.email,
+                isSeller: true
+            };
+            
+            closeModal('authModal');
+            showToast('Pendaftaran penjual berhasil! Menunggu persetujuan admin.');
+            updateUserUI();
+        }
+
+        // Update User UI
+        function updateUserUI() {
+            if (currentUser) {
+                // Update user button
+                const userButton = document.querySelector('.fa-user-circle').parentElement;
+                userButton.innerHTML = `
+                    <div class="relative">
+                        <i class="fas fa-user-circle text-xl"></i>
+                        <span class="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></span>
+                    </div>
+                `;
+                
+                // Update seller button if user is seller
+                const sellerButton = document.querySelector('.btn-seller');
+                if (currentUser.isSeller && sellerButton) {
+                    sellerButton.style.display = 'flex';
+                }
+            }
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            if (!currentUser) {
+                showModal('authModal');
+                return;
+            }
+            showModal('dashboardModal');
+            showDashboardSection('profile');
+        }
+
+        // Show Dashboard Section
+        function showDashboardSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(section + 'Section').classList.remove('hidden');
+            
+            // Load section data
+            if (section === 'orders') {
+                loadUserOrders();
+            } else if (section === 'address') {
+                loadUserAddresses();
+            } else if (section === 'wishlist') {
+                loadUserWishlist();
+            } else if (section === 'seller') {
+                loadSellerDashboard();
+            }
+        }
+
+        // Load User Orders
+        function loadUserOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const userOrders = orders.filter(order => order.userId === currentUser.id);
+            
+            const ordersList = document.getElementById('ordersList');
+            if (userOrders.length === 0) {
+                ordersList.innerHTML = '<p class="text-gray-500 text-center py-8">Belum ada pesanan</p>';
+            } else {
+                ordersList.innerHTML = userOrders.map(order => {
+                    const seller = sellers.find(s => s.id === order.items[0]?.sellerId);
+                    return `
+                        <div class="border rounded-lg p-4 mb-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <span class="font-bold">Order #${order.id}</span>
+                                    <div class="text-sm text-gray-500">${new Date(order.date).toLocaleDateString('id-ID')}</div>
+                                </div>
+                                <span class="px-2 py-1 rounded text-xs ${
+                                    order.status === 'success' ? 'bg-green-100 text-green-800' : 
+                                    order.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 
+                                    order.status === 'processing' ? 'bg-blue-100 text-blue-800' :
+                                    order.status === 'shipped' ? 'bg-purple-100 text-purple-800' :
+                                    'bg-red-100 text-red-800'
+                                }">${order.status}</span>
+                            </div>
+                            
+                            <div class="space-y-2 mb-3">
+                                ${order.items.map(item => {
+                                    const productSeller = sellers.find(s => s.id === item.sellerId);
+                                    return `
+                                        <div class="flex justify-between text-sm">
+                                            <div class="flex items-center">
+                                                <img src="${item.image}" class="w-10 h-10 object-cover rounded mr-2">
+                                                <div>
+                                                    <div class="font-medium">${item.name}</div>
+                                                    <div class="text-xs text-gray-500">${productSeller?.name || 'Unknown Seller'}</div>
+                                                </div>
+                                            </div>
+                                            <div>Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                            
+                            <div class="border-t pt-3 flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold">Total: Rp ${order.total.toLocaleString('id-ID')}</div>
+                                    ${order.status === 'pending' ? '<div class="text-sm text-yellow-600">Menunggu pembayaran</div>' : ''}
+                                </div>
+                                <div class="flex gap-2">
+                                    <button onclick="viewOrderDetail('${order.id}')" class="btn-gradient px-4 py-2 rounded text-sm">Detail</button>
+                                    ${order.status === 'pending' ? '<button onclick="payOrder(\'' + order.id + '\')" class="bg-green-600 text-white px-4 py-2 rounded text-sm">Bayar</button>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        // Load User Addresses
+        function loadUserAddresses() {
+            const addresses = JSON.parse(localStorage.getItem('addresses') || '[]');
+            const userAddresses = addresses.filter(addr => addr.userId === currentUser.id);
+            
+            const addressList = document.getElementById('addressList');
+            if (userAddresses.length === 0) {
+                addressList.innerHTML = '<p class="text-gray-500 text-center py-8">Belum ada alamat</p>';
+            } else {
+                addressList.innerHTML = userAddresses.map(addr => `
+                    <div class="border rounded-lg p-4 mb-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-semibold">${addr.label || 'Alamat Utama'}</h4>
+                                <p class="text-gray-600">${addr.name}</p>
+                                <p class="text-gray-600">${addr.phone}</p>
+                                <p class="text-gray-600">${addr.address}</p>
+                                <p class="text-gray-600">${addr.city}, ${addr.province}</p>
+                            </div>
+                            ${addr.isDefault ? '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Utama</span>' : ''}
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="text-blue-600 hover:text-blue-700">Edit</button>
+                            <button class="text-red-600 hover:text-red-700">Hapus</button>
+                            ${!addr.isDefault ? '<button class="text-purple-600 hover:text-purple-700">Jadikan Utama</button>' : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Show Address Form
+        function showAddressForm() {
+            const addressForm = `
+                <div class="border rounded-lg p-4 mb-4">
+                    <h3 class="font-bold mb-4">Tambah Alamat Baru</h3>
+                    <form onsubmit="saveAddress(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Label Alamat</label>
+                            <input type="text" name="label" class="input-readable w-full px-4 py-2 rounded" placeholder="Rumah, Kantor, etc">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Nama Penerima</label>
+                            <input type="text" name="name" required class="input-readable w-full px-4 py-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">No. Telepon</label>
+                            <input type="tel" name="phone" required class="input-readable w-full px-4 py-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Alamat Lengkap</label>
+                            <textarea name="address" required class="input-readable w-full px-4 py-2 rounded" rows="3"></textarea>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Provinsi</label>
+                                <select name="province" required class="input-readable w-full px-4 py-2 rounded">
+                                    <option value="">Pilih Provinsi</option>
+                                    <option value="DKI Jakarta">DKI Jakarta</option>
+                                    <option value="Jawa Barat">Jawa Barat</option>
+                                    <option value="Jawa Tengah">Jawa Tengah</option>
+                                    <option value="Jawa Timur">Jawa Timur</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Kota</label>
+                                <input type="text" name="city" required class="input-readable w-full px-4 py-2 rounded">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="isDefault" class="mr-2">
+                                <span>Jadikan alamat utama</span>
+                            </label>
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="submit" class="btn-gradient px-6 py-2 rounded">Simpan</button>
+                            <button type="button" onclick="this.closest('.border').remove()" class="border border-gray-300 px-6 py-2 rounded">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            document.getElementById('addressList').insertAdjacentHTML('afterbegin', addressForm);
+        }
+
+        // Save Address
+        function saveAddress(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            const address = {
+                id: Date.now(),
+                userId: currentUser.id,
+                label: formData.get('label'),
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                address: formData.get('address'),
+                province: formData.get('province'),
+                city: formData.get('city'),
+                isDefault: formData.get('isDefault') === 'on'
+            };
+            
+            const addresses = JSON.parse(localStorage.getItem('addresses') || '[]');
+            if (address.isDefault) {
+                addresses.forEach(addr => addr.isDefault = false);
+            }
+            
+            addresses.push(address);
+            localStorage.setItem('addresses', JSON.stringify(addresses));
+            
+            loadUserAddresses();
+            showToast('Alamat berhasil disimpan');
+        }
+
+        // Load User Wishlist
+        function loadUserWishlist() {
+            const wishlistItems = document.getElementById('wishlistItems');
+            
+            if (wishlist.length === 0) {
+                wishlistItems.innerHTML = '<p class="text-gray-500 text-center py-8">Wishlist kosong</p>';
+            } else {
+                wishlistItems.innerHTML = wishlist.map(item => {
+                    const seller = sellers.find(s => s.id === item.sellerId);
+                    return `
+                        <div class="bg-white rounded-lg shadow-md p-4 flex gap-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover rounded">
+                            <div class="flex-1">
+                                <div class="flex items-center mb-2">
+                                    <img src="${seller?.image || 'https://picsum.photos/seed/default/20/20'}" class="w-5 h-5 rounded-full mr-2">
+                                    <span class="text-sm text-gray-500">${seller?.name || 'Unknown Seller'}</span>
+                                </div>
+                                <h4 class="font-semibold mb-2">${item.name}</h4>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        ${generateStars(item.rating)}
+                                    </div>
+                                    <span class="text-gray-500 text-sm ml-2">(${item.reviews})</span>
+                                </div>
+                                <p class="text-purple-600 font-bold mb-3">Rp ${item.price.toLocaleString('id-ID')}</p>
+                                <div class="flex gap-2">
+                                    <button onclick="addToCart(${item.id})" class="btn-gradient px-4 py-2 rounded text-sm">
+                                        <i class="fas fa-shopping-cart mr-1"></i> Beli
+                                    </button>
+                                    <button onclick="toggleWishlist(${item.id})" class="border border-red-300 text-red-600 px-4 py-2 rounded text-sm hover:bg-red-50">
+                                        <i class="fas fa-trash mr-1"></i> Hapus
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        // Load Seller Dashboard
+        function loadSellerDashboard() {
+            if (!currentUser.isSeller) {
+                showToast('Anda bukan penjual');
+                return;
+            }
+            
+            currentSeller = sellers.find(s => s.id === currentUser.id);
+            
+            if (!currentSeller) {
+                showToast('Data penjual tidak ditemukan');
+                return;
+            }
+            
+            // Load seller products
+            const sellerProducts = products.filter(p => p.sellerId === currentSeller.id);
+            const sellerProductsDiv = document.getElementById('sellerProducts');
+            
+            if (sellerProducts.length === 0) {
+                sellerProductsDiv.innerHTML = '<p class="text-gray-500 text-center py-8">Belum ada produk</p>';
+            } else {
+                sellerProductsDiv.innerHTML = sellerProducts.map(product => `
+                    <div class="bg-white rounded-lg shadow-sm p-4 mb-4 flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded">
+                            <div>
+                                <h4 class="font-semibold">${product.name}</h4>
+                                <p class="text-purple-600 font-bold">Rp ${product.price.toLocaleString('id-ID')}</p>
+                                <p class="text-sm text-gray-500">Stok: ${product.stock}</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="editProduct(${product.id})" class="text-blue-600 hover:text-blue-700 p-2">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="deleteProduct(${product.id})" class="text-red-600 hover:text-red-700 p-2">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Get Seller Stats
+        function getSellerStats() {
+            if (!currentSeller) {
+                return {
+                    totalProducts: 0,
+                    totalOrders: 0,
+                    totalRevenue: 0,
+                    avgRating: 0
+                };
+            }
+            
+            const sellerProducts = products.filter(p => p.sellerId === currentSeller.id);
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const sellerOrders = orders.filter(order => 
+                order.items.some(item => item.sellerId === currentSeller.id)
+            );
+            
+            const totalRevenue = sellerOrders.reduce((sum, order) => {
+                if (order.status === 'success') {
+                    return sum + order.items
+                        .filter(item => item.sellerId === currentSeller.id)
+                        .reduce((itemSum, item) => itemSum + (item.price * item.quantity), 0);
+                }
+                return sum;
+            }, 0);
+            
+            return {
+                totalProducts: sellerProducts.length,
+                totalOrders: sellerOrders.length,
+                totalRevenue: totalRevenue,
+                avgRating: currentSeller.rating
+            };
+        }
+
+        // Show Add Product Form
+        function showAddProductForm() {
+            const addProductForm = `
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4">Tambah Produk Baru</h3>
+                    <form onsubmit="saveProduct(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Nama Produk</label>
+                                <input type="text" name="name" required class="input-readable w-full px-4 py-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Kategori</label>
+                                <select name="category" required class="input-readable w-full px-4 py-2 rounded">
+                                    <option value="">Pilih Kategori</option>
+                                    <option value="children-toys">Mainan Anak</option>
+                                    <option value="electronic">Elektronik</option>
+                                    <option value="handphone">Handphone</option>
+                                    <option value="household-appliances">Peralatan Rumah Tangga</option>
+                                    <option value="computer-accessories">Komputer & Aksesoris</option>
+                                    <option value="fashion-boys">Fashion Anak Laki-laki</option>
+                                    <option value="fashion-girl">Fashion Anak Perempuan</option>
+                                    <option value="book">Buku</option>
+                                    <option value="automotive">Otomotif</option>
+                                    <option value="sport">Olahraga</option>
+                                    <option value="baby">Bayi</option>
+                                    <option value="software">Software</option>
+                                    <option value="cosmetics">Kosmetik</option>
+                                    <option value="kitchen-appliances">Peralatan Dapur</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Harga</label>
+                                <input type="number" name="price" required class="input-readable w-full px-4 py-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Stok</label>
+                                <input type="number" name="stock" required class="input-readable w-full px-4 py-2 rounded">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Deskripsi</label>
+                            <textarea name="description" required class="input-readable w-full px-4 py-2 rounded" rows="3"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Spesifikasi (pisahkan dengan koma)</label>
+                            <input type="text" name="specs" class="input-readable w-full px-4 py-2 rounded" placeholder="Spec 1, Spec 2, Spec 3">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Fitur (pisahkan dengan koma)</label>
+                            <input type="text" name="features" class="input-readable w-full px-4 py-2 rounded" placeholder="Feature 1, Feature 2, Feature 3">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Gambar Produk</label>
+                            <input type="url" name="image" required class="input-readable w-full px-4 py-2 rounded" placeholder="https://example.com/image.jpg">
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="submit" class="btn-seller px-6 py-2 rounded">Simpan Produk</button>
+                            <button type="button" onclick="this.closest('.bg-white').remove()" class="border border-gray-300 px-6 py-2 rounded">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            document.getElementById('sellerProducts').insertAdjacentHTML('afterbegin', addProductForm);
+        }
+
+        // Save Product
+        function saveProduct(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            const newProduct = {
+                id: Date.now(),
+                name: formData.get('name'),
+                category: formData.get('category'),
+                price: parseInt(formData.get('price')),
+                rating: 0,
+                reviews: 0,
+                image: formData.get('image'),
+                description: formData.get('description'),
+                specs: formData.get('specs').split(',').map(s => s.trim()),
+                features: formData.get('features').split(',').map(f => f.trim()),
+                stock: parseInt(formData.get('stock')),
+                sellerId: currentSeller.id
+            };
+            
+            products.push(newProduct);
+            
+            // Update seller stats
+            currentSeller.totalProducts++;
+            const sellers = JSON.parse(localStorage.getItem('sellers') || '[]');
+            const sellerIndex = sellers.findIndex(s => s.id === currentSeller.id);
+            if (sellerIndex > -1) {
+                sellers[sellerIndex] = currentSeller;
+                localStorage.setItem('sellers', JSON.stringify(sellers));
+            }
+            
+            // Remove form and reload
+            event.target.closest('.bg-white').remove();
+            loadSellerDashboard();
+            showToast('Produk berhasil ditambahkan');
+        }
+
+        // Edit Product
+        function editProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            
+            const editForm = `
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-bold mb-4">Edit Produk</h3>
+                    <form onsubmit="updateProduct(event, ${productId})" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Nama Produk</label>
+                                <input type="text" name="name" value="${product.name}" required class="input-readable w-full px-4 py-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Harga</label>
+                                <input type="number" name="price" value="${product.price}" required class="input-readable w-full px-4 py-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Stok</label>
+                                <input type="number" name="stock" value="${product.stock}" required class="input-readable w-full px-4 py-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Kategori</label>
+                                <select name="category" required class="input-readable w-full px-4 py-2 rounded">
+                                    <option value="children-toys" ${product.category === 'children-toys' ? 'selected' : ''}>Mainan Anak</option>
+                                    <option value="electronic" ${product.category === 'electronic' ? 'selected' : ''}>Elektronik</option>
+                                    <option value="handphone" ${product.category === 'handphone' ? 'selected' : ''}>Handphone</option>
+                                    <option value="household-appliances" ${product.category === 'household-appliances' ? 'selected' : ''}>Peralatan Rumah Tangga</option>
+                                    <option value="computer-accessories" ${product.category === 'computer-accessories' ? 'selected' : ''}>Komputer & Aksesoris</option>
+                                    <option value="fashion-boys" ${product.category === 'fashion-boys' ? 'selected' : ''}>Fashion Anak Laki-laki</option>
+                                    <option value="fashion-girl" ${product.category === 'fashion-girl' ? 'selected' : ''}>Fashion Anak Perempuan</option>
+                                    <option value="book" ${product.category === 'book' ? 'selected' : ''}>Buku</option>
+                                    <option value="automotive" ${product.category === 'automotive' ? 'selected' : ''}>Otomotif</option>
+                                    <option value="sport" ${product.category === 'sport' ? 'selected' : ''}>Olahraga</option>
+                                    <option value="baby" ${product.category === 'baby' ? 'selected' : ''}>Bayi</option>
+                                    <option value="software" ${product.category === 'software' ? 'selected' : ''}>Software</option>
+                                    <option value="cosmetics" ${product.category === 'cosmetics' ? 'selected' : ''}>Kosmetik</option>
+                                    <option value="kitchen-appliances" ${product.category === 'kitchen-appliances' ? 'selected' : ''}>Peralatan Dapur</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Deskripsi</label>
+                            <textarea name="description" required class="input-readable w-full px-4 py-2 rounded" rows="3">${product.description}</textarea>
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="submit" class="btn-seller px-6 py-2 rounded">Update Produk</button>
+                            <button type="button" onclick="this.closest('.bg-white').remove()" class="border border-gray-300 px-6 py-2 rounded">Batal</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            document.getElementById('sellerProducts').insertAdjacentHTML('afterbegin', editForm);
+        }
+
+        // Update Product
+        function updateProduct(event, productId) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            const productIndex = products.findIndex(p => p.id === productId);
+            if (productIndex > -1) {
+                products[productIndex] = {
+                    ...products[productIndex],
+                    name: formData.get('name'),
+                    category: formData.get('category'),
+                    price: parseInt(formData.get('price')),
+                    stock: parseInt(formData.get('stock')),
+                    description: formData.get('description')
+                };
+                
+                // Remove form and reload
+                event.target.closest('.bg-white').remove();
+                loadSellerDashboard();
+                showToast('Produk berhasil diperbarui');
+            }
+        }
+
+        // Delete Product
+        function deleteProduct(productId) {
+            if (confirm('Apakah Anda yakin ingin menghapus produk ini?')) {
+                products = products.filter(p => p.id !== productId);
+                
+                // Update seller stats
+                currentSeller.totalProducts--;
+                const sellers = JSON.parse(localStorage.getItem('sellers') || '[]');
+                const sellerIndex = sellers.findIndex(s => s.id === currentSeller.id);
+                if (sellerIndex > -1) {
+                    sellers[sellerIndex] = currentSeller;
+                    localStorage.setItem('sellers', JSON.stringify(sellers));
+                }
+                
+                loadSellerDashboard();
+                showToast('Produk berhasil dihapus');
+            }
+        }
+
+        // Show Seller Orders
+        function showSellerOrders() {
+            // This would show seller's orders management
+            showToast('Fitur manajemen pesanan akan segera hadir');
+        }
+
+        // Update Profile
+        function updateProfile(event) {
+            event.preventDefault();
+            
+            // Update current user data
+            currentUser.name = document.getElementById('profileName').value;
+            currentUser.phone = document.getElementById('profilePhone').value;
+            currentUser.birthday = document.getElementById('profileBirthday').value;
+            currentUser.bio = document.getElementById('profileBio').value;
+            
+            // Save to localStorage
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.email === currentUser.email);
+            if (userIndex > -1) {
+                users[userIndex] = currentUser;
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+            
+            // Update seller data if user is seller
+            if (currentUser.isSeller && currentSeller) {
+                currentSeller.name = currentUser.name;
+                currentSeller.phone = currentUser.phone;
+                
+                const sellers = JSON.parse(localStorage.getItem('sellers') || '[]');
+                const sellerIndex = sellers.findIndex(s => s.id === currentSeller.id);
+                if (sellerIndex > -1) {
+                    sellers[sellerIndex] = currentSeller;
+                    localStorage.setItem('sellers', JSON.stringify(sellers));
+                }
+            }
+            
+            showToast('Profil berhasil diperbarui');
+        }
+
+        // Delete Account
+        function deleteAccount() {
+            if (confirm('Apakah Anda yakin ingin menghapus akun? Tindakan ini tidak dapat dibatalkan.')) {
+                // Remove user data
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const filteredUsers = users.filter(u => u.email !== currentUser.email);
+                localStorage.setItem('users', JSON.stringify(filteredUsers));
+                
+                // Remove seller data if user is seller
+                if (currentUser.isSeller) {
+                    const sellers = JSON.parse(localStorage.getItem('sellers') || '[]');
+                    const filteredSellers = sellers.filter(s => s.id !== currentUser.id);
+                    localStorage.setItem('sellers', JSON.stringify(filteredSellers));
+                }
+                
+                // Clear orders
+                const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+                const filteredOrders = orders.filter(o => o.userId !== currentUser.id);
+                localStorage.setItem('orders', JSON.stringify(filteredOrders));
+                
+                // Clear addresses
+                const addresses = JSON.parse(localStorage.getItem('addresses') || '[]');
+                const filteredAddresses = addresses.filter(a => a.userId !== currentUser.id);
+                localStorage.setItem('addresses', JSON.stringify(filteredAddresses));
+                
+                logout();
+                showToast('Akun berhasil dihapus');
+            }
+        }
+
+        // Logout
+        function logout() {
+            currentUser = null;
+            currentSeller = null;
+            closeModal('dashboardModal');
+            showToast('Anda telah logout');
+            location.reload(); // Reload untuk reset UI
+        }
+
+        // Handle Newsletter
+        function handleNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            showToast(`Terima kasih! Email ${email} telah terdaftar.`);
+            event.target.reset();
+        }
+
+        // Filter Products
+        function filterProducts(category) {
+            currentFilter = category;
+            
+            // Update filter tags
+            document.querySelectorAll('.filter-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter products
+            if (category === 'all') {
+                filteredProducts = [...products];
+            } else if (category.startsWith('seller-')) {
+                const sellerId = parseInt(category.split('-')[1]);
+                filteredProducts = products.filter(p => p.sellerId === sellerId);
+            } else {
+                filteredProducts = products.filter(p => p.category === category);
+            }
+            
+            renderProducts();
+            
+            // Close category menu if open
+            document.getElementById('categoryMenu').classList.remove('show');
+        }
+
+        // Sort Products
+        function sortProducts(sortBy) {
+            switch(sortBy) {
+                case 'price-low':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'rating':
+                    filteredProducts.sort((a, b) => b.rating - a.rating);
+                    break;
+                default:
+                    filteredProducts = [...products];
+            }
+            renderProducts();
+        }
+
+        // Set View Mode
+        function setViewMode(mode) {
+            viewMode = mode;
+            renderProducts();
+        }
+
+        // Handle Search
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        // Perform Search
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (searchTerm) {
+                // Search in products
+                const productResults = products.filter(p => 
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    p.category.toLowerCase().includes(searchTerm)
+                );
+                
+                // Search in sellers
+                const sellerResults = sellers.filter(s => 
+                    s.name.toLowerCase().includes(searchTerm) ||
+                    s.description.toLowerCase().includes(searchTerm)
+                );
+                
+                // Combine results
+                filteredProducts = [...productResults];
+                
+                // Add products from found sellers
+                sellerResults.forEach(seller => {
+                    const sellerProducts = products.filter(p => p.sellerId === seller.id);
+                    filteredProducts.push(...sellerProducts);
+                });
+                
+                // Remove duplicates
+                filteredProducts = [...new Set(filteredProducts)];
+                
+                renderProducts();
+                showToast(`Menampilkan ${filteredProducts.length} hasil pencarian`);
+            }
+        }
+
+        // Load More Products
+        function loadMoreProducts() {
+            // Simulate loading more products
+            showToast('Memuat lebih banyak produk...');
+            
+            setTimeout(() => {
+                // Add more products (in real app, this would fetch from API)
+                const newProducts = [
+                    {
+                        id: 19,
+                        name: 'Smart TV 55 inch',
+                        category: 'electronic',
+                        price: 8000000,
+                        rating: 4.6,
+                        reviews: 89,
+                        image: 'https://picsum.photos/seed/tv1/300/300',
+                        description: 'Smart TV dengan layar 4K Ultra HD.',
+                        specs: ['55 inch', '4K UHD', 'Smart TV', 'HDR'],
+                        stock: 8,
+                        features: ['4K Resolution', 'Smart Features', 'HDR Support', 'Multiple Ports'],
+                        sellerId: 1
+                    },
+                    {
+                        id: 20,
+                        name: 'Jam Tangan Casio',
+                        category: 'fashion-boys',
+                        price: 500000,
+                        rating: 4.3,
+                        reviews: 156,
+                        image: 'https://picsum.photos/seed/watch1/300/300',
+                        description: 'Jam tangan analog dengan desain klasik.',
+                        specs: ['Analog', 'Water Resistant', 'Date Display'],
+                        stock: 30,
+                        features: ['Classic Design', 'Water Resistant', 'Date Display', 'Durable'],
+                        sellerId: 3
+                    }
+                ];
+                
+                products.push(...newProducts);
+                if (currentFilter === 'all') {
+                    filteredProducts = [...products];
+                } else if (currentFilter.startsWith('seller-')) {
+                    const sellerId = parseInt(currentFilter.split('-')[1]);
+                    filteredProducts = products.filter(p => p.sellerId === sellerId);
+                } else {
+                    filteredProducts = products.filter(p => p.category === currentFilter);
+                }
+                renderProducts();
+                showToast('Produk berhasil dimuat!');
+            }, 1000);
+        }
+
+        // Proceed to Checkout
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                showToast('Keranjang belanja kosong!');
+                return;
+            }
+            
+            if (!currentUser) {
+                showModal('authModal');
+                return;
+            }
+
+            // Generate order ID
+            const orderId = 'ORDER-' + Date.now();
+            
+            // Hitung total
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 100000 ? 0 : 15000;
+            const total = subtotal + shipping;
+
+            // Data untuk Midtrans
+            const transactionData = {
+                transaction_details: {
+                    order_id: orderId,
+                    gross_amount: total
+                },
+                customer_details: {
+                    email: currentUser.email,
+                    name: currentUser.name
+                },
+                item_details: cart.map(item => ({
+                    id: item.id,
+                    price: item.price,
+                    quantity: item.quantity,
+                    name: item.name
+                }))
+            };
+
+            // Token dummy untuk testing
+            const snapToken = 'YOUR_SNAP_TOKEN';
+            
+            // Buka Midtrans Snap
+            window.snap.pay(snapToken, {
+                onSuccess: function(result) {
+                    saveOrder(orderId, 'success');
+                    cart = [];
+                    updateCartUI();
+                    toggleCart();
+                    showToast('Pembayaran berhasil!');
+                },
+                onPending: function(result) {
+                    saveOrder(orderId, 'pending');
+                    showToast('Menunggu pembayaran');
+                },
+                onError: function(result) {
+                    showToast('Pembayaran gagal');
+                }
+            });
+        }
+
+        // Save Order
+        function saveOrder(orderId, status) {
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 100000 ? 0 : 15000;
+            
+            const order = {
+                id: orderId,
+                userId: currentUser.id,
+                items: [...cart],
+                status: status,
+                subtotal: subtotal,
+                shipping: shipping,
+                total: subtotal + shipping,
+                date: new Date().toISOString()
+            };
+            
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            // Update seller stats
+            cart.forEach(item => {
+                const seller = sellers.find(s => s.id === item.sellerId);
+                if (seller && status === 'success') {
+                    seller.totalOrders++;
+                    seller.totalRevenue += item.price * item.quantity;
+                    
+                    // Update seller in storage
+                    const sellers = JSON.parse(localStorage.getItem('sellers') || '[]');
+                    const sellerIndex = sellers.findIndex(s => s.id === seller.id);
+                    if (sellerIndex > -1) {
+                        sellers[sellerIndex] = seller;
+                        localStorage.setItem('sellers', JSON.stringify(sellers));
+                    }
+                }
+            });
+        }
+
+        // Pay Order
+        function payOrder(orderId) {
+            // This would integrate with payment system
+            showToast('Memproses pembayaran...');
+            
+            setTimeout(() => {
+                const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+                const orderIndex = orders.findIndex(o => o.id === orderId);
+                
+                if (orderIndex > -1) {
+                    orders[orderIndex].status = 'processing';
+                    localStorage.setItem('orders', JSON.stringify(orders));
+                    loadUserOrders();
+                    showToast('Pembayaran sedang diproses');
+                }
+            }, 1000);
+        }
+
+        // View Order Detail
+        function viewOrderDetail(orderId) {
+            // This would show detailed order information
+            showToast('Detail pesanan akan segera hadir');
+        }
+
+        // Start Countdown
+        function startCountdown() {
+            // Set countdown to 24 hours from now
+            const countDownDate = new Date().getTime() + (24 * 60 * 60 * 1000);
+            
+            const timer = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+                
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                }
+            }, 1000);
+        }
+
+        // Show Toast Notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/Hide Back to Top Button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load data from localStorage
+            const savedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+            const savedSellers = JSON.parse(localStorage.getItem('sellers') || '[]');
+            const savedProducts = JSON.parse(localStorage.getItem('products') || '[]');
+            
+            // Merge with default data
+            users.push(...savedUsers);
+            sellers.push(...savedSellers);
+            products.push(...savedProducts);
+            
+            // Remove duplicates
+            users = [...new Map(users.map(user => [user.id, user])).values()];
+            sellers = [...new Map(sellers.map(seller => [seller.id, seller])).values()];
+            products = [...new Map(products.map(product => [product.id, product])).values()];
+            
+            initializeData();
+            updateCartUI();
+            updateWishlistUI();
+        });
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('show');
+            }
+        }
+
+        // Close category menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const categoryMenu = document.getElementById('categoryMenu');
+            const categoryDropdown = document.querySelector('.category-dropdown');
+            
+            if (!categoryDropdown.contains(event.target) && !categoryMenu.contains(event.target)) {
+                categoryMenu.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
