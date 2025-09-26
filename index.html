@@ -1964,8 +1964,8 @@
 
                     <!-- Search Bar -->
                     <div class="search-bar">
-                        <input type="text" placeholder="Cari produk, toko, atau kategori">
-                        <button>
+                        <input type="text" placeholder="Cari produk, toko, atau kategori" id="searchInput">
+                        <button onclick="searchProducts()">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -2053,7 +2053,7 @@
                         <div class="timer-box">56</div>
                     </div>
                 </div>
-                <div class="product-grid">
+                <div class="product-grid" id="flashSaleProducts">
                     <!-- Flash sale products will be loaded here -->
                 </div>
             </div>
@@ -3858,6 +3858,13 @@
                 recentlyViewed = JSON.parse(savedRecentlyViewed);
             }
             
+            // Load products from localStorage if available
+            const savedProducts = localStorage.getItem('products');
+            if (savedProducts) {
+                products = JSON.parse(savedProducts);
+                filteredProducts = [...products];
+            }
+            
             // Check for dropship parameter in URL
             const urlParams = new URLSearchParams(window.location.search);
             const dropshipId = urlParams.get('dropship');
@@ -3873,6 +3880,7 @@
             updateUserUI();
             loadRecommendedProducts();
             loadRecentlyViewedProducts();
+            loadFlashSaleProducts();
         }
 
         // Process Dropship Order
@@ -3899,6 +3907,64 @@
                 // Clear URL parameters
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
+        }
+
+        // Load Flash Sale Products
+        function loadFlashSaleProducts() {
+            const flashSaleContainer = document.getElementById('flashSaleProducts');
+            if (!flashSaleContainer) return;
+            
+            // Get products with discount
+            const flashSaleProducts = products.filter(p => p.discount > 0);
+            
+            flashSaleContainer.innerHTML = flashSaleProducts.map(product => {
+                const seller = sellers.find(s => s.id === product.sellerId);
+                const discountHtml = product.discount ? `
+                    <span class="product-badge">-${product.discount}%</span>
+                ` : '';
+                
+                const originalPriceHtml = product.originalPrice ? `
+                    <span class="text-gray-400 text-sm line-through ml-2">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>
+                ` : '';
+                
+                return `
+                    <div class="product-card" data-aos="fade-up">
+                        <div class="product-image-container">
+                            <img src="${product.image}" alt="${product.name}" class="product-image">
+                            ${discountHtml}
+                            <div class="product-actions">
+                                <button onclick="toggleWishlist(${product.id})" class="product-action-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button onclick="quickViewProduct(${product.id})" class="product-action-btn">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="dropship-badge">Komisi ${product.commission}%</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <img src="${seller?.image || 'https://picsum.photos/seed/default/20/20'}" class="seller-avatar" alt="${seller?.name || 'Unknown Seller'}">
+                                <span class="seller-name">${seller?.name || 'Unknown Seller'}</span>
+                            </div>
+                            <h3 class="product-name">${product.name}</h3>
+                            <div class="product-rating">
+                                <div class="rating-stars">
+                                    ${generateStars(product.rating)}
+                                </div>
+                                <span class="rating-count">(${product.reviews})</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">Rp ${product.price.toLocaleString('id-ID')}</span>
+                                ${originalPriceHtml}
+                            </div>
+                            <button onclick="addToCart(${product.id})" class="add-to-cart-btn w-full">
+                                <i class="fas fa-shopping-cart mr-2"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         // Show Page
@@ -4340,9 +4406,34 @@
             }
         }
 
+        // Search Products
+        function searchProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filteredProducts = [...products];
+            } else {
+                filteredProducts = products.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm) ||
+                    product.category.toLowerCase().includes(searchTerm) ||
+                    product.description.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Reset pagination
+            currentPageNumber = 1;
+            
+            // Go to products page
+            showPage('products');
+            
+            // Render products
+            renderProducts();
+        }
+
         // Load Recommended Products
         function loadRecommendedProducts() {
             const container = document.getElementById('recommendedProducts');
+            if (!container) return;
             
             // Get random products for recommendations
             const shuffled = [...products].sort(() => 0.5 - Math.random());
@@ -4397,6 +4488,7 @@
         // Load Recently Viewed Products
         function loadRecentlyViewedProducts() {
             const container = document.getElementById('recentlyViewedProducts');
+            if (!container) return;
             
             if (recentlyViewed.length === 0) {
                 container.innerHTML = '<p class="text-gray-500 text-center col-span-full">Belum ada produk yang dilihat</p>';
@@ -5179,23 +5271,33 @@
             const snapToken = 'YOUR_SNAP_TOKEN';
             
             // Buka Midtrans Snap
-            window.snap.pay(snapToken, {
-                onSuccess: function(result) {
-                    saveOrder(orderId, 'success');
-                    cart = [];
-                    updateCartUI();
-                    saveCartToLocalStorage();
-                    toggleCart();
-                    showToast('Pembayaran berhasil!');
-                },
-                onPending: function(result) {
-                    saveOrder(orderId, 'pending');
-                    showToast('Menunggu pembayaran');
-                },
-                onError: function(result) {
-                    showToast('Pembayaran gagal');
-                }
-            });
+            if (window.snap) {
+                window.snap.pay(snapToken, {
+                    onSuccess: function(result) {
+                        saveOrder(orderId, 'success');
+                        cart = [];
+                        updateCartUI();
+                        saveCartToLocalStorage();
+                        toggleCart();
+                        showToast('Pembayaran berhasil!');
+                    },
+                    onPending: function(result) {
+                        saveOrder(orderId, 'pending');
+                        showToast('Menunggu pembayaran');
+                    },
+                    onError: function(result) {
+                        showToast('Pembayaran gagal');
+                    }
+                });
+            } else {
+                // Fallback jika Midtrans tidak tersedia
+                saveOrder(orderId, 'pending');
+                cart = [];
+                updateCartUI();
+                saveCartToLocalStorage();
+                toggleCart();
+                showToast('Pesanan berhasil dibuat!');
+            }
         }
 
         // Save Order
@@ -5428,6 +5530,8 @@
         // Decrease Quantity
         function decreaseQuantity() {
             const quantityInput = document.getElementById('productQuantity');
+            if (!quantityInput) return;
+            
             const currentValue = parseInt(quantityInput.value);
             if (currentValue > 1) {
                 quantityInput.value = currentValue - 1;
@@ -5437,6 +5541,8 @@
         // Increase Quantity
         function increaseQuantity() {
             const quantityInput = document.getElementById('productQuantity');
+            if (!quantityInput) return;
+            
             const currentValue = parseInt(quantityInput.value);
             const maxValue = parseInt(quantityInput.max);
             if (currentValue < maxValue) {
@@ -5446,7 +5552,10 @@
 
         // Add to Cart from Detail
         function addToCartFromDetail(productId) {
-            const quantity = parseInt(document.getElementById('productQuantity').value);
+            const quantityInput = document.getElementById('productQuantity');
+            if (!quantityInput) return;
+            
+            const quantity = parseInt(quantityInput.value);
             const product = products.find(p => p.id === productId);
             const existingItem = cart.find(item => item.id === productId);
             
@@ -5464,7 +5573,10 @@
 
         // Buy Now
         function buyNow(productId) {
-            const quantity = parseInt(document.getElementById('productQuantity').value);
+            const quantityInput = document.getElementById('productQuantity');
+            if (!quantityInput) return;
+            
+            const quantity = parseInt(quantityInput.value);
             const product = products.find(p => p.id === productId);
             
             cart = [{...product, quantity}];
@@ -5489,10 +5601,12 @@
         // Header Scroll Effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('mainHeader');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            if (header) {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
             }
         });
 
