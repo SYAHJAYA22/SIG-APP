@@ -33,6 +33,7 @@
         /* Global Styles */
         body {
             overflow-x: hidden;
+            background-color: #f0f3f7;
         }
 
         /* Page Container */
@@ -45,7 +46,7 @@
             display: block;
         }
 
-        /* Navigation */
+        /* Navigation Dots */
         .nav-dots {
             position: fixed;
             right: 30px;
@@ -136,7 +137,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             z-index: 999;
@@ -148,32 +149,63 @@
             background: rgba(255, 255, 255, 0.98);
         }
 
+        /* Search Bar */
+        .search-bar {
+            position: relative;
+            flex-grow: 1;
+            max-width: 600px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 40px 10px 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
         /* Home Page Styles */
         .home-page {
+            background: #f0f3f7;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .home-page::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
         .hero-content {
             position: relative;
             z-index: 10;
+            padding: 100px 0;
         }
 
         .hero-title {
@@ -181,122 +213,916 @@
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1.5rem;
+            color: white;
         }
 
         .hero-subtitle {
             font-size: clamp(1rem, 3vw, 1.5rem);
             margin-bottom: 2rem;
-            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        .floating-shapes {
+        /* Banner Section */
+        .banner-section {
+            padding: 20px 0;
+        }
+
+        .banner-slider {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .banner-slide {
             position: absolute;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            z-index: 1;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease;
         }
 
-        .shape {
-            position: absolute;
-            opacity: 0.1;
-        }
-
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            background: white;
-            border-radius: 50%;
-            top: -150px;
-            left: -150px;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            background: white;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            bottom: -100px;
-            right: -100px;
-            animation: float 15s infinite ease-in-out reverse;
-        }
-
-        .shape-3 {
-            width: 150px;
-            height: 150px;
-            background: white;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            top: 50%;
-            left: 10%;
-            animation: float 25s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-30px) rotate(120deg); }
-            66% { transform: translateY(30px) rotate(240deg); }
+        .banner-content {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 10px;
         }
 
         /* Category Page Styles */
         .category-page {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: #f0f3f7;
             min-height: 100vh;
+            padding-top: 80px;
         }
 
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
             padding: 2rem;
         }
 
         .category-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .category-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-count {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Flash Sale Section */
+        .flash-sale-section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .flash-sale-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .flash-sale-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+        }
+
+        .flash-sale-timer {
+            display: flex;
+            gap: 10px;
+        }
+
+        .timer-box {
+            background: #ef4444;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        /* Products Page Styles */
+        .products-page {
+            background: #f0f3f7;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* Hero Section for Products Page */
+        .products-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 0;
             position: relative;
             overflow: hidden;
         }
 
-        .category-card::before {
+        .products-hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA1KSIvPjwvcGF0dGVybjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
+            opacity: 0.1;
         }
 
-        .category-card:hover::before {
-            transform: scaleX(1);
+        .products-hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
         }
 
-        .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .category-icon {
-            font-size: 3.5rem;
+        .products-hero-title {
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        }
+
+        .products-hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Banner Section for Products Page */
+        .products-banner {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .products-banner-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .products-banner-text {
+            flex: 1;
+        }
+
+        .products-banner-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ef4444;
+            margin-bottom: 0.5rem;
+        }
+
+        .products-banner-subtitle {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .products-banner-timer {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .products-banner-image {
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        /* Quick Categories */
+        .quick-categories {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .quick-categories-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .quick-categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .quick-category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-category-item:hover {
+            background: #f3f4f6;
+            transform: translateY(-3px);
+        }
+
+        .quick-category-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        .quick-category-name {
+            font-size: 0.875rem;
+            text-align: center;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .filter-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #f3f4f6;
+            color: #4b5563;
+            border: none;
+        }
+
+        .filter-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .filter-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .filter-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            top: 100%;
+            right: 0;
+            margin-top: 5px;
+        }
+
+        .filter-dropdown-content a {
+            color: #4b5563;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .filter-dropdown-content a:hover {
+            background: #f3f4f6;
+        }
+
+        .filter-dropdown:hover .filter-dropdown-content {
+            display: block;
+        }
+
+        /* Active Filters */
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .active-filter {
+            display: flex;
+            align-items: center;
+            background: #e0e7ff;
+            color: #4f46e5;
+            padding: 5px 12px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+
+        .active-filter button {
+            background: none;
+            border: none;
+            color: #4f46e5;
+            margin-left: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* View Mode Toggle */
+        .view-mode-toggle {
+            display: flex;
+            gap: 5px;
+            background: #f3f4f6;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+        .view-mode-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background: transparent;
+            color: #6b7280;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .view-mode-btn.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 0 2rem 2rem;
+        }
+
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 0 2rem 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid #f0f0f0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-card-list {
+            display: flex;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .product-card-list:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-image-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-card-list .product-image-container {
+            width: 200px;
+            height: 200px;
+            flex-shrink: 0;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image,
+        .product-card-list:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ef4444;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .dropship-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-actions,
+        .product-card-list:hover .product-actions {
+            opacity: 1;
+        }
+
+        .product-action-btn {
+            background: white;
+            color: #667eea;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .product-action-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-card-list .product-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-seller {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .seller-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .seller-name {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-card-list .product-name {
+            height: auto;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .rating-stars {
+            color: #fbbf24;
+            margin-right: 5px;
+        }
+
+        .rating-count {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price-current {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .price-original {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            text-decoration: line-through;
+        }
+
+        .add-to-cart-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #4f46e5;
+        }
+
+        .product-card-list .add-to-cart-btn {
+            width: auto;
+            padding: 0.5rem 1rem;
+        }
+
+        /* Loading Animation */
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Pagination */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            gap: 10px;
+        }
+
+        .pagination-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .pagination-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-info {
+            margin: 0 15px;
+            color: #6b7280;
+        }
+
+        /* Recommended Products */
+        .recommended-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .recommended-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .recommended-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* Recently Viewed */
+        .recently-viewed-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .recently-viewed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .recently-viewed-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .recently-viewed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .recently-viewed-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .recently-viewed-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .recently-viewed-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .recently-viewed-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 10px;
+        }
+
+        .recently-viewed-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .recently-viewed-price {
+            font-size: 0.75rem;
+        }
+
+        /* No Results State */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .no-results-icon {
+            font-size: 4rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .no-results-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+        }
+
+        .no-results-subtitle {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .no-results-action {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .no-results-action:hover {
+            background: #4f46e5;
+        }
+
+        /* Product Count */
+        .product-count {
+            background: white;
+            border-radius: 15px;
+            padding: 1rem 2rem;
+            margin: 0 2rem 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .count-text {
+            color: #4b5563;
+        }
+
+        .count-number {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* Official Store Section */
+        .official-store-section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .official-store-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .official-store-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+        }
+
+        .official-store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .official-store-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .official-store-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .official-store-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 0.5rem;
+            border: 2px solid #f0f0f0;
+        }
+
+        .official-store-name {
+            font-weight: 600;
+            text-align: center;
         }
 
         /* Sellers Page Styles */
         .sellers-page {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: #f0f3f7;
             min-height: 100vh;
+            padding-top: 80px;
         }
 
         .seller-card-3d {
@@ -324,7 +1150,7 @@
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -342,96 +1168,11 @@
             transform: rotateY(180deg);
         }
 
-        /* Products Page Styles */
-        .products-page {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            min-height: 100vh;
-        }
-
-        .filter-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 0 2rem 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #ef4444;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .dropship-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #10b981;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
         /* Dashboard Page Styles */
         .dashboard-page {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            background: #f0f3f7;
             min-height: 100vh;
+            padding-top: 80px;
         }
 
         .dashboard-grid {
@@ -442,17 +1183,16 @@
         }
 
         .dashboard-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            background: white;
+            border-radius: 15px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
         }
 
         .dashboard-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         .stat-card {
@@ -471,22 +1211,23 @@
 
         /* Dropshipper Page Styles */
         .dropshipper-page {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            background: #f0f3f7;
             min-height: 100vh;
+            padding-top: 80px;
         }
 
         .dropshipper-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             margin-bottom: 2rem;
             transition: all 0.3s ease;
         }
 
         .dropshipper-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         .dropshipper-product {
@@ -496,10 +1237,12 @@
             border-radius: 10px;
             margin-bottom: 1rem;
             transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
         }
 
         .dropshipper-product:hover {
             background: #f9fafb;
+            border-color: #667eea;
         }
 
         .dropshipper-product img {
@@ -521,8 +1264,9 @@
 
         /* Dropshipper Dashboard Styles */
         .dropshipper-dashboard {
-            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            background: #f0f3f7;
             min-height: 100vh;
+            padding-top: 80px;
         }
 
         .commission-card {
@@ -530,13 +1274,13 @@
             border-radius: 15px;
             padding: 1.5rem;
             margin-bottom: 1rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
         }
 
         .commission-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .commission-status {
@@ -587,16 +1331,17 @@
 
         /* Dropshipper Profile Page Styles */
         .dropshipper-profile {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            background: #f0f3f7;
             min-height: 100vh;
+            padding-top: 80px;
         }
 
         .profile-header {
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .profile-stats {
@@ -622,10 +1367,10 @@
 
         .sales-chart {
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             height: 300px;
             position: relative;
         }
@@ -917,6 +1662,200 @@
             left: 0;
         }
 
+        /* Product Detail Modal Styles */
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .product-image-gallery {
+            position: relative;
+        }
+
+        .product-main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .product-thumbnail-list {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .product-thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .product-thumbnail.active {
+            border-color: #667eea;
+        }
+
+        .product-info-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .product-rating-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .product-price-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .product-current-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .product-original-price {
+            font-size: 1rem;
+            color: #9ca3af;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .product-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-variants {
+            margin-bottom: 1.5rem;
+        }
+
+        .variant-option {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .variant-option.active {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .product-quantity {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+
+        .product-actions-section {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .add-to-cart-large {
+            flex: 1;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart-large:hover {
+            background: #4f46e5;
+        }
+
+        .buy-now {
+            flex: 1;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .buy-now:hover {
+            background: #dc2626;
+        }
+
+        .product-tabs {
+            margin-top: 2rem;
+        }
+
+        .review-item {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+        }
+
+        .review-date {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .review-rating {
+            margin-bottom: 0.5rem;
+        }
+
+        .review-comment {
+            line-height: 1.6;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-dots {
@@ -942,6 +1881,53 @@
             .header {
                 padding: 0.5rem 0;
             }
+
+            .search-bar {
+                margin: 10px 0;
+            }
+
+            .product-detail-container {
+                grid-template-columns: 1fr;
+            }
+
+            .product-actions-section {
+                flex-direction: column;
+            }
+
+            .products-hero-title {
+                font-size: 2rem;
+            }
+
+            .products-banner-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .products-banner-image {
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .quick-categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+
+            .filter-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .filter-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .product-count {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -964,54 +1950,58 @@
 
     <!-- Home Page -->
     <div id="homePage" class="page home-page active">
-        <!-- Floating Shapes -->
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-        </div>
-
         <!-- Header -->
         <header class="header" id="mainHeader">
             <div class="container mx-auto px-4">
-                <div class="flex items-center justify-between py-4">
+                <div class="flex flex-col md:flex-row items-center py-4">
                     <!-- Logo -->
-                    <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-store text-purple-600 text-2xl"></i>
+                    <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-store text-white text-2xl"></i>
                         </div>
                         <h1 class="text-2xl font-bold text-gray-800">SYAHJAYA INDO GRUP</h1>
                     </div>
 
-                    <!-- Navigation -->
-                    <nav class="hidden md:flex space-x-8">
-                        <a href="#" onclick="showPage('home')" class="text-purple-600 font-medium">Beranda</a>
-                        <a href="#" onclick="showPage('category')" class="text-gray-700 hover:text-purple-600 font-medium">Kategori</a>
-                        <a href="#" onclick="showPage('sellers')" class="text-gray-700 hover:text-purple-600 font-medium">Penjual</a>
-                        <a href="#" onclick="showPage('products')" class="text-gray-700 hover:text-purple-600 font-medium">Produk</a>
-                        <a href="#" onclick="showPage('dropshipper')" class="text-gray-700 hover:text-purple-600 font-medium">Dropshipper</a>
-                    </nav>
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <input type="text" placeholder="Cari produk, toko, atau kategori">
+                        <button>
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
 
                     <!-- User Actions -->
-                    <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                        <button class="text-gray-700 hover:text-purple-600 transition-colors">
+                            <i class="fas fa-bell text-xl"></i>
+                        </button>
                         <button onclick="showDashboard()" class="relative text-gray-700 hover:text-purple-600 transition-colors">
                             <i class="fas fa-user-circle text-xl"></i>
-                        </button>
-                        <button onclick="showModal('authModal'); showSellerRegisterForm();" class="btn-secondary hidden md:flex">
-                            <i class="fas fa-store mr-2"></i> Jual
                         </button>
                         <button onclick="toggleMobileMenu()" class="md:hidden text-gray-700">
                             <i class="fas fa-bars text-xl"></i>
                         </button>
                     </div>
                 </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8 mt-4 pt-4 border-t">
+                    <a href="#" onclick="showPage('home')" class="text-purple-600 font-medium">Beranda</a>
+                    <a href="#" onclick="showPage('category')" class="text-gray-700 hover:text-purple-600 font-medium">Kategori</a>
+                    <a href="#" onclick="showPage('sellers')" class="text-gray-700 hover:text-purple-600 font-medium">Penjual</a>
+                    <a href="#" onclick="showPage('products')" class="text-gray-700 hover:text-purple-600 font-medium">Produk</a>
+                    <a href="#" onclick="showPage('dropshipper')" class="text-gray-700 hover:text-purple-600 font-medium">Dropshipper</a>
+                    <button onclick="showModal('authModal'); showSellerRegisterForm();" class="btn-secondary text-sm">
+                        <i class="fas fa-store mr-2"></i> Jual
+                    </button>
+                </nav>
             </div>
         </header>
 
         <!-- Hero Section -->
-        <section class="min-h-screen flex items-center justify-center pt-20">
+        <section class="hero-section">
             <div class="container mx-auto px-4">
-                <div class="hero-content text-center text-white">
+                <div class="hero-content text-center">
                     <h2 class="hero-title" data-aos="fade-up">
                         SELAMAT DATANG DI<br>
                         <span class="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">SYAHJAYA INDO GRUP</span>
@@ -1034,9 +2024,130 @@
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="py-20 bg-white">
+        <!-- Banner Section -->
+        <section class="banner-section">
             <div class="container mx-auto px-4">
+                <div class="banner-slider" data-aos="fade-up">
+                    <div class="banner-slide" style="background-image: url('https://picsum.photos/seed/banner1/1200/300');">
+                        <div class="banner-content">
+                            <h3 class="text-2xl font-bold mb-2">Flash Sale 50%</h3>
+                            <p>Diskon besar untuk produk pilihan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flash Sale Section -->
+        <section class="flash-sale-section">
+            <div class="container mx-auto px-4">
+                <div class="flash-sale-header">
+                    <div class="flash-sale-title">
+                        <i class="fas fa-bolt mr-2"></i> Flash Sale
+                    </div>
+                    <div class="flash-sale-timer">
+                        <div class="timer-box">12</div>
+                        <span>:</span>
+                        <div class="timer-box">34</div>
+                        <span>:</span>
+                        <div class="timer-box">56</div>
+                    </div>
+                </div>
+                <div class="product-grid">
+                    <!-- Flash sale products will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Section -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">
+                    Kategori Produk
+                </h2>
+                <div class="category-grid">
+                    <div class="category-card" data-aos="fade-up" onclick="filterProducts('children-toys')">
+                        <i class="fas fa-child category-icon"></i>
+                        <h3 class="category-name">Mainan Anak</h3>
+                        <p class="category-count">156 Produk</p>
+                    </div>
+                    <div class="category-card" data-aos="fade-up" data-aos-delay="100" onclick="filterProducts('electronic')">
+                        <i class="fas fa-tv category-icon"></i>
+                        <h3 class="category-name">Elektronik</h3>
+                        <p class="category-count">234 Produk</p>
+                    </div>
+                    <div class="category-card" data-aos="fade-up" data-aos-delay="200" onclick="filterProducts('handphone')">
+                        <i class="fas fa-mobile-alt category-icon"></i>
+                        <h3 class="category-name">Handphone</h3>
+                        <p class="category-count">189 Produk</p>
+                    </div>
+                    <div class="category-card" data-aos="fade-up" data-aos-delay="300" onclick="filterProducts('household')">
+                        <i class="fas fa-home category-icon"></i>
+                        <h3 class="category-name">Peralatan Rumah</h3>
+                        <p class="category-count">167 Produk</p>
+                    </div>
+                    <div class="category-card" data-aos="fade-up" data-aos-delay="400" onclick="filterProducts('computer')">
+                        <i class="fas fa-laptop category-icon"></i>
+                        <h3 class="category-name">Komputer & Aksesoris</h3>
+                        <p class="category-count">145 Produk</p>
+                    </div>
+                    <div class="category-card" data-aos="fade-up" data-aos-delay="500" onclick="filterProducts('fashion-boys')">
+                        <i class="fas fa-male category-icon"></i>
+                        <h3 class="category-name">Fashion Pria</h3>
+                        <p class="category-count">278 Produk</p>
+                    </div>
+                    <div class="category-card" data-aos="fade-up" data-aos-delay="600" onclick="filterProducts('fashion-girls')">
+                        <i class="fas fa-female category-icon"></i>
+                        <h3 class="category-name">Fashion Wanita</h3>
+                        <p class="category-count">312 Produk</p>
+                    </div>
+                    <div class="category-card" data-aos="fade-up" data-aos-delay="700" onclick="filterProducts('book')">
+                        <i class="fas fa-book category-icon"></i>
+                        <h3 class="category-name">Buku</h3>
+                        <p class="category-count">123 Produk</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Official Store Section -->
+        <section class="official-store-section">
+            <div class="container mx-auto px-4">
+                <div class="official-store-header">
+                    <div class="official-store-title">
+                        <i class="fas fa-certificate mr-2"></i> Official Store
+                    </div>
+                    <a href="#" onclick="showPage('sellers')" class="text-purple-600 hover:text-purple-700 font-medium">Lihat Semua</a>
+                </div>
+                <div class="official-store-grid">
+                    <div class="official-store-card" data-aos="fade-up">
+                        <img src="https://picsum.photos/seed/seller1/100/100" class="official-store-logo" alt="Toko Maju Jaya">
+                        <div class="official-store-name">Toko Maju Jaya</div>
+                    </div>
+                    <div class="official-store-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://picsum.photos/seed/seller2/100/100" class="official-store-logo" alt="Gadget Store">
+                        <div class="official-store-name">Gadget Store</div>
+                    </div>
+                    <div class="official-store-card" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://picsum.photos/seed/seller3/100/100" class="official-store-logo" alt="Butik Cantik">
+                        <div class="official-store-name">Butik Cantik</div>
+                    </div>
+                    <div class="official-store-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://picsum.photos/seed/seller4/100/100" class="official-store-logo" alt="Sport Center">
+                        <div class="official-store-name">Sport Center</div>
+                    </div>
+                    <div class="official-store-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="https://picsum.photos/seed/seller5/100/100" class="official-store-logo" alt="Tech World">
+                        <div class="official-store-name">Tech World</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Mengapa Belanja di SYAHJAYA INDO GRUP?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div class="text-center" data-aos="fade-up">
                         <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1070,36 +2181,12 @@
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <section class="py-16 bg-gray-100">
-            <div class="container mx-auto px-4">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div data-aos="zoom-in">
-                        <div class="text-4xl font-bold text-purple-600 mb-2">10K+</div>
-                        <div class="text-gray-600">Produk</div>
-                    </div>
-                    <div data-aos="zoom-in" data-aos-delay="100">
-                        <div class="text-4xl font-bold text-pink-600 mb-2">5K+</div>
-                        <div class="text-gray-600">Penjual</div>
-                    </div>
-                    <div data-aos="zoom-in" data-aos-delay="200">
-                        <div class="text-4xl font-bold text-blue-600 mb-2">50K+</div>
-                        <div class="text-gray-600">Pembeli</div>
-                    </div>
-                    <div data-aos="zoom-in" data-aos-delay="300">
-                        <div class="text-4xl font-bold text-green-600 mb-2">10K+</div>
-                        <div class="text-gray-600">Dropshipper</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Testimonials Section -->
-        <section class="py-16 bg-white">
+        <section class="py-16 bg-gray-50">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-12">Apa Kata Mereka</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-gray-50 p-6 rounded-lg" data-aos="fade-up">
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up">
                         <div class="flex items-center mb-4">
                             <img src="https://picsum.photos/seed/user1/50/50" class="w-12 h-12 rounded-full mr-3">
                             <div>
@@ -1115,7 +2202,7 @@
                         </div>
                         <p class="text-gray-600">"Platform yang sangat membantu untuk mengembangkan bisnis online. Penjualan meningkat 300% sejak bergabung!"</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
                         <div class="flex items-center mb-4">
                             <img src="https://picsum.photos/seed/user2/50/50" class="w-12 h-12 rounded-full mr-3">
                             <div>
@@ -1131,7 +2218,7 @@
                         </div>
                         <p class="text-gray-600">"Sebagai dropshipper, saya bisa mendapatkan komisi yang tinggi tanpa perlu modal. Sangat recommended!"</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
                         <div class="flex items-center mb-4">
                             <img src="https://picsum.photos/seed/user3/50/50" class="w-12 h-12 rounded-full mr-3">
                             <div>
@@ -1154,83 +2241,81 @@
 
     <!-- Category Page -->
     <div id="categoryPage" class="page category-page">
-        <div class="pt-20">
-            <div class="container mx-auto px-4 py-12">
-                <h2 class="text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">
-                    Jelajahi Kategori Produk
-                </h2>
-                
-                <div class="category-grid">
-                    <div class="category-card" data-aos="fade-up" onclick="filterProducts('children-toys')">
-                        <i class="fas fa-child category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Mainan Anak</h3>
-                        <p class="text-gray-600">156 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="100" onclick="filterProducts('electronic')">
-                        <i class="fas fa-tv category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Elektronik</h3>
-                        <p class="text-gray-600">234 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="200" onclick="filterProducts('handphone')">
-                        <i class="fas fa-mobile-alt category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Handphone</h3>
-                        <p class="text-gray-600">189 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="300" onclick="filterProducts('household')">
-                        <i class="fas fa-home category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Peralatan Rumah</h3>
-                        <p class="text-gray-600">167 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="400" onclick="filterProducts('computer')">
-                        <i class="fas fa-laptop category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Komputer & Aksesoris</h3>
-                        <p class="text-gray-600">145 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="500" onclick="filterProducts('fashion-boys')">
-                        <i class="fas fa-male category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Fashion Pria</h3>
-                        <p class="text-gray-600">278 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="600" onclick="filterProducts('fashion-girls')">
-                        <i class="fas fa-female category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Fashion Wanita</h3>
-                        <p class="text-gray-600">312 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="700" onclick="filterProducts('book')">
-                        <i class="fas fa-book category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Buku</h3>
-                        <p class="text-gray-600">123 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="800" onclick="filterProducts('automotive')">
-                        <i class="fas fa-car category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Otomotif</h3>
-                        <p class="text-gray-600">78 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="900" onclick="filterProducts('sport')">
-                        <i class="fas fa-dumbbell category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Olahraga</h3>
-                        <p class="text-gray-600">89 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="1000" onclick="filterProducts('baby')">
-                        <i class="fas fa-baby category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Bayi</h3>
-                        <p class="text-gray-600">45 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="1100" onclick="filterProducts('software')">
-                        <i class="fas fa-code category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Software</h3>
-                        <p class="text-gray-600">67 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="1200" onclick="filterProducts('cosmetics')">
-                        <i class="fas fa-spray-can category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Kosmetik</h3>
-                        <p class="text-gray-600">156 Produk</p>
-                    </div>
-                    <div class="category-card" data-aos="fade-up" data-aos-delay="1300" onclick="filterProducts('kitchen')">
-                        <i class="fas fa-utensils category-icon"></i>
-                        <h3 class="text-xl font-bold mb-2">Peralatan Dapur</h3>
-                        <p class="text-gray-600">112 Produk</p>
-                    </div>
+        <div class="container mx-auto px-4 py-12">
+            <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">
+                Jelajahi Kategori Produk
+            </h2>
+            
+            <div class="category-grid">
+                <div class="category-card" data-aos="fade-up" onclick="filterProducts('children-toys')">
+                    <i class="fas fa-child category-icon"></i>
+                    <h3 class="category-name">Mainan Anak</h3>
+                    <p class="category-count">156 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="100" onclick="filterProducts('electronic')">
+                    <i class="fas fa-tv category-icon"></i>
+                    <h3 class="category-name">Elektronik</h3>
+                    <p class="category-count">234 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="200" onclick="filterProducts('handphone')">
+                    <i class="fas fa-mobile-alt category-icon"></i>
+                    <h3 class="category-name">Handphone</h3>
+                    <p class="category-count">189 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="300" onclick="filterProducts('household')">
+                    <i class="fas fa-home category-icon"></i>
+                    <h3 class="category-name">Peralatan Rumah</h3>
+                    <p class="category-count">167 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="400" onclick="filterProducts('computer')">
+                    <i class="fas fa-laptop category-icon"></i>
+                    <h3 class="category-name">Komputer & Aksesoris</h3>
+                    <p class="category-count">145 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="500" onclick="filterProducts('fashion-boys')">
+                    <i class="fas fa-male category-icon"></i>
+                    <h3 class="category-name">Fashion Pria</h3>
+                    <p class="category-count">278 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="600" onclick="filterProducts('fashion-girls')">
+                    <i class="fas fa-female category-icon"></i>
+                    <h3 class="category-name">Fashion Wanita</h3>
+                    <p class="category-count">312 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="700" onclick="filterProducts('book')">
+                    <i class="fas fa-book category-icon"></i>
+                    <h3 class="category-name">Buku</h3>
+                    <p class="category-count">123 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="800" onclick="filterProducts('automotive')">
+                    <i class="fas fa-car category-icon"></i>
+                    <h3 class="category-name">Otomotif</h3>
+                    <p class="category-count">78 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="900" onclick="filterProducts('sport')">
+                    <i class="fas fa-dumbbell category-icon"></i>
+                    <h3 class="category-name">Olahraga</h3>
+                    <p class="category-count">89 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="1000" onclick="filterProducts('baby')">
+                    <i class="fas fa-baby category-icon"></i>
+                    <h3 class="category-name">Bayi</h3>
+                    <p class="category-count">45 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="1100" onclick="filterProducts('software')">
+                    <i class="fas fa-code category-icon"></i>
+                    <h3 class="category-name">Software</h3>
+                    <p class="category-count">67 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="1200" onclick="filterProducts('cosmetics')">
+                    <i class="fas fa-spray-can category-icon"></i>
+                    <h3 class="category-name">Kosmetik</h3>
+                    <p class="category-count">156 Produk</p>
+                </div>
+                <div class="category-card" data-aos="fade-up" data-aos-delay="1300" onclick="filterProducts('kitchen')">
+                    <i class="fas fa-utensils category-icon"></i>
+                    <h3 class="category-name">Peralatan Dapur</h3>
+                    <p class="category-count">112 Produk</p>
                 </div>
             </div>
         </div>
@@ -1238,109 +2323,107 @@
 
     <!-- Sellers Page -->
     <div id="sellersPage" class="page sellers-page">
-        <div class="pt-20">
-            <div class="container mx-auto px-4 py-12">
-                <h2 class="text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">
-                    Temukan Penjual Terbaik
-                </h2>
+        <div class="container mx-auto px-4 py-12">
+            <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">
+                Temukan Penjual Terbaik
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="seller-card-3d" data-aos="fade-up">
+                    <div class="seller-card-inner">
+                        <div class="seller-card-front">
+                            <img src="https://picsum.photos/seed/seller1/100/100" class="w-24 h-24 rounded-full mb-4">
+                            <h3 class="text-xl font-bold mb-2">Toko Maju Jaya</h3>
+                            <div class="flex text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 text-center mb-4">Toko elektronik terlengkap</p>
+                            <button class="btn-primary">Lihat Profil</button>
+                        </div>
+                        <div class="seller-card-back">
+                            <i class="fas fa-store text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-4">Toko Maju Jaya</h3>
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">156</div>
+                                    <div class="text-sm opacity-90">Produk</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">2341</div>
+                                    <div class="text-sm opacity-90">Pesanan</div>
+                                </div>
+                            </div>
+                            <button class="bg-white text-purple-600 px-6 py-2 rounded-full font-semibold">Hubungi</button>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="seller-card-3d" data-aos="fade-up">
-                        <div class="seller-card-inner">
-                            <div class="seller-card-front">
-                                <img src="https://picsum.photos/seed/seller1/100/100" class="w-24 h-24 rounded-full mb-4">
-                                <h3 class="text-xl font-bold mb-2">Toko Maju Jaya</h3>
-                                <div class="flex text-yellow-400 mb-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="text-gray-600 text-center mb-4">Toko elektronik terlengkap</p>
-                                <button class="btn-primary">Lihat Profil</button>
+                <div class="seller-card-3d" data-aos="fade-up" data-aos-delay="100">
+                    <div class="seller-card-inner">
+                        <div class="seller-card-front">
+                            <img src="https://picsum.photos/seed/seller2/100/100" class="w-24 h-24 rounded-full mb-4">
+                            <h3 class="text-xl font-bold mb-2">Gadget Store</h3>
+                            <div class="flex text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                             </div>
-                            <div class="seller-card-back">
-                                <i class="fas fa-store text-5xl mb-4"></i>
-                                <h3 class="text-2xl font-bold mb-4">Toko Maju Jaya</h3>
-                                <div class="grid grid-cols-2 gap-4 mb-6">
-                                    <div class="text-center">
-                                        <div class="text-3xl font-bold">156</div>
-                                        <div class="text-sm opacity-90">Produk</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <div class="text-3xl font-bold">2341</div>
-                                        <div class="text-sm opacity-90">Pesanan</div>
-                                    </div>
+                            <p class="text-gray-600 text-center mb-4">Spesialis gadget original</p>
+                            <button class="btn-primary">Lihat Profil</button>
+                        </div>
+                        <div class="seller-card-back">
+                            <i class="fas fa-store text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-4">Gadget Store</h3>
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">89</div>
+                                    <div class="text-sm opacity-90">Produk</div>
                                 </div>
-                                <button class="bg-white text-purple-600 px-6 py-2 rounded-full font-semibold">Hubungi</button>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">1876</div>
+                                    <div class="text-sm opacity-90">Pesanan</div>
+                                </div>
                             </div>
+                            <button class="bg-white text-purple-600 px-6 py-2 rounded-full font-semibold">Hubungi</button>
                         </div>
                     </div>
-                    
-                    <div class="seller-card-3d" data-aos="fade-up" data-aos-delay="100">
-                        <div class="seller-card-inner">
-                            <div class="seller-card-front">
-                                <img src="https://picsum.photos/seed/seller2/100/100" class="w-24 h-24 rounded-full mb-4">
-                                <h3 class="text-xl font-bold mb-2">Gadget Store</h3>
-                                <div class="flex text-yellow-400 mb-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="text-gray-600 text-center mb-4">Spesialis gadget original</p>
-                                <button class="btn-primary">Lihat Profil</button>
+                </div>
+                
+                <div class="seller-card-3d" data-aos="fade-up" data-aos-delay="200">
+                    <div class="seller-card-inner">
+                        <div class="seller-card-front">
+                            <img src="https://picsum.photos/seed/seller3/100/100" class="w-24 h-24 rounded-full mb-4">
+                            <h3 class="text-xl font-bold mb-2">Butik Cantik</h3>
+                            <div class="flex text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
                             </div>
-                            <div class="seller-card-back">
-                                <i class="fas fa-store text-5xl mb-4"></i>
-                                <h3 class="text-2xl font-bold mb-4">Gadget Store</h3>
-                                <div class="grid grid-cols-2 gap-4 mb-6">
-                                    <div class="text-center">
-                                        <div class="text-3xl font-bold">89</div>
-                                        <div class="text-sm opacity-90">Produk</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <div class="text-3xl font-bold">1876</div>
-                                        <div class="text-sm opacity-90">Pesanan</div>
-                                    </div>
-                                </div>
-                                <button class="bg-white text-purple-600 px-6 py-2 rounded-full font-semibold">Hubungi</button>
-                            </div>
+                            <p class="text-gray-600 text-center mb-4">Fashion terkini untuk wanita</p>
+                            <button class="btn-primary">Lihat Profil</button>
                         </div>
-                    </div>
-                    
-                    <div class="seller-card-3d" data-aos="fade-up" data-aos-delay="200">
-                        <div class="seller-card-inner">
-                            <div class="seller-card-front">
-                                <img src="https://picsum.photos/seed/seller3/100/100" class="w-24 h-24 rounded-full mb-4">
-                                <h3 class="text-xl font-bold mb-2">Butik Cantik</h3>
-                                <div class="flex text-yellow-400 mb-2">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
+                        <div class="seller-card-back">
+                            <i class="fas fa-store text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-4">Butik Cantik</h3>
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">234</div>
+                                    <div class="text-sm opacity-90">Produk</div>
                                 </div>
-                                <p class="text-gray-600 text-center mb-4">Fashion terkini untuk wanita</p>
-                                <button class="btn-primary">Lihat Profil</button>
-                            </div>
-                            <div class="seller-card-back">
-                                <i class="fas fa-store text-5xl mb-4"></i>
-                                <h3 class="text-2xl font-bold mb-4">Butik Cantik</h3>
-                                <div class="grid grid-cols-2 gap-4 mb-6">
-                                    <div class="text-center">
-                                        <div class="text-3xl font-bold">234</div>
-                                        <div class="text-sm opacity-90">Produk</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <div class="text-3xl font-bold">3456</div>
-                                        <div class="text-sm opacity-90">Pesanan</div>
-                                    </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">3456</div>
+                                    <div class="text-sm opacity-90">Pesanan</div>
                                 </div>
-                                <button class="bg-white text-purple-600 px-6 py-2 rounded-full font-semibold">Hubungi</button>
                             </div>
+                            <button class="bg-white text-purple-600 px-6 py-2 rounded-full font-semibold">Hubungi</button>
                         </div>
                     </div>
                 </div>
@@ -1350,167 +2433,339 @@
 
     <!-- Products Page -->
     <div id="productsPage" class="page products-page">
-        <div class="pt-20">
-            <div class="container mx-auto px-4 py-12">
-                <h2 class="text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">
-                    Produk Pilihan Kami
-                </h2>
-                
-                <!-- Filter Section -->
-                <div class="filter-section" data-aos="fade-up">
-                    <div class="flex flex-wrap gap-4 items-center">
-                        <span class="font-medium text-gray-700">Filter:</span>
-                        <button class="filter-btn active" onclick="filterProducts('all')">Semua</button>
-                        <button class="filter-btn" onclick="filterProducts('children-toys')">Mainan Anak</button>
-                        <button class="filter-btn" onclick="filterProducts('electronic')">Elektronik</button>
-                        <button class="filter-btn" onclick="filterProducts('handphone')">Handphone</button>
-                        <button class="filter-btn" onclick="filterProducts('household')">Peralatan Rumah</button>
-                        <button class="filter-btn" onclick="filterProducts('computer')">Komputer & Aksesoris</button>
-                        <button class="filter-btn" onclick="filterProducts('fashion-boys')">Fashion Pria</button>
-                        <button class="filter-btn" onclick="filterProducts('fashion-girls')">Fashion Wanita</button>
-                        <button class="filter-btn" onclick="filterProducts('book')">Buku</button>
-                        <button class="filter-btn" onclick="filterProducts('automotive')">Otomotif</button>
-                        <button class="filter-btn" onclick="filterProducts('sport')">Olahraga</button>
-                        <button class="filter-btn" onclick="filterProducts('baby')">Bayi</button>
-                        <button class="filter-btn" onclick="filterProducts('software')">Software</button>
-                        <button class="filter-btn" onclick="filterProducts('cosmetics')">Kosmetik</button>
-                        <button class="filter-btn" onclick="filterProducts('kitchen')">Peralatan Dapur</button>
-                        
-                        <div class="ml-auto flex items-center gap-4">
-                            <span class="font-medium text-gray-700">Urutkan:</span>
-                            <select onchange="sortProducts(this.value)" class="px-4 py-2 rounded-lg border border-gray-300">
-                                <option value="default">Default</option>
-                                <option value="price-low">Harga Terendah</option>
-                                <option value="price-high">Harga Tertinggi</option>
-                                <option value="name">Nama A-Z</option>
-                                <option value="rating">Rating Tertinggi</option>
-                                <option value="commission">Komisi Tertinggi</option>
-                            </select>
+        <!-- Hero Section -->
+        <section class="products-hero">
+            <div class="container mx-auto px-4">
+                <div class="products-hero-content" data-aos="fade-up">
+                    <h1 class="products-hero-title">Produk Pilihan Kami</h1>
+                    <p class="products-hero-subtitle">Temukan berbagai produk berkualitas dengan harga terbaik hanya di SYAHJAYA INDO GRUP</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Banner Section -->
+        <section class="container mx-auto px-4">
+            <div class="products-banner" data-aos="fade-up">
+                <div class="products-banner-content">
+                    <div class="products-banner-text">
+                        <h3 class="products-banner-title">
+                            <i class="fas fa-bolt mr-2"></i> Flash Sale Hari Ini
+                        </h3>
+                        <p class="products-banner-subtitle">Diskon hingga 50% untuk produk pilihan</p>
+                        <div class="products-banner-timer">
+                            <div class="timer-box">12</div>
+                            <span>:</span>
+                            <div class="timer-box">34</div>
+                            <span>:</span>
+                            <div class="timer-box">56</div>
+                        </div>
+                        <button class="btn-primary">Lihat Semua</button>
+                    </div>
+                    <img src="https://picsum.photos/seed/flashsale/200/150" class="products-banner-image" alt="Flash Sale">
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Categories -->
+        <section class="container mx-auto px-4">
+            <div class="quick-categories" data-aos="fade-up">
+                <h3 class="quick-categories-title">Kategori Populer</h3>
+                <div class="quick-categories-grid">
+                    <div class="quick-category-item" onclick="filterProducts('electronic')">
+                        <div class="quick-category-icon">
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <div class="quick-category-name">Elektronik</div>
+                    </div>
+                    <div class="quick-category-item" onclick="filterProducts('handphone')">
+                        <div class="quick-category-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="quick-category-name">Handphone</div>
+                    </div>
+                    <div class="quick-category-item" onclick="filterProducts('computer')">
+                        <div class="quick-category-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <div class="quick-category-name">Komputer</div>
+                    </div>
+                    <div class="quick-category-item" onclick="filterProducts('fashion-boys')">
+                        <div class="quick-category-icon">
+                            <i class="fas fa-male"></i>
+                        </div>
+                        <div class="quick-category-name">Fashion Pria</div>
+                    </div>
+                    <div class="quick-category-item" onclick="filterProducts('fashion-girls')">
+                        <div class="quick-category-icon">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <div class="quick-category-name">Fashion Wanita</div>
+                    </div>
+                    <div class="quick-category-item" onclick="filterProducts('sport')">
+                        <div class="quick-category-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <div class="quick-category-name">Olahraga</div>
+                    </div>
+                    <div class="quick-category-item" onclick="filterProducts('kitchen')">
+                        <div class="quick-category-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="quick-category-name">Dapur</div>
+                    </div>
+                    <div class="quick-category-item" onclick="filterProducts('children-toys')">
+                        <div class="quick-category-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <div class="quick-category-name">Mainan</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="container mx-auto px-4">
+            <div class="filter-section" data-aos="fade-up">
+                <div class="filter-header">
+                    <h3 class="filter-title">Filter Produk</h3>
+                    <div class="filter-actions">
+                        <div class="view-mode-toggle">
+                            <button class="view-mode-btn active" onclick="setViewMode('grid')">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-mode-btn" onclick="setViewMode('list')">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                        <div class="filter-dropdown">
+                            <button class="filter-btn">
+                                Urutkan <i class="fas fa-chevron-down ml-1"></i>
+                            </button>
+                            <div class="filter-dropdown-content">
+                                <a href="#" onclick="sortProducts('default')">Default</a>
+                                <a href="#" onclick="sortProducts('price-low')">Harga Terendah</a>
+                                <a href="#" onclick="sortProducts('price-high')">Harga Tertinggi</a>
+                                <a href="#" onclick="sortProducts('name')">Nama A-Z</a>
+                                <a href="#" onclick="sortProducts('rating')">Rating Tertinggi</a>
+                                <a href="#" onclick="sortProducts('commission')">Komisi Tertinggi</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Products Grid -->
-                <div id="productGrid" class="product-grid">
-                    <!-- Products will be loaded here -->
+                <div class="flex flex-wrap gap-2">
+                    <button class="filter-btn active" onclick="filterProducts('all')">Semua</button>
+                    <button class="filter-btn" onclick="filterProducts('children-toys')">Mainan Anak</button>
+                    <button class="filter-btn" onclick="filterProducts('electronic')">Elektronik</button>
+                    <button class="filter-btn" onclick="filterProducts('handphone')">Handphone</button>
+                    <button class="filter-btn" onclick="filterProducts('household')">Peralatan Rumah</button>
+                    <button class="filter-btn" onclick="filterProducts('computer')">Komputer & Aksesoris</button>
+                    <button class="filter-btn" onclick="filterProducts('fashion-boys')">Fashion Pria</button>
+                    <button class="filter-btn" onclick="filterProducts('fashion-girls')">Fashion Wanita</button>
+                    <button class="filter-btn" onclick="filterProducts('book')">Buku</button>
+                    <button class="filter-btn" onclick="filterProducts('automotive')">Otomotif</button>
+                    <button class="filter-btn" onclick="filterProducts('sport')">Olahraga</button>
+                    <button class="filter-btn" onclick="filterProducts('baby')">Bayi</button>
+                    <button class="filter-btn" onclick="filterProducts('software')">Software</button>
+                    <button class="filter-btn" onclick="filterProducts('cosmetics')">Kosmetik</button>
+                    <button class="filter-btn" onclick="filterProducts('kitchen')">Peralatan Dapur</button>
+                </div>
+                
+                <div id="activeFilters" class="active-filters">
+                    <!-- Active filters will be displayed here -->
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Product Count -->
+        <section class="container mx-auto px-4">
+            <div class="product-count" data-aos="fade-up">
+                <div class="count-text">Menampilkan <span class="count-number" id="productCountNumber">0</span> produk</div>
+                <div id="loadingIndicator" class="loading-container" style="display: none;">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Grid/List -->
+        <section class="container mx-auto px-4">
+            <div id="productGrid" class="product-grid">
+                <!-- Products will be loaded here -->
+            </div>
+            <div id="productList" class="product-list" style="display: none;">
+                <!-- Products will be loaded here in list view -->
+            </div>
+        </section>
+
+        <!-- No Results State -->
+        <section class="container mx-auto px-4" id="noResultsSection" style="display: none;">
+            <div class="no-results">
+                <div class="no-results-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3 class="no-results-title">Produk tidak ditemukan</h3>
+                <p class="no-results-subtitle">Coba gunakan kata kunci lain atau hapus filter yang sedang aktif</p>
+                <button class="no-results-action" onclick="resetFilters()">Reset Filter</button>
+            </div>
+        </section>
+
+        <!-- Pagination -->
+        <section class="container mx-auto px-4" id="paginationSection" style="display: none;">
+            <div class="pagination-container">
+                <button class="pagination-btn" id="prevPageBtn" onclick="changePage(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="pagination-info">
+                    Halaman <span id="currentPage">1</span> dari <span id="totalPages">1</span>
+                </div>
+                <button class="pagination-btn" id="nextPageBtn" onclick="changePage(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Recommended Products -->
+        <section class="container mx-auto px-4">
+            <div class="recommended-section" data-aos="fade-up">
+                <div class="recommended-header">
+                    <h3 class="recommended-title">
+                        <i class="fas fa-star mr-2"></i> Produk Rekomendasi
+                    </h3>
+                    <a href="#" class="text-purple-600 hover:text-purple-700 font-medium">Lihat Semua</a>
+                </div>
+                <div class="product-grid" id="recommendedProducts">
+                    <!-- Recommended products will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Recently Viewed -->
+        <section class="container mx-auto px-4">
+            <div class="recently-viewed-section" data-aos="fade-up">
+                <div class="recently-viewed-header">
+                    <h3 class="recently-viewed-title">
+                        <i class="fas fa-history mr-2"></i> Baru Dilihat
+                    </h3>
+                    <button onclick="clearRecentlyViewed()" class="text-gray-500 hover:text-gray-700 text-sm">Hapus</button>
+                </div>
+                <div class="recently-viewed-grid" id="recentlyViewedProducts">
+                    <!-- Recently viewed products will be loaded here -->
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- Dropshipper Page -->
     <div id="dropshipperPage" class="page dropshipper-page">
-        <div class="pt-20">
-            <div class="container mx-auto px-4 py-12">
-                <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">
-                    Jadi Dropshipper, Dapatkan Komisi Tinggi!
-                </h2>
+        <div class="container mx-auto px-4 py-12">
+            <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">
+                Jadi Dropshipper, Dapatkan Komisi Tinggi!
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Dropshipper Info -->
+                <div class="lg:col-span-1">
+                    <div class="dropshipper-card" data-aos="fade-up">
+                        <h3 class="text-2xl font-bold mb-4">Apa itu Dropshipper?</h3>
+                        <p class="text-gray-600 mb-4">
+                            Dropshipper adalah orang yang menjual produk milik orang lain (supplier) tanpa perlu memiliki stok barang. 
+                            Dropshipper hanya perlu memasarkan produk dan ketika ada pembeli, supplier akan mengirimkan barang langsung ke pembeli.
+                        </p>
+                        <h4 class="text-xl font-bold mb-3">Keuntungan Menjadi Dropshipper:</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Tidak perlu modal besar</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Tidak perlu menyimpan stok barang</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Bisa dikerjakan dari mana saja</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Komisi hingga 30% dari harga produk</span>
+                            </li>
+                        </ul>
+                        <button onclick="showModal('authModal'); showDropshipperRegisterForm()" class="w-full btn-success mt-4">
+                            <i class="fas fa-user-plus mr-2"></i> Daftar sebagai Dropshipper
+                        </button>
+                    </div>
+                </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Dropshipper Info -->
-                    <div class="lg:col-span-1">
-                        <div class="dropshipper-card" data-aos="fade-up">
-                            <h3 class="text-2xl font-bold mb-4">Apa itu Dropshipper?</h3>
-                            <p class="text-gray-600 mb-4">
-                                Dropshipper adalah orang yang menjual produk milik orang lain (supplier) tanpa perlu memiliki stok barang. 
-                                Dropshipper hanya perlu memasarkan produk dan ketika ada pembeli, supplier akan mengirimkan barang langsung ke pembeli.
-                            </p>
-                            <h4 class="text-xl font-bold mb-3">Keuntungan Menjadi Dropshipper:</h4>
-                            <ul class="space-y-2">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>Tidak perlu modal besar</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>Tidak perlu menyimpan stok barang</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>Bisa dikerjakan dari mana saja</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>Komisi hingga 30% dari harga produk</span>
-                                </li>
-                            </ul>
-                            <button onclick="showModal('authModal'); showDropshipperRegisterForm()" class="w-full btn-success mt-4">
-                                <i class="fas fa-user-plus mr-2"></i> Daftar sebagai Dropshipper
-                            </button>
+                <!-- Products for Dropshipper -->
+                <div class="lg:col-span-2">
+                    <div class="dropshipper-card" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-2xl font-bold mb-4">Produk Terlaris untuk Dropship</h3>
+                        <div class="space-y-4">
+                            <div class="dropshipper-product">
+                                <img src="https://picsum.photos/seed/product1/60/60" alt="Laptop Gaming">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold">Laptop Gaming ASUS ROG</h4>
+                                    <p class="text-gray-600 text-sm">Komisi: <span class="commission-badge">15%</span></p>
+                                    <p class="text-purple-600 font-bold">Rp 15.000.000</p>
+                                </div>
+                                <button onclick="shareDropshipProduct(1)" class="btn-primary">
+                                    <i class="fas fa-share-alt mr-2"></i> Bagikan
+                                </button>
+                            </div>
+                            
+                            <div class="dropshipper-product">
+                                <img src="https://picsum.photos/seed/product2/60/60" alt="Smartphone">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold">Smartphone Samsung Galaxy</h4>
+                                    <p class="text-gray-600 text-sm">Komisi: <span class="commission-badge">20%</span></p>
+                                    <p class="text-purple-600 font-bold">Rp 12.000.000</p>
+                                </div>
+                                <button onclick="shareDropshipProduct(2)" class="btn-primary">
+                                    <i class="fas fa-share-alt mr-2"></i> Bagikan
+                                </button>
+                            </div>
+                            
+                            <div class="dropshipper-product">
+                                <img src="https://picsum.photos/seed/product3/60/60" alt="Sepatu">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold">Sepatu Running Nike</h4>
+                                    <p class="text-gray-600 text-sm">Komisi: <span class="commission-badge">25%</span></p>
+                                    <p class="text-purple-600 font-bold">Rp 1.200.000</p>
+                                </div>
+                                <button onclick="shareDropshipProduct(3)" class="btn-primary">
+                                    <i class="fas fa-share-alt mr-2"></i> Bagikan
+                                </button>
+                            </div>
+                            
+                            <div class="dropshipper-product">
+                                <img src="https://picsum.photos/seed/product4/60/60" alt="Kosmetik">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold">Lipstik Matte Premium</h4>
+                                    <p class="text-gray-600 text-sm">Komisi: <span class="commission-badge">30%</span></p>
+                                    <p class="text-purple-600 font-bold">Rp 250.000</p>
+                                </div>
+                                <button onclick="shareDropshipProduct(4)" class="btn-primary">
+                                    <i class="fas fa-share-alt mr-2"></i> Bagikan
+                                </button>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Products for Dropshipper -->
-                    <div class="lg:col-span-2">
-                        <div class="dropshipper-card" data-aos="fade-up" data-aos-delay="100">
-                            <h3 class="text-2xl font-bold mb-4">Produk Terlaris untuk Dropship</h3>
-                            <div class="space-y-4">
-                                <div class="dropshipper-product">
-                                    <img src="https://picsum.photos/seed/product1/60/60" alt="Laptop Gaming">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold">Laptop Gaming ASUS ROG</h4>
-                                        <p class="text-gray-600 text-sm">Komisi: <span class="commission-badge">15%</span></p>
-                                        <p class="text-purple-600 font-bold">Rp 15.000.000</p>
-                                    </div>
-                                    <button onclick="shareDropshipProduct(1)" class="btn-primary">
-                                        <i class="fas fa-share-alt mr-2"></i> Bagikan
-                                    </button>
-                                </div>
-                                
-                                <div class="dropshipper-product">
-                                    <img src="https://picsum.photos/seed/product2/60/60" alt="Smartphone">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold">Smartphone Samsung Galaxy</h4>
-                                        <p class="text-gray-600 text-sm">Komisi: <span class="commission-badge">20%</span></p>
-                                        <p class="text-purple-600 font-bold">Rp 12.000.000</p>
-                                    </div>
-                                    <button onclick="shareDropshipProduct(2)" class="btn-primary">
-                                        <i class="fas fa-share-alt mr-2"></i> Bagikan
-                                    </button>
-                                </div>
-                                
-                                <div class="dropshipper-product">
-                                    <img src="https://picsum.photos/seed/product3/60/60" alt="Sepatu">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold">Sepatu Running Nike</h4>
-                                        <p class="text-gray-600 text-sm">Komisi: <span class="commission-badge">25%</span></p>
-                                        <p class="text-purple-600 font-bold">Rp 1.200.000</p>
-                                    </div>
-                                    <button onclick="shareDropshipProduct(3)" class="btn-primary">
-                                        <i class="fas fa-share-alt mr-2"></i> Bagikan
-                                    </button>
-                                </div>
-                                
-                                <div class="dropshipper-product">
-                                    <img src="https://picsum.photos/seed/product4/60/60" alt="Kosmetik">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold">Lipstik Matte Premium</h4>
-                                        <p class="text-gray-600 text-sm">Komisi: <span class="commission-badge">30%</span></p>
-                                        <p class="text-purple-600 font-bold">Rp 250.000</p>
-                                    </div>
-                                    <button onclick="shareDropshipProduct(4)" class="btn-primary">
-                                        <i class="fas fa-share-alt mr-2"></i> Bagikan
-                                    </button>
-                                </div>
+                    <!-- Dropshipper Stats -->
+                    <div class="dropshipper-card mt-6" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-2xl font-bold mb-4">Statistik Dropshipper</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold">10K+</div>
+                                <div>Dropshipper Aktif</div>
                             </div>
-                        </div>
-                        
-                        <!-- Dropshipper Stats -->
-                        <div class="dropshipper-card mt-6" data-aos="fade-up" data-aos-delay="200">
-                            <h3 class="text-2xl font-bold mb-4">Statistik Dropshipper</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-lg text-center">
-                                    <div class="text-3xl font-bold">10K+</div>
-                                    <div>Dropshipper Aktif</div>
-                                </div>
-                                <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-lg text-center">
-                                    <div class="text-3xl font-bold">50K+</div>
-                                    <div>Produk Terjual</div>
-                                </div>
-                                <div class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4 rounded-lg text-center">
-                                    <div class="text-3xl font-bold">2M+</div>
-                                    <div>Komisi Dibayarkan</div>
-                                </div>
+                            <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold">50K+</div>
+                                <div>Produk Terjual</div>
+                            </div>
+                            <div class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold">2M+</div>
+                                <div>Komisi Dibayarkan</div>
                             </div>
                         </div>
                     </div>
@@ -1521,75 +2776,88 @@
 
     <!-- Dropshipper Dashboard Page -->
     <div id="dropshipperDashboardPage" class="page dropshipper-dashboard">
-        <div class="pt-20">
-            <div class="container mx-auto px-4 py-12">
-                <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-4xl font-bold text-gray-800" data-aos="fade-up">
-                        Dashboard Dropshipper
-                    </h2>
-                    <div class="flex gap-3">
-                        <button onclick="showPage('dropshipper')" class="btn-secondary">
-                            <i class="fas fa-arrow-left mr-2"></i> Kembali
-                        </button>
-                        <button onclick="showDropshipperProfile()" class="btn-primary">
-                            <i class="fas fa-user mr-2"></i> Profil Saya
+        <div class="container mx-auto px-4 py-12">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-4xl font-bold text-gray-800" data-aos="fade-up">
+                    Dashboard Dropshipper
+                </h2>
+                <div class="flex gap-3">
+                    <button onclick="showPage('dropshipper')" class="btn-secondary">
+                        <i class="fas fa-arrow-left mr-2"></i> Kembali
+                    </button>
+                    <button onclick="showDropshipperProfile()" class="btn-primary">
+                        <i class="fas fa-user mr-2"></i> Profil Saya
+                    </button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Dropshipper Stats Summary -->
+                <div class="lg:col-span-1">
+                    <div class="dashboard-card" data-aos="fade-up">
+                        <h3 class="text-xl font-bold mb-4">Statistik Anda</h3>
+                        <div class="space-y-4">
+                            <div class="stat-card">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <div class="text-lg font-medium">Total Komisi</div>
+                                        <div class="text-sm opacity-90">Rp ${getDropshipperStats().totalCommission.toLocaleString('id-ID')}</div>
+                                    </div>
+                                    <i class="fas fa-money-bill-wave text-2xl"></i>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <div class="text-lg font-medium">Produk Terjual</div>
+                                        <div class="text-sm opacity-90">${getDropshipperStats().totalSales}</div>
+                                    </div>
+                                    <i class="fas fa-shopping-cart text-2xl"></i>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <div class="text-lg font-medium">Komisi Pending</div>
+                                        <div class="text-sm opacity-90">Rp ${getDropshipperStats().pendingCommission.toLocaleString('id-ID')}</div>
+                                    </div>
+                                    <i class="fas fa-clock text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="requestWithdrawal()" class="w-full btn-success mt-4 ${getDropshipperStats().availableCommission < 50000 ? 'disabled' : ''}">
+                            <i class="fas fa-money-bill-wave mr-2"></i> Tarik Komisi
                         </button>
                     </div>
                 </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Dropshipper Stats Summary -->
-                    <div class="lg:col-span-1">
-                        <div class="dashboard-card" data-aos="fade-up">
-                            <h3 class="text-xl font-bold mb-4">Statistik Anda</h3>
-                            <div class="space-y-4">
-                                <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-lg">
-                                    <div class="text-2xl font-bold">Rp ${getDropshipperStats().totalCommission.toLocaleString('id-ID')}</div>
-                                    <div class="text-sm opacity-90">Total Komisi</div>
-                                </div>
-                                <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-lg">
-                                    <div class="text-2xl font-bold">${getDropshipperStats().totalSales}</div>
-                                    <div class="text-sm opacity-90">Produk Terjual</div>
-                                </div>
-                                <div class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4 rounded-lg">
-                                    <div class="text-2xl font-bold">${getDropshipperStats().pendingCommission > 0 ? 'Rp ' + getDropshipperStats().pendingCommission.toLocaleString('id-ID') : 'Rp 0'}</div>
-                                    <div class="text-sm opacity-90">Komisi Pending</div>
-                                </div>
-                            </div>
-                            <button onclick="requestWithdrawal()" class="w-full btn-success mt-4 ${getDropshipperStats().availableCommission < 50000 ? 'disabled' : ''}">
-                                <i class="fas fa-money-bill-wave mr-2"></i> Tarik Komisi
-                            </button>
+                <!-- Commission History -->
+                <div class="lg:col-span-2">
+                    <div class="dashboard-card" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-bold mb-4">Riwayat Komisi</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="text-left py-2">Tanggal</th>
+                                        <th class="text-left py-2">Produk</th>
+                                        <th class="text-left py-2">Komisi</th>
+                                        <th class="text-left py-2">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="commissionHistory">
+                                    <!-- Commission history will be loaded here -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     
-                    <!-- Commission History -->
-                    <div class="lg:col-span-2">
-                        <div class="dashboard-card" data-aos="fade-up" data-aos-delay="100">
-                            <h3 class="text-xl font-bold mb-4">Riwayat Komisi</h3>
-                            <div class="overflow-x-auto">
-                                <table class="w-full">
-                                    <thead>
-                                        <tr class="border-b">
-                                            <th class="text-left py-2">Tanggal</th>
-                                            <th class="text-left py-2">Produk</th>
-                                            <th class="text-left py-2">Komisi</th>
-                                            <th class="text-left py-2">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="commissionHistory">
-                                        <!-- Commission history will be loaded here -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        
-                        <!-- Sales Chart -->
-                        <div class="dashboard-card mt-6" data-aos="fade-up" data-aos-delay="200">
-                            <h3 class="text-xl font-bold mb-4">Grafik Penjualan</h3>
-                            <div class="sales-chart">
-                                <div class="chart-placeholder">
-                                    <p class="text-gray-500">Grafik penjualan akan ditampilkan di sini</p>
-                                </div>
+                    <!-- Sales Chart -->
+                    <div class="dashboard-card mt-6" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-xl font-bold mb-4">Grafik Penjualan</h3>
+                        <div class="sales-chart">
+                            <div class="chart-placeholder">
+                                <p class="text-gray-500">Grafik penjualan akan ditampilkan di sini</p>
                             </div>
                         </div>
                     </div>
@@ -1600,119 +2868,117 @@
 
     <!-- Dropshipper Profile Page -->
     <div id="dropshipperProfilePage" class="page dropshipper-profile">
-        <div class="pt-20">
-            <div class="container mx-auto px-4 py-12">
-                <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-4xl font-bold text-gray-800" data-aos="fade-up">
-                        Profil Dropshipper
-                    </h2>
-                    <button onclick="showPage('dropshipperDashboard')" class="btn-secondary">
-                        <i class="fas fa-arrow-left mr-2"></i> Kembali ke Dashboard
+        <div class="container mx-auto px-4 py-12">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-4xl font-bold text-gray-800" data-aos="fade-up">
+                    Profil Dropshipper
+                </h2>
+                <button onclick="showPage('dropshipperDashboard')" class="btn-secondary">
+                    <i class="fas fa-arrow-left mr-2"></i> Kembali ke Dashboard
+                </button>
+            </div>
+            
+            <div class="profile-header" data-aos="fade-up">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="w-32 h-32 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-white text-5xl font-bold mb-4 md:mb-0 md:mr-6">
+                        ${currentUser?.name?.charAt(0) || 'D'}
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="text-2xl font-bold">${currentUser?.name || 'Dropshipper'}</h3>
+                        <p class="text-gray-600">${currentUser?.email || 'dropshipper@example.com'}</p>
+                        <p class="text-gray-600">Bergabung sejak: ${currentUser?.joinedDate || '01/01/2023'}</p>
+                        <div class="mt-2">
+                            <span class="inline-block bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm">
+                                <i class="fas fa-check-circle mr-1"></i> Dropshipper Aktif
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-stats">
+                    <div class="profile-stat-card">
+                        <div class="profile-stat-number">${getDropshipperStats().totalSales}</div>
+                        <div>Total Penjualan</div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="profile-stat-number">Rp ${getDropshipperStats().totalCommission.toLocaleString('id-ID')}</div>
+                        <div>Total Komisi</div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="profile-stat-number">${getDropshipperStats().withdrawnCount || 0}</div>
+                        <div>Penarikan</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Dropshipper Info -->
+                <div class="dashboard-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold mb-4">Informasi Dropshipper</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between pb-2 border-b">
+                            <span class="text-gray-600">Nama Lengkap</span>
+                            <span class="font-medium">${currentUser?.name || '-'}</span>
+                        </div>
+                        <div class="flex justify-between pb-2 border-b">
+                            <span class="text-gray-600">Email</span>
+                            <span class="font-medium">${currentUser?.email || '-'}</span>
+                        </div>
+                        <div class="flex justify-between pb-2 border-b">
+                            <span class="text-gray-600">No. Telepon</span>
+                            <span class="font-medium">${currentUser?.phone || '-'}</span>
+                        </div>
+                        <div class="flex justify-between pb-2 border-b">
+                            <span class="text-gray-600">Platform Jualan</span>
+                            <span class="font-medium">${currentUser?.platform || '-'}</span>
+                        </div>
+                        <div class="flex justify-between pb-2 border-b">
+                            <span class="text-gray-600">Link Toko Online</span>
+                            <a href="${currentUser?.storeLink || '#'}" target="_blank" class="font-medium text-purple-600 hover:underline">
+                                ${currentUser?.storeLink ? 'Kunjungi Toko' : '-'}
+                            </a>
+                        </div>
+                    </div>
+                    <button onclick="showModal('editDropshipperModal')" class="w-full btn-primary mt-4">
+                        <i class="fas fa-edit mr-2"></i> Edit Profil
                     </button>
                 </div>
                 
-                <div class="profile-header" data-aos="fade-up">
-                    <div class="flex flex-col md:flex-row items-center">
-                        <div class="w-32 h-32 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-white text-5xl font-bold mb-4 md:mb-0 md:mr-6">
-                            ${currentUser?.name?.charAt(0) || 'D'}
+                <!-- Bank Account Info -->
+                <div class="dashboard-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold mb-4">Informasi Rekening</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between pb-2 border-b">
+                            <span class="text-gray-600">Nama Pemilik</span>
+                            <span class="font-medium">${currentUser?.bankAccountName || '-'}</span>
                         </div>
-                        <div class="text-center md:text-left">
-                            <h3 class="text-2xl font-bold">${currentUser?.name || 'Dropshipper'}</h3>
-                            <p class="text-gray-600">${currentUser?.email || 'dropshipper@example.com'}</p>
-                            <p class="text-gray-600">Bergabung sejak: ${currentUser?.joinedDate || '01/01/2023'}</p>
-                            <div class="mt-2">
-                                <span class="inline-block bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm">
-                                    <i class="fas fa-check-circle mr-1"></i> Dropshipper Aktif
-                                </span>
-                            </div>
+                        <div class="flex justify-between pb-2 border-b">
+                            <span class="text-gray-600">Nama Bank</span>
+                            <span class="font-medium">${currentUser?.bankName || '-'}</span>
                         </div>
-                    </div>
-                    
-                    <div class="profile-stats">
-                        <div class="profile-stat-card">
-                            <div class="profile-stat-number">${getDropshipperStats().totalSales}</div>
-                            <div>Total Penjualan</div>
-                        </div>
-                        <div class="profile-stat-card">
-                            <div class="profile-stat-number">Rp ${getDropshipperStats().totalCommission.toLocaleString('id-ID')}</div>
-                            <div>Total Komisi</div>
-                        </div>
-                        <div class="profile-stat-card">
-                            <div class="profile-stat-number">${getDropshipperStats().withdrawnCount || 0}</div>
-                            <div>Penarikan</div>
+                        <div class="flex justify-between pb-2 border-b">
+                            <span class="text-gray-600">Nomor Rekening</span>
+                            <span class="font-medium">${currentUser?.bankAccountNumber || '-'}</span>
                         </div>
                     </div>
+                    <button onclick="showModal('editBankAccountModal')" class="w-full btn-primary mt-4">
+                        <i class="fas fa-edit mr-2"></i> Edit Rekening
+                    </button>
                 </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Dropshipper Info -->
-                    <div class="dashboard-card" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="text-xl font-bold mb-4">Informasi Dropshipper</h3>
-                        <div class="space-y-3">
-                            <div class="flex justify-between pb-2 border-b">
-                                <span class="text-gray-600">Nama Lengkap</span>
-                                <span class="font-medium">${currentUser?.name || '-'}</span>
-                            </div>
-                            <div class="flex justify-between pb-2 border-b">
-                                <span class="text-gray-600">Email</span>
-                                <span class="font-medium">${currentUser?.email || '-'}</span>
-                            </div>
-                            <div class="flex justify-between pb-2 border-b">
-                                <span class="text-gray-600">No. Telepon</span>
-                                <span class="font-medium">${currentUser?.phone || '-'}</span>
-                            </div>
-                            <div class="flex justify-between pb-2 border-b">
-                                <span class="text-gray-600">Platform Jualan</span>
-                                <span class="font-medium">${currentUser?.platform || '-'}</span>
-                            </div>
-                            <div class="flex justify-between pb-2 border-b">
-                                <span class="text-gray-600">Link Toko Online</span>
-                                <a href="${currentUser?.storeLink || '#'}" target="_blank" class="font-medium text-purple-600 hover:underline">
-                                    ${currentUser?.storeLink ? 'Kunjungi Toko' : '-'}
-                                </a>
-                            </div>
+            </div>
+            
+            <!-- Top Selling Products -->
+            <div class="dashboard-card mt-8" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="text-xl font-bold mb-4">Produk Terlaris Anda</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    ${getTopSellingProducts().map(product => `
+                        <div class="bg-white border rounded-lg p-4">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-32 object-cover rounded mb-3">
+                            <h4 class="font-semibold">${product.name}</h4>
+                            <p class="text-gray-600 text-sm">Terjual: ${product.soldCount || 0}</p>
+                            <p class="text-green-600 font-bold">Komisi: Rp ${((product.price * product.commission / 100) * (product.soldCount || 0)).toLocaleString('id-ID')}</p>
                         </div>
-                        <button onclick="showModal('editDropshipperModal')" class="w-full btn-primary mt-4">
-                            <i class="fas fa-edit mr-2"></i> Edit Profil
-                        </button>
-                    </div>
-                    
-                    <!-- Bank Account Info -->
-                    <div class="dashboard-card" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="text-xl font-bold mb-4">Informasi Rekening</h3>
-                        <div class="space-y-3">
-                            <div class="flex justify-between pb-2 border-b">
-                                <span class="text-gray-600">Nama Pemilik</span>
-                                <span class="font-medium">${currentUser?.bankAccountName || '-'}</span>
-                            </div>
-                            <div class="flex justify-between pb-2 border-b">
-                                <span class="text-gray-600">Nama Bank</span>
-                                <span class="font-medium">${currentUser?.bankName || '-'}</span>
-                            </div>
-                            <div class="flex justify-between pb-2 border-b">
-                                <span class="text-gray-600">Nomor Rekening</span>
-                                <span class="font-medium">${currentUser?.bankAccountNumber || '-'}</span>
-                            </div>
-                        </div>
-                        <button onclick="showModal('editBankAccountModal')" class="w-full btn-primary mt-4">
-                            <i class="fas fa-edit mr-2"></i> Edit Rekening
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Top Selling Products -->
-                <div class="dashboard-card mt-8" data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="text-xl font-bold mb-4">Produk Terlaris Anda</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        ${getTopSellingProducts().map(product => `
-                            <div class="bg-white border rounded-lg p-4">
-                                <img src="${product.image}" alt="${product.name}" class="w-full h-32 object-cover rounded mb-3">
-                                <h4 class="font-semibold">${product.name}</h4>
-                                <p class="text-gray-600 text-sm">Terjual: ${product.soldCount || 0}</p>
-                                <p class="text-green-600 font-bold">Komisi: Rp ${((product.price * product.commission / 100) * (product.soldCount || 0)).toLocaleString('id-ID')}</p>
-                            </div>
-                        `).join('')}
-                    </div>
+                    `).join('')}
                 </div>
             </div>
         </div>
@@ -1720,163 +2986,161 @@
 
     <!-- Dashboard Page -->
     <div id="dashboardPage" class="page dashboard-page">
-        <div class="pt-20">
-            <div class="container mx-auto px-4 py-12">
-                <h2 class="text-4xl font-bold text-gray-800 text-center mb-12" data-aos="fade-up">
-                    Dashboard Pengguna
-                </h2>
-                
-                <div class="dashboard-grid">
-                    <!-- Profile Card -->
-                    <div class="dashboard-card" data-aos="fade-up">
-                        <div class="flex items-center mb-6">
-                            <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mr-4">
-                                ${currentUser?.name?.charAt(0) || 'U'}
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-bold">${currentUser?.name || 'User'}</h3>
-                                <p class="text-gray-600">${currentUser?.email || 'user@example.com'}</p>
-                                ${currentUser?.isSeller ? '<span class="inline-block bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm mt-1">Penjual</span>' : ''}
-                                ${currentUser?.isDropshipper ? '<span class="inline-block bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm mt-1">Dropshipper</span>' : ''}
-                            </div>
+        <div class="container mx-auto px-4 py-12">
+            <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">
+                Dashboard Pengguna
+            </h2>
+            
+            <div class="dashboard-grid">
+                <!-- Profile Card -->
+                <div class="dashboard-card" data-aos="fade-up">
+                    <div class="flex items-center mb-6">
+                        <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mr-4">
+                            ${currentUser?.name?.charAt(0) || 'U'}
                         </div>
-                        <div class="space-y-2">
-                            <button class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
-                                <i class="fas fa-user mr-3 text-gray-600"></i> Edit Profil
-                            </button>
-                            <button class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
-                                <i class="fas fa-map-marker-alt mr-3 text-gray-600"></i> Alamat Saya
-                            </button>
-                            <button class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
-                                <i class="fas fa-cog mr-3 text-gray-600"></i> Pengaturan
-                            </button>
-                            ${currentUser?.isDropshipper ? `
-                            <button onclick="showPage('dropshipperDashboard')" class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
-                                <i class="fas fa-chart-line mr-3 text-green-600"></i> Dashboard Dropshipper
-                            </button>
-                            ` : ''}
-                            <button onclick="logout()" class="w-full text-left px-4 py-3 rounded-lg hover:bg-red-50 transition-colors flex items-center text-red-600">
-                                <i class="fas fa-sign-out-alt mr-3"></i> Keluar
-                            </button>
+                        <div>
+                            <h3 class="text-2xl font-bold">${currentUser?.name || 'User'}</h3>
+                            <p class="text-gray-600">${currentUser?.email || 'user@example.com'}</p>
+                            ${currentUser?.isSeller ? '<span class="inline-block bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm mt-1">Penjual</span>' : ''}
+                            ${currentUser?.isDropshipper ? '<span class="inline-block bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm mt-1">Dropshipper</span>' : ''}
                         </div>
                     </div>
-                    
-                    <!-- Orders Card -->
-                    <div class="dashboard-card" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="text-xl font-bold mb-4">Pesanan Saya</h3>
-                        <div class="space-y-3">
-                            <div class="stat-card">
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <div class="text-lg font-medium">Menunggu Pembayaran</div>
-                                        <div class="text-sm opacity-90">3 pesanan</div>
-                                    </div>
-                                    <i class="fas fa-clock text-2xl"></i>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <div class="text-lg font-medium">Diproses</div>
-                                        <div class="text-sm opacity-90">2 pesanan</div>
-                                    </div>
-                                    <i class="fas fa-box text-2xl"></i>
-                                </div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <div class="text-lg font-medium">Selesai</div>
-                                        <div class="text-sm opacity-90">15 pesanan</div>
-                                    </div>
-                                    <i class="fas fa-check-circle text-2xl"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="w-full mt-4 btn-primary">Lihat Semua Pesanan</button>
-                    </div>
-                    
-                    <!-- Wishlist Card -->
-                    <div class="dashboard-card" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="text-xl font-bold mb-4">Wishlist Saya</h3>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="bg-gray-100 rounded-lg p-3">
-                                <img src="https://picsum.photos/seed/wish1/150/150" class="w-full h-32 object-cover rounded mb-2">
-                                <p class="font-medium text-sm truncate">Laptop Gaming ASUS</p>
-                                <p class="text-purple-600 font-bold">Rp 15jt</p>
-                            </div>
-                            <div class="bg-gray-100 rounded-lg p-3">
-                                <img src="https://picsum.photos/seed/wish2/150/150" class="w-full h-32 object-cover rounded mb-2">
-                                <p class="font-medium text-sm truncate">Smartphone Samsung</p>
-                                <p class="text-purple-600 font-bold">Rp 12jt</p>
-                            </div>
-                        </div>
-                        <button class="w-full mt-4 btn-secondary">Lihat Semua Wishlist</button>
-                    </div>
-                    
-                    <!-- Dropshipper Stats Card -->
-                    ${currentUser?.isDropshipper ? `
-                    <div class="dashboard-card" data-aos="fade-up" data-aos-delay="300">
-                        <h3 class="text-xl font-bold mb-4">Statistik Dropshipper</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-lg text-center">
-                                <div class="text-2xl font-bold">${getDropshipperStats().totalSales}</div>
-                                <div class="text-sm">Produk Terjual</div>
-                            </div>
-                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-lg text-center">
-                                <div class="text-2xl font-bold">Rp ${getDropshipperStats().totalCommission.toLocaleString('id-ID')}</div>
-                                <div class="text-sm">Total Komisi</div>
-                            </div>
-                        </div>
-                        <button onclick="showPage('dropshipperDashboard')" class="w-full mt-4 btn-success">
-                            <i class="fas fa-chart-line mr-2"></i> Lihat Detail
+                    <div class="space-y-2">
+                        <button class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
+                            <i class="fas fa-user mr-3 text-gray-600"></i> Edit Profil
+                        </button>
+                        <button class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
+                            <i class="fas fa-map-marker-alt mr-3 text-gray-600"></i> Alamat Saya
+                        </button>
+                        <button class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
+                            <i class="fas fa-cog mr-3 text-gray-600"></i> Pengaturan
+                        </button>
+                        ${currentUser?.isDropshipper ? `
+                        <button onclick="showPage('dropshipperDashboard')" class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors flex items-center">
+                            <i class="fas fa-chart-line mr-3 text-green-600"></i> Dashboard Dropshipper
+                        </button>
+                        ` : ''}
+                        <button onclick="logout()" class="w-full text-left px-4 py-3 rounded-lg hover:bg-red-50 transition-colors flex items-center text-red-600">
+                            <i class="fas fa-sign-out-alt mr-3"></i> Keluar
                         </button>
                     </div>
-                    ` : ''}
-                    
-                    <!-- Recent Activity -->
-                    <div class="dashboard-card md:col-span-2 lg:col-span-3" data-aos="fade-up" data-aos-delay="300">
-                        <h3 class="text-xl font-bold mb-4">Aktivitas Terakhir</h3>
-                        <div class="space-y-3">
-                            <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                                    <i class="fas fa-check text-green-600"></i>
+                </div>
+                
+                <!-- Orders Card -->
+                <div class="dashboard-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold mb-4">Pesanan Saya</h3>
+                    <div class="space-y-3">
+                        <div class="stat-card">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="text-lg font-medium">Menunggu Pembayaran</div>
+                                    <div class="text-sm opacity-90">3 pesanan</div>
                                 </div>
-                                <div class="flex-1">
-                                    <p class="font-medium">Pesanan #ORDER-123 selesai</p>
-                                    <p class="text-sm text-gray-600">2 jam yang lalu</p>
-                                </div>
+                                <i class="fas fa-clock text-2xl"></i>
                             </div>
-                            <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                    <i class="fas fa-shopping-cart text-blue-600"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="font-medium">Menambahkan produk ke keranjang</p>
-                                    <p class="text-sm text-gray-600">5 jam yang lalu</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                                    <i class="fas fa-heart text-purple-600"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="font-medium">Menambahkan ke wishlist</p>
-                                    <p class="text-sm text-gray-600">1 hari yang lalu</p>
-                                </div>
-                            </div>
-                            ${currentUser?.isDropshipper ? `
-                            <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                                    <i class="fas fa-money-bill-wave text-green-600"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="font-medium">Menerima komisi Rp 250.000</p>
-                                    <p class="text-sm text-gray-600">2 hari yang lalu</p>
-                                </div>
-                            </div>
-                            ` : ''}
                         </div>
+                        <div class="stat-card">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="text-lg font-medium">Diproses</div>
+                                    <div class="text-sm opacity-90">2 pesanan</div>
+                                </div>
+                                <i class="fas fa-box text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="text-lg font-medium">Selesai</div>
+                                    <div class="text-sm opacity-90">15 pesanan</div>
+                                </div>
+                                <i class="fas fa-check-circle text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 btn-primary">Lihat Semua Pesanan</button>
+                </div>
+                
+                <!-- Wishlist Card -->
+                <div class="dashboard-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold mb-4">Wishlist Saya</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-gray-100 rounded-lg p-3">
+                            <img src="https://picsum.photos/seed/wish1/150/150" class="w-full h-32 object-cover rounded mb-2">
+                            <p class="font-medium text-sm truncate">Laptop Gaming ASUS</p>
+                            <p class="text-purple-600 font-bold">Rp 15jt</p>
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-3">
+                            <img src="https://picsum.photos/seed/wish2/150/150" class="w-full h-32 object-cover rounded mb-2">
+                            <p class="font-medium text-sm truncate">Smartphone Samsung</p>
+                            <p class="text-purple-600 font-bold">Rp 12jt</p>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 btn-secondary">Lihat Semua Wishlist</button>
+                </div>
+                
+                <!-- Dropshipper Stats Card -->
+                ${currentUser?.isDropshipper ? `
+                <div class="dashboard-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold mb-4">Statistik Dropshipper</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold">${getDropshipperStats().totalSales}</div>
+                            <div class="text-sm">Produk Terjual</div>
+                        </div>
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold">Rp ${getDropshipperStats().totalCommission.toLocaleString('id-ID')}</div>
+                            <div class="text-sm">Total Komisi</div>
+                        </div>
+                    </div>
+                    <button onclick="showPage('dropshipperDashboard')" class="w-full mt-4 btn-success">
+                        <i class="fas fa-chart-line mr-2"></i> Lihat Detail
+                    </button>
+                </div>
+                ` : ''}
+                
+                <!-- Recent Activity -->
+                <div class="dashboard-card md:col-span-2 lg:col-span-3" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold mb-4">Aktivitas Terakhir</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-medium">Pesanan #ORDER-123 selesai</p>
+                                <p class="text-sm text-gray-600">2 jam yang lalu</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-shopping-cart text-blue-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-medium">Menambahkan produk ke keranjang</p>
+                                <p class="text-sm text-gray-600">5 jam yang lalu</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-heart text-purple-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-medium">Menambahkan ke wishlist</p>
+                                <p class="text-sm text-gray-600">1 hari yang lalu</p>
+                            </div>
+                        </div>
+                        ${currentUser?.isDropshipper ? `
+                        <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-money-bill-wave text-green-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-medium">Menerima komisi Rp 250.000</p>
+                                <p class="text-sm text-gray-600">2 hari yang lalu</p>
+                            </div>
+                        </div>
+                        ` : ''}
                     </div>
                 </div>
             </div>
@@ -2182,7 +3446,7 @@
 
     <!-- Product Detail Modal -->
     <div id="productModal" class="modal">
-        <div class="modal-content max-w-4xl">
+        <div class="modal-content max-w-6xl">
             <button onclick="closeModal('productModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
                 <i class="fas fa-times text-xl"></i>
             </button>
@@ -2282,6 +3546,16 @@
         let currentPage = 'home';
         let commissions = [];
         let withdrawals = [];
+        let recentlyViewed = [];
+        let currentViewMode = 'grid';
+        let currentPageNumber = 1;
+        let itemsPerPage = 8;
+        let activeFilters = {
+            category: 'all',
+            sortBy: 'default',
+            priceRange: null,
+            rating: null
+        };
 
         // Product Data
         const productData = [
@@ -2579,6 +3853,11 @@
                 withdrawals = JSON.parse(savedWithdrawals);
             }
             
+            const savedRecentlyViewed = localStorage.getItem('recentlyViewed');
+            if (savedRecentlyViewed) {
+                recentlyViewed = JSON.parse(savedRecentlyViewed);
+            }
+            
             // Check for dropship parameter in URL
             const urlParams = new URLSearchParams(window.location.search);
             const dropshipId = urlParams.get('dropship');
@@ -2592,6 +3871,8 @@
             renderProducts();
             updateCartUI();
             updateUserUI();
+            loadRecommendedProducts();
+            loadRecentlyViewedProducts();
         }
 
         // Process Dropship Order
@@ -2649,6 +3930,8 @@
             // Load page specific data
             if (pageName === 'products') {
                 renderProducts();
+                loadRecommendedProducts();
+                loadRecentlyViewedProducts();
             } else if (pageName === 'dropshipperDashboard') {
                 renderCommissionHistory();
             }
@@ -2681,53 +3964,158 @@
         // Render Products
         function renderProducts() {
             const grid = document.getElementById('productGrid');
-            if (!grid) return;
+            const list = document.getElementById('productList');
+            const noResults = document.getElementById('noResultsSection');
+            const pagination = document.getElementById('paginationSection');
+            const productCount = document.getElementById('productCountNumber');
             
-            grid.innerHTML = filteredProducts.map(product => {
-                const seller = sellers.find(s => s.id === product.sellerId);
-                const discountHtml = product.discount ? `
-                    <span class="product-badge">-${product.discount}%</span>
-                ` : '';
+            // Show loading
+            document.getElementById('loadingIndicator').style.display = 'flex';
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                document.getElementById('loadingIndicator').style.display = 'none';
                 
-                const originalPriceHtml = product.originalPrice ? `
-                    <span class="text-gray-400 text-sm line-through ml-2">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>
-                ` : '';
+                // Update product count
+                productCount.textContent = filteredProducts.length;
                 
-                return `
-                    <div class="product-card" data-aos="fade-up">
-                        <div class="relative">
-                            <img src="${product.image}" alt="${product.name}" class="product-image">
-                            ${discountHtml}
-                            <button onclick="toggleWishlist(${product.id})" class="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100">
-                                <i class="far fa-heart text-gray-600"></i>
-                            </button>
-                            <span class="dropship-badge">Komisi ${product.commission}%</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="flex items-center mb-2">
-                                <img src="${seller?.image || 'https://picsum.photos/seed/default/30/30'}" class="w-6 h-6 rounded-full mr-2">
-                                <span class="text-xs text-gray-500">${seller?.name || 'Unknown Seller'}</span>
-                            </div>
-                            <h3 class="font-semibold mb-2">${product.name}</h3>
-                            <div class="flex items-center mb-2">
-                                <div class="flex text-yellow-400 text-sm">
-                                    ${generateStars(product.rating)}
+                if (filteredProducts.length === 0) {
+                    // Show no results state
+                    grid.style.display = 'none';
+                    list.style.display = 'none';
+                    noResults.style.display = 'block';
+                    pagination.style.display = 'none';
+                    return;
+                }
+                
+                // Hide no results state
+                noResults.style.display = 'none';
+                
+                // Calculate pagination
+                const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+                const startIndex = (currentPageNumber - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+                
+                // Update pagination UI
+                document.getElementById('currentPage').textContent = currentPageNumber;
+                document.getElementById('totalPages').textContent = totalPages;
+                document.getElementById('prevPageBtn').disabled = currentPageNumber === 1;
+                document.getElementById('nextPageBtn').disabled = currentPageNumber === totalPages;
+                
+                // Show/hide pagination
+                pagination.style.display = totalPages > 1 ? 'flex' : 'none';
+                
+                // Render based on view mode
+                if (currentViewMode === 'grid') {
+                    grid.style.display = 'grid';
+                    list.style.display = 'none';
+                    
+                    grid.innerHTML = paginatedProducts.map(product => {
+                        const seller = sellers.find(s => s.id === product.sellerId);
+                        const discountHtml = product.discount ? `
+                            <span class="product-badge">-${product.discount}%</span>
+                        ` : '';
+                        
+                        const originalPriceHtml = product.originalPrice ? `
+                            <span class="text-gray-400 text-sm line-through ml-2">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>
+                        ` : '';
+                        
+                        return `
+                            <div class="product-card" data-aos="fade-up">
+                                <div class="product-image-container">
+                                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                                    ${discountHtml}
+                                    <div class="product-actions">
+                                        <button onclick="toggleWishlist(${product.id})" class="product-action-btn">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button onclick="quickViewProduct(${product.id})" class="product-action-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <span class="dropship-badge">Komisi ${product.commission}%</span>
                                 </div>
-                                <span class="text-gray-500 text-sm ml-2">(${product.reviews})</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <span class="text-purple-600 font-bold">Rp ${product.price.toLocaleString('id-ID')}</span>
-                                    ${originalPriceHtml}
+                                <div class="product-info">
+                                    <div class="product-seller">
+                                        <img src="${seller?.image || 'https://picsum.photos/seed/default/20/20'}" class="seller-avatar" alt="${seller?.name || 'Unknown Seller'}">
+                                        <span class="seller-name">${seller?.name || 'Unknown Seller'}</span>
+                                    </div>
+                                    <h3 class="product-name">${product.name}</h3>
+                                    <div class="product-rating">
+                                        <div class="rating-stars">
+                                            ${generateStars(product.rating)}
+                                        </div>
+                                        <span class="rating-count">(${product.reviews})</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="price-current">Rp ${product.price.toLocaleString('id-ID')}</span>
+                                        ${originalPriceHtml}
+                                    </div>
+                                    <button onclick="addToCart(${product.id})" class="add-to-cart-btn w-full">
+                                        <i class="fas fa-shopping-cart mr-2"></i> Tambah ke Keranjang
+                                    </button>
                                 </div>
-                                <button onclick="addToCart(${product.id})" class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
                             </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+                        `;
+                    }).join('');
+                } else {
+                    grid.style.display = 'none';
+                    list.style.display = 'flex';
+                    
+                    list.innerHTML = paginatedProducts.map(product => {
+                        const seller = sellers.find(s => s.id === product.sellerId);
+                        const discountHtml = product.discount ? `
+                            <span class="product-badge">-${product.discount}%</span>
+                        ` : '';
+                        
+                        const originalPriceHtml = product.originalPrice ? `
+                            <span class="text-gray-400 text-sm line-through ml-2">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>
+                        ` : '';
+                        
+                        return `
+                            <div class="product-card-list" data-aos="fade-up">
+                                <div class="product-image-container">
+                                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                                    ${discountHtml}
+                                    <div class="product-actions">
+                                        <button onclick="toggleWishlist(${product.id})" class="product-action-btn">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button onclick="quickViewProduct(${product.id})" class="product-action-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <span class="dropship-badge">Komisi ${product.commission}%</span>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-seller">
+                                        <img src="${seller?.image || 'https://picsum.photos/seed/default/20/20'}" class="seller-avatar" alt="${seller?.name || 'Unknown Seller'}">
+                                        <span class="seller-name">${seller?.name || 'Unknown Seller'}</span>
+                                    </div>
+                                    <h3 class="product-name">${product.name}</h3>
+                                    <div class="product-rating">
+                                        <div class="rating-stars">
+                                            ${generateStars(product.rating)}
+                                        </div>
+                                        <span class="rating-count">(${product.reviews})</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="price-current">Rp ${product.price.toLocaleString('id-ID')}</span>
+                                        ${originalPriceHtml}
+                                    </div>
+                                    <div class="flex items-center justify-between mt-2">
+                                        <span class="text-sm text-gray-600">Stok: ${product.stock}</span>
+                                        <button onclick="addToCart(${product.id})" class="add-to-cart-btn">
+                                            <i class="fas fa-shopping-cart mr-2"></i> Tambah
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            }, 500);
         }
 
         // Generate Stars
@@ -2754,11 +4142,8 @@
 
         // Filter Products
         function filterProducts(category) {
-            if (category === 'all') {
-                filteredProducts = [...products];
-            } else {
-                filteredProducts = products.filter(p => p.category === category);
-            }
+            activeFilters.category = category;
+            applyFilters();
             
             // Update filter buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -2766,12 +4151,34 @@
             });
             event.target.classList.add('active');
             
+            // Update active filters display
+            updateActiveFiltersDisplay();
+            
+            // Reset pagination
+            currentPageNumber = 1;
+            
             renderProducts();
             showPage('products');
         }
 
+        // Apply Filters
+        function applyFilters() {
+            // Start with all products
+            filteredProducts = [...products];
+            
+            // Apply category filter
+            if (activeFilters.category !== 'all') {
+                filteredProducts = filteredProducts.filter(p => p.category === activeFilters.category);
+            }
+            
+            // Apply sort
+            sortProducts(activeFilters.sortBy, false);
+        }
+
         // Sort Products
-        function sortProducts(sortBy) {
+        function sortProducts(sortBy, updateDisplay = true) {
+            activeFilters.sortBy = sortBy;
+            
             switch(sortBy) {
                 case 'price-low':
                     filteredProducts.sort((a, b) => a.price - b.price);
@@ -2789,9 +4196,264 @@
                     filteredProducts.sort((a, b) => b.commission - a.commission);
                     break;
                 default:
-                    filteredProducts = [...products];
+                    // Keep original order
+                    break;
             }
+            
+            if (updateDisplay) {
+                currentPageNumber = 1;
+                renderProducts();
+            }
+        }
+
+        // Update Active Filters Display
+        function updateActiveFiltersDisplay() {
+            const container = document.getElementById('activeFilters');
+            container.innerHTML = '';
+            
+            // Add category filter
+            if (activeFilters.category !== 'all') {
+                const filterTag = document.createElement('div');
+                filterTag.className = 'active-filter';
+                filterTag.innerHTML = `
+                    Kategori: ${getCategoryName(activeFilters.category)}
+                    <button onclick="removeFilter('category')">&times;</button>
+                `;
+                container.appendChild(filterTag);
+            }
+            
+            // Add sort filter
+            if (activeFilters.sortBy !== 'default') {
+                const filterTag = document.createElement('div');
+                filterTag.className = 'active-filter';
+                filterTag.innerHTML = `
+                    Urutkan: ${getSortName(activeFilters.sortBy)}
+                    <button onclick="removeFilter('sortBy')">&times;</button>
+                `;
+                container.appendChild(filterTag);
+            }
+        }
+
+        // Get Category Name
+        function getCategoryName(category) {
+            const categoryNames = {
+                'children-toys': 'Mainan Anak',
+                'electronic': 'Elektronik',
+                'handphone': 'Handphone',
+                'household': 'Peralatan Rumah',
+                'computer': 'Komputer & Aksesoris',
+                'fashion-boys': 'Fashion Pria',
+                'fashion-girls': 'Fashion Wanita',
+                'book': 'Buku',
+                'automotive': 'Otomotif',
+                'sport': 'Olahraga',
+                'baby': 'Bayi',
+                'software': 'Software',
+                'cosmetics': 'Kosmetik',
+                'kitchen': 'Peralatan Dapur'
+            };
+            
+            return categoryNames[category] || category;
+        }
+
+        // Get Sort Name
+        function getSortName(sortBy) {
+            const sortNames = {
+                'price-low': 'Harga Terendah',
+                'price-high': 'Harga Tertinggi',
+                'name': 'Nama A-Z',
+                'rating': 'Rating Tertinggi',
+                'commission': 'Komisi Tertinggi'
+            };
+            
+            return sortNames[sortBy] || sortBy;
+        }
+
+        // Remove Filter
+        function removeFilter(filterType) {
+            if (filterType === 'category') {
+                activeFilters.category = 'all';
+                // Update filter buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent.includes('Semua')) {
+                        btn.classList.add('active');
+                    }
+                });
+            } else if (filterType === 'sortBy') {
+                activeFilters.sortBy = 'default';
+            }
+            
+            applyFilters();
+            updateActiveFiltersDisplay();
+            currentPageNumber = 1;
             renderProducts();
+        }
+
+        // Reset Filters
+        function resetFilters() {
+            activeFilters = {
+                category: 'all',
+                sortBy: 'default',
+                priceRange: null,
+                rating: null
+            };
+            
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes('Semua')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            applyFilters();
+            updateActiveFiltersDisplay();
+            currentPageNumber = 1;
+            renderProducts();
+        }
+
+        // Set View Mode
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            
+            // Update buttons
+            document.querySelectorAll('.view-mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderProducts();
+        }
+
+        // Change Page
+        function changePage(direction) {
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+            const newPage = currentPageNumber + direction;
+            
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPageNumber = newPage;
+                renderProducts();
+                
+                // Scroll to top of products section
+                document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Load Recommended Products
+        function loadRecommendedProducts() {
+            const container = document.getElementById('recommendedProducts');
+            
+            // Get random products for recommendations
+            const shuffled = [...products].sort(() => 0.5 - Math.random());
+            const recommended = shuffled.slice(0, 4);
+            
+            container.innerHTML = recommended.map(product => {
+                const seller = sellers.find(s => s.id === product.sellerId);
+                const discountHtml = product.discount ? `
+                    <span class="product-badge">-${product.discount}%</span>
+                ` : '';
+                
+                return `
+                    <div class="product-card" data-aos="fade-up">
+                        <div class="product-image-container">
+                            <img src="${product.image}" alt="${product.name}" class="product-image">
+                            ${discountHtml}
+                            <div class="product-actions">
+                                <button onclick="toggleWishlist(${product.id})" class="product-action-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button onclick="quickViewProduct(${product.id})" class="product-action-btn">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="dropship-badge">Komisi ${product.commission}%</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-seller">
+                                <img src="${seller?.image || 'https://picsum.photos/seed/default/20/20'}" class="seller-avatar" alt="${seller?.name || 'Unknown Seller'}">
+                                <span class="seller-name">${seller?.name || 'Unknown Seller'}</span>
+                            </div>
+                            <h3 class="product-name">${product.name}</h3>
+                            <div class="product-rating">
+                                <div class="rating-stars">
+                                    ${generateStars(product.rating)}
+                                </div>
+                                <span class="rating-count">(${product.reviews})</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">Rp ${product.price.toLocaleString('id-ID')}</span>
+                                ${product.originalPrice ? `<span class="text-gray-400 text-sm line-through ml-2">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>` : ''}
+                            </div>
+                            <button onclick="addToCart(${product.id})" class="add-to-cart-btn w-full">
+                                <i class="fas fa-shopping-cart mr-2"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Load Recently Viewed Products
+        function loadRecentlyViewedProducts() {
+            const container = document.getElementById('recentlyViewedProducts');
+            
+            if (recentlyViewed.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center col-span-full">Belum ada produk yang dilihat</p>';
+                return;
+            }
+            
+            container.innerHTML = recentlyViewed.map(product => `
+                <div class="recently-viewed-item" onclick="showProductDetail(${product.id})">
+                    <img src="${product.image}" alt="${product.name}" class="recently-viewed-image">
+                    <div class="recently-viewed-info">
+                        <div class="recently-viewed-name">${product.name}</div>
+                        <div class="recently-viewed-price">Rp ${product.price.toLocaleString('id-ID')}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Clear Recently Viewed
+        function clearRecentlyViewed() {
+            recentlyViewed = [];
+            localStorage.removeItem('recentlyViewed');
+            loadRecentlyViewedProducts();
+            showToast('Riwayat produk telah dihapus');
+        }
+
+        // Quick View Product
+        function quickViewProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Add to recently viewed
+            addToRecentlyViewed(product);
+            
+            // Show product detail modal
+            showProductDetail(productId);
+        }
+
+        // Add to Recently Viewed
+        function addToRecentlyViewed(product) {
+            // Remove if already exists
+            recentlyViewed = recentlyViewed.filter(p => p.id !== product.id);
+            
+            // Add to beginning
+            recentlyViewed.unshift(product);
+            
+            // Keep only last 10 items
+            if (recentlyViewed.length > 10) {
+                recentlyViewed = recentlyViewed.slice(0, 10);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+            
+            // Update display if on products page
+            if (currentPage === 'products') {
+                loadRecentlyViewedProducts();
+            }
         }
 
         // Add to Cart
@@ -3602,6 +5264,216 @@
             });
         }
 
+        // Show Product Detail
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Add to recently viewed
+            addToRecentlyViewed(product);
+            
+            const seller = sellers.find(s => s.id === product.sellerId);
+            
+            const productDetailContent = document.getElementById('productDetailContent');
+            productDetailContent.innerHTML = `
+                <div class="product-detail-container">
+                    <div class="product-image-gallery">
+                        <img src="${product.image}" alt="${product.name}" class="product-main-image">
+                        <div class="product-thumbnail-list">
+                            <img src="${product.image}" alt="${product.name}" class="product-thumbnail active" onclick="changeProductImage(this)">
+                            <img src="https://picsum.photos/seed/${product.id}a/300/300" alt="${product.name}" class="product-thumbnail" onclick="changeProductImage(this)">
+                            <img src="https://picsum.photos/seed/${product.id}b/300/300" alt="${product.name}" class="product-thumbnail" onclick="changeProductImage(this)">
+                            <img src="https://picsum.photos/seed/${product.id}c/300/300" alt="${product.name}" class="product-thumbnail" onclick="changeProductImage(this)">
+                        </div>
+                    </div>
+                    <div class="product-info-section">
+                        <h2>${product.name}</h2>
+                        <div class="product-rating-section">
+                            <div class="rating-stars">
+                                ${generateStars(product.rating)}
+                            </div>
+                            <span class="rating-count">(${product.reviews} ulasan)</span>
+                        </div>
+                        <div class="product-price-section">
+                            <span class="product-current-price">Rp ${product.price.toLocaleString('id-ID')}</span>
+                            ${product.originalPrice ? `<span class="product-original-price">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>` : ''}
+                        </div>
+                        <div class="product-description">
+                            <h3>Deskripsi Produk</h3>
+                            <p>${product.description}</p>
+                        </div>
+                        <div class="product-variants">
+                            <h3>Varian</h3>
+                            <div class="variant-option active">Hitam</div>
+                            <div class="variant-option">Putih</div>
+                            <div class="variant-option">Biru</div>
+                        </div>
+                        <div class="product-quantity">
+                            <h3>Kuantitas</h3>
+                            <div class="flex items-center">
+                                <button class="quantity-btn" onclick="decreaseQuantity()">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <input type="number" id="productQuantity" class="quantity-input" value="1" min="1" max="${product.stock}">
+                                <button class="quantity-btn" onclick="increaseQuantity()">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-actions-section">
+                            <button onclick="addToCartFromDetail(${product.id})" class="add-to-cart-large">
+                                <i class="fas fa-shopping-cart mr-2"></i> Tambah ke Keranjang
+                            </button>
+                            <button onclick="buyNow(${product.id})" class="buy-now">
+                                <i class="fas fa-bolt mr-2"></i> Beli Sekarang
+                            </button>
+                        </div>
+                        <div class="product-tabs">
+                            <div class="tabs">
+                                <div class="tab active" onclick="showTab('description')">Deskripsi</div>
+                                <div class="tab" onclick="showTab('specification')">Spesifikasi</div>
+                                <div class="tab" onclick="showTab('reviews')">Ulasan</div>
+                            </div>
+                            <div id="descriptionTab" class="tab-content active">
+                                <p>${product.description}</p>
+                            </div>
+                            <div id="specificationTab" class="tab-content">
+                                <table class="w-full">
+                                    <tr>
+                                        <td class="font-medium py-2">Berat</td>
+                                        <td class="py-2">1 kg</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium py-2">Dimensi</td>
+                                        <td class="py-2">20 x 10 x 5 cm</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium py-2">Garansi</td>
+                                        <td class="py-2">1 Tahun</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="reviewsTab" class="tab-content">
+                                ${generateProductReviews(product.id)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            showModal('productModal');
+        }
+
+        // Change Product Image
+        function changeProductImage(thumbnail) {
+            document.querySelectorAll('.product-thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            thumbnail.classList.add('active');
+            
+            const mainImage = document.querySelector('.product-main-image');
+            mainImage.src = thumbnail.src;
+        }
+
+        // Generate Product Reviews
+        function generateProductReviews(productId) {
+            const reviews = [
+                {
+                    name: 'Ahmad',
+                    rating: 5,
+                    date: '2023-05-15',
+                    comment: 'Produk sangat bagus, kualitas sesuai dengan harga. Pengiriman cepat dan packing rapi.'
+                },
+                {
+                    name: 'Siti',
+                    rating: 4,
+                    date: '2023-05-10',
+                    comment: 'Bagus, sesuai dengan deskripsi. Harga terjangkau dan kualitas oke.'
+                },
+                {
+                    name: 'Budi',
+                    rating: 5,
+                    date: '2023-05-05',
+                    comment: 'Mantap! Produk original dan sesuai dengan gambar. Recommended seller!'
+                }
+            ];
+            
+            return reviews.map(review => `
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="reviewer-name">${review.name}</div>
+                        <div class="review-date">${review.date}</div>
+                    </div>
+                    <div class="review-rating">
+                        ${generateStars(review.rating)}
+                    </div>
+                    <div class="review-comment">${review.comment}</div>
+                </div>
+            `).join('');
+        }
+
+        // Show Tab
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        // Decrease Quantity
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('productQuantity');
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        }
+
+        // Increase Quantity
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('productQuantity');
+            const currentValue = parseInt(quantityInput.value);
+            const maxValue = parseInt(quantityInput.max);
+            if (currentValue < maxValue) {
+                quantityInput.value = currentValue + 1;
+            }
+        }
+
+        // Add to Cart from Detail
+        function addToCartFromDetail(productId) {
+            const quantity = parseInt(document.getElementById('productQuantity').value);
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({...product, quantity});
+            }
+            
+            updateCartUI();
+            saveCartToLocalStorage();
+            showToast(`${product.name} (${quantity} item) ditambahkan ke keranjang!`);
+            closeModal('productModal');
+        }
+
+        // Buy Now
+        function buyNow(productId) {
+            const quantity = parseInt(document.getElementById('productQuantity').value);
+            const product = products.find(p => p.id === productId);
+            
+            cart = [{...product, quantity}];
+            updateCartUI();
+            saveCartToLocalStorage();
+            closeModal('productModal');
+            proceedToCheckout();
+        }
+
         // Show Toast Notification
         function showToast(message) {
             const toast = document.createElement('div');
@@ -3645,28 +5517,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             initializeData();
         });
-
-        // Add filter button styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .filter-btn {
-                padding: 0.5rem 1rem;
-                border-radius: 9999px;
-                font-size: 0.875rem;
-                cursor: pointer;
-                transition: all 0.2s;
-                background: #f3f4f6;
-                color: #4b5563;
-            }
-            .filter-btn:hover {
-                background: #e5e7eb;
-            }
-            .filter-btn.active {
-                background: #667eea;
-                color: white;
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
